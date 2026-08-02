@@ -7,10 +7,19 @@ type Props = {
   className?: string;
   strength?: number;
   priority?: boolean;
+  /** Adds a dark scrim so overlaid text stays readable. */
+  scrim?: boolean;
 };
 
 /** Image inside a cinematic mask with scroll-driven parallax + hover duotone. */
-export function ParallaxMedia({ src, alt, className, strength = 60, priority }: Props) {
+export function ParallaxMedia({
+  src,
+  alt,
+  className,
+  strength = 60,
+  priority,
+  scrim,
+}: Props) {
   const ref = useRef<HTMLDivElement>(null);
   const reduced = useReducedMotion();
   const { scrollYProgress } = useScroll({
@@ -28,6 +37,13 @@ export function ParallaxMedia({ src, alt, className, strength = 60, priority }: 
         style={reduced ? {} : { y, height: `calc(100% + ${strength * 2}px)` }}
         className="absolute inset-0 h-full w-full object-cover"
       />
+      {scrim && (
+        <div
+          aria-hidden
+          className="absolute inset-0 z-2 bg-gradient-to-r from-background via-background/70 to-background/10"
+        />
+      )}
     </div>
   );
 }
+
