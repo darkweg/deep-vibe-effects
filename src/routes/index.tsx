@@ -192,6 +192,7 @@ function Index() {
           alt="Antenne de télécommunications sous un ciel gris"
           className="absolute inset-0 h-full w-full"
           strength={90}
+          scrim
         />
         <div className="relative z-3 flex h-full items-center">
           <div className="container-x">

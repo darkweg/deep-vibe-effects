@@ -119,6 +119,7 @@ function Club() {
           alt="Assemblée du club GTEL en amphithéâtre"
           className="absolute inset-0 h-full w-full"
           strength={80}
+          scrim
         />
         <div className="relative z-3 flex h-full items-end pb-16">
           <div className="container-x">
