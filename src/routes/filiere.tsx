@@ -45,7 +45,6 @@ function Filiere() {
           alt="Pylône de télécommunications"
           className="absolute inset-0 h-full w-full"
           strength={80}
-          scrim
         />
       </section>
 
