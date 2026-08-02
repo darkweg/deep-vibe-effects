@@ -40,9 +40,14 @@ export function ParallaxMedia({
       {scrim && (
         <div
           aria-hidden
-          className="absolute inset-0 z-2 bg-gradient-to-r from-background via-background/70 to-background/10"
+          className="absolute inset-0 z-2"
+          style={{
+            background:
+              "linear-gradient(100deg, var(--background) 0%, color-mix(in oklab, var(--background) 82%, transparent) 42%, color-mix(in oklab, var(--background) 25%, transparent) 100%)",
+          }}
         />
       )}
+
     </div>
   );
 }
