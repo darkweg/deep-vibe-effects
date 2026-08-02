@@ -10,33 +10,115 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ActualitesRouteImport } from './routes/actualites'
+import { Route as BibliothequeRouteImport } from './routes/bibliotheque'
+import { Route as ClubRouteImport } from './routes/club'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as FiliereRouteImport } from './routes/filiere'
+import { Route as GalerieRouteImport } from './routes/galerie'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ActualitesRoute = ActualitesRouteImport.update({
+  id: '/actualites',
+  path: '/actualites',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BibliothequeRoute = BibliothequeRouteImport.update({
+  id: '/bibliotheque',
+  path: '/bibliotheque',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ClubRoute = ClubRouteImport.update({
+  id: '/club',
+  path: '/club',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FiliereRoute = FiliereRouteImport.update({
+  id: '/filiere',
+  path: '/filiere',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GalerieRoute = GalerieRouteImport.update({
+  id: '/galerie',
+  path: '/galerie',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/actualites': typeof ActualitesRoute
+  '/bibliotheque': typeof BibliothequeRoute
+  '/club': typeof ClubRoute
+  '/contact': typeof ContactRoute
+  '/filiere': typeof FiliereRoute
+  '/galerie': typeof GalerieRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/actualites': typeof ActualitesRoute
+  '/bibliotheque': typeof BibliothequeRoute
+  '/club': typeof ClubRoute
+  '/contact': typeof ContactRoute
+  '/filiere': typeof FiliereRoute
+  '/galerie': typeof GalerieRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/actualites': typeof ActualitesRoute
+  '/bibliotheque': typeof BibliothequeRoute
+  '/club': typeof ClubRoute
+  '/contact': typeof ContactRoute
+  '/filiere': typeof FiliereRoute
+  '/galerie': typeof GalerieRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/actualites'
+    | '/bibliotheque'
+    | '/club'
+    | '/contact'
+    | '/filiere'
+    | '/galerie'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/actualites'
+    | '/bibliotheque'
+    | '/club'
+    | '/contact'
+    | '/filiere'
+    | '/galerie'
+  id:
+    | '__root__'
+    | '/'
+    | '/actualites'
+    | '/bibliotheque'
+    | '/club'
+    | '/contact'
+    | '/filiere'
+    | '/galerie'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ActualitesRoute: typeof ActualitesRoute
+  BibliothequeRoute: typeof BibliothequeRoute
+  ClubRoute: typeof ClubRoute
+  ContactRoute: typeof ContactRoute
+  FiliereRoute: typeof FiliereRoute
+  GalerieRoute: typeof GalerieRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +130,59 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/actualites': {
+      id: '/actualites'
+      path: '/actualites'
+      fullPath: '/actualites'
+      preLoaderRoute: typeof ActualitesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/bibliotheque': {
+      id: '/bibliotheque'
+      path: '/bibliotheque'
+      fullPath: '/bibliotheque'
+      preLoaderRoute: typeof BibliothequeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/club': {
+      id: '/club'
+      path: '/club'
+      fullPath: '/club'
+      preLoaderRoute: typeof ClubRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/filiere': {
+      id: '/filiere'
+      path: '/filiere'
+      fullPath: '/filiere'
+      preLoaderRoute: typeof FiliereRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/galerie': {
+      id: '/galerie'
+      path: '/galerie'
+      fullPath: '/galerie'
+      preLoaderRoute: typeof GalerieRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ActualitesRoute: ActualitesRoute,
+  BibliothequeRoute: BibliothequeRoute,
+  ClubRoute: ClubRoute,
+  ContactRoute: ContactRoute,
+  FiliereRoute: FiliereRoute,
+  GalerieRoute: GalerieRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
