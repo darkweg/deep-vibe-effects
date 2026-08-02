@@ -14,8 +14,8 @@ export function Reveal({ children, delay = 0, y = 40, className }: RevealProps) 
   return (
     <motion.div
       className={className}
-      initial={reduced ? undefined : { opacity: 0, y, filter: "blur(10px)" }}
-      whileInView={reduced ? undefined : { opacity: 1, y: 0, filter: "blur(0px)" }}
+      initial={reduced ? false : { opacity: 0, y, filter: "blur(10px)" }}
+      whileInView={reduced ? {} : { opacity: 1, y: 0, filter: "blur(0px)" }}
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 1, delay, ease: [0.16, 1, 0.3, 1] }}
     >
@@ -42,8 +42,8 @@ export function RevealText({
         <span key={`${word}-${i}`} className="inline-block overflow-hidden align-bottom">
           <motion.span
             className="inline-block"
-            initial={reduced ? undefined : { y: "110%" }}
-            whileInView={reduced ? undefined : { y: 0 }}
+            initial={reduced ? false : { y: "110%" }}
+            whileInView={reduced ? {} : { y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{
               duration: 0.9,

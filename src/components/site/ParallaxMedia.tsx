@@ -25,7 +25,7 @@ export function ParallaxMedia({ src, alt, className, strength = 60, priority }: 
         src={src}
         alt={alt}
         loading={priority ? "eager" : "lazy"}
-        style={reduced ? undefined : { y, height: `calc(100% + ${strength * 2}px)` }}
+        style={reduced ? {} : { y, height: `calc(100% + ${strength * 2}px)` }}
         className="absolute inset-0 h-full w-full object-cover"
       />
     </div>
