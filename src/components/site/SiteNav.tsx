@@ -119,7 +119,25 @@ export function SiteNav() {
                   </Link>
                 </motion.div>
               ))}
+              {user ? (
+                <button
+                  type="button"
+                  onClick={async () => {
+                    queryClient.clear();
+                    await signOut();
+                    navigate({ to: "/", replace: true });
+                  }}
+                  className="mt-4 btn-ghost px-5 py-3 text-left"
+                >
+                  Se déconnecter
+                </button>
+              ) : (
+                <Link to="/auth" className="btn-glow mt-4 px-5 py-3 text-center">
+                  Espace membre
+                </Link>
+              )}
             </div>
+
           </motion.div>
         )}
       </AnimatePresence>
