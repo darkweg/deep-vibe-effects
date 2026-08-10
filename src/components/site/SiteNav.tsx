@@ -1,13 +1,19 @@
-import { Link, useRouterState } from "@tanstack/react-router";
+import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
 import { motion, AnimatePresence } from "motion/react";
 import { useEffect, useState } from "react";
-import { Menu, X } from "lucide-react";
+import { LogOut, Menu, X } from "lucide-react";
+import { useQueryClient } from "@tanstack/react-query";
 import { NAV_LINKS } from "@/lib/gtel-data";
+import { useAuth } from "@/hooks/useAuth";
 
 export function SiteNav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const { user, profile, signOut } = useAuth();
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -50,17 +56,33 @@ export function SiteNav() {
           ))}
         </div>
 
-        <div className="hidden lg:block">
-          <Link
-            to="/contact"
-            className="group relative inline-flex items-center overflow-hidden border border-primary/60 px-5 py-2.5 font-mono text-xs uppercase tracking-[0.16em] text-foreground"
-          >
-            <span className="absolute inset-0 -translate-x-full bg-primary transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0" />
-            <span className="relative transition-colors duration-500 group-hover:text-primary-foreground">
+        <div className="hidden items-center gap-3 lg:flex">
+          {user ? (
+            <>
+              <span className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-cobalt to-cyan font-mono text-[0.65rem] text-primary-foreground">
+                {(profile?.display_name ?? user.email ?? "GT").slice(0, 2).toUpperCase()}
+              </span>
+              <button
+                type="button"
+                onClick={async () => {
+                  await queryClient.cancelQueries();
+                  queryClient.clear();
+                  await signOut();
+                  navigate({ to: "/", replace: true });
+                }}
+                className="btn-ghost inline-flex items-center gap-2 px-4 py-2.5"
+              >
+                <LogOut className="h-3.5 w-3.5" />
+                Sortir
+              </button>
+            </>
+          ) : (
+            <Link to="/auth" className="btn-glow inline-flex items-center px-5 py-2.5">
               Espace membre
-            </span>
-          </Link>
+            </Link>
+          )}
         </div>
+
 
         <button
           type="button"
@@ -97,7 +119,25 @@ export function SiteNav() {
                   </Link>
                 </motion.div>
               ))}
+              {user ? (
+                <button
+                  type="button"
+                  onClick={async () => {
+                    queryClient.clear();
+                    await signOut();
+                    navigate({ to: "/", replace: true });
+                  }}
+                  className="mt-4 btn-ghost px-5 py-3 text-left"
+                >
+                  Se déconnecter
+                </button>
+              ) : (
+                <Link to="/auth" className="btn-glow mt-4 px-5 py-3 text-center">
+                  Espace membre
+                </Link>
+              )}
             </div>
+
           </motion.div>
         )}
       </AnimatePresence>

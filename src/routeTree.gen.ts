@@ -10,16 +10,22 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as ActualitesRouteImport } from './routes/actualites'
-import { Route as BibliothequeRouteImport } from './routes/bibliotheque'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ClubRouteImport } from './routes/club'
 import { Route as ContactRouteImport } from './routes/contact'
-import { Route as FiliereRouteImport } from './routes/filiere'
 import { Route as GalerieRouteImport } from './routes/galerie'
+import { Route as AuthenticatedBibliothequeRouteImport } from './routes/_authenticated/bibliotheque'
+import { Route as AuthenticatedFiliereRouteImport } from './routes/_authenticated/filiere'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ActualitesRoute = ActualitesRouteImport.update({
@@ -27,9 +33,9 @@ const ActualitesRoute = ActualitesRouteImport.update({
   path: '/actualites',
   getParentRoute: () => rootRouteImport,
 } as any)
-const BibliothequeRoute = BibliothequeRouteImport.update({
-  id: '/bibliotheque',
-  path: '/bibliotheque',
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ClubRoute = ClubRouteImport.update({
@@ -42,82 +48,96 @@ const ContactRoute = ContactRouteImport.update({
   path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
-const FiliereRoute = FiliereRouteImport.update({
-  id: '/filiere',
-  path: '/filiere',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const GalerieRoute = GalerieRouteImport.update({
   id: '/galerie',
   path: '/galerie',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedBibliothequeRoute =
+  AuthenticatedBibliothequeRouteImport.update({
+    id: '/bibliotheque',
+    path: '/bibliotheque',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedFiliereRoute = AuthenticatedFiliereRouteImport.update({
+  id: '/filiere',
+  path: '/filiere',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/actualites': typeof ActualitesRoute
-  '/bibliotheque': typeof BibliothequeRoute
+  '/auth': typeof AuthRoute
   '/club': typeof ClubRoute
   '/contact': typeof ContactRoute
-  '/filiere': typeof FiliereRoute
   '/galerie': typeof GalerieRoute
+  '/bibliotheque': typeof AuthenticatedBibliothequeRoute
+  '/filiere': typeof AuthenticatedFiliereRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/actualites': typeof ActualitesRoute
-  '/bibliotheque': typeof BibliothequeRoute
+  '/auth': typeof AuthRoute
   '/club': typeof ClubRoute
   '/contact': typeof ContactRoute
-  '/filiere': typeof FiliereRoute
   '/galerie': typeof GalerieRoute
+  '/bibliotheque': typeof AuthenticatedBibliothequeRoute
+  '/filiere': typeof AuthenticatedFiliereRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/actualites': typeof ActualitesRoute
-  '/bibliotheque': typeof BibliothequeRoute
+  '/auth': typeof AuthRoute
   '/club': typeof ClubRoute
   '/contact': typeof ContactRoute
-  '/filiere': typeof FiliereRoute
   '/galerie': typeof GalerieRoute
+  '/_authenticated/bibliotheque': typeof AuthenticatedBibliothequeRoute
+  '/_authenticated/filiere': typeof AuthenticatedFiliereRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/actualites'
-    | '/bibliotheque'
+    | '/auth'
     | '/club'
     | '/contact'
-    | '/filiere'
     | '/galerie'
+    | '/bibliotheque'
+    | '/filiere'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/actualites'
-    | '/bibliotheque'
+    | '/auth'
     | '/club'
     | '/contact'
-    | '/filiere'
     | '/galerie'
+    | '/bibliotheque'
+    | '/filiere'
   id:
     | '__root__'
     | '/'
+    | '/_authenticated'
     | '/actualites'
-    | '/bibliotheque'
+    | '/auth'
     | '/club'
     | '/contact'
-    | '/filiere'
     | '/galerie'
+    | '/_authenticated/bibliotheque'
+    | '/_authenticated/filiere'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   ActualitesRoute: typeof ActualitesRoute
-  BibliothequeRoute: typeof BibliothequeRoute
+  AuthRoute: typeof AuthRoute
   ClubRoute: typeof ClubRoute
   ContactRoute: typeof ContactRoute
-  FiliereRoute: typeof FiliereRoute
   GalerieRoute: typeof GalerieRoute
 }
 
@@ -130,6 +150,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/actualites': {
       id: '/actualites'
       path: '/actualites'
@@ -137,11 +164,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ActualitesRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/bibliotheque': {
-      id: '/bibliotheque'
-      path: '/bibliotheque'
-      fullPath: '/bibliotheque'
-      preLoaderRoute: typeof BibliothequeRouteImport
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/club': {
@@ -158,13 +185,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/filiere': {
-      id: '/filiere'
-      path: '/filiere'
-      fullPath: '/filiere'
-      preLoaderRoute: typeof FiliereRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/galerie': {
       id: '/galerie'
       path: '/galerie'
@@ -172,16 +192,43 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GalerieRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/bibliotheque': {
+      id: '/_authenticated/bibliotheque'
+      path: '/bibliotheque'
+      fullPath: '/bibliotheque'
+      preLoaderRoute: typeof AuthenticatedBibliothequeRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/filiere': {
+      id: '/_authenticated/filiere'
+      path: '/filiere'
+      fullPath: '/filiere'
+      preLoaderRoute: typeof AuthenticatedFiliereRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedBibliothequeRoute: typeof AuthenticatedBibliothequeRoute
+  AuthenticatedFiliereRoute: typeof AuthenticatedFiliereRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedBibliothequeRoute: AuthenticatedBibliothequeRoute,
+  AuthenticatedFiliereRoute: AuthenticatedFiliereRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   ActualitesRoute: ActualitesRoute,
-  BibliothequeRoute: BibliothequeRoute,
+  AuthRoute: AuthRoute,
   ClubRoute: ClubRoute,
   ContactRoute: ContactRoute,
-  FiliereRoute: FiliereRoute,
   GalerieRoute: GalerieRoute,
 }
 export const routeTree = rootRouteImport

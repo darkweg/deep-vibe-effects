@@ -5,7 +5,7 @@ import { PageHeader } from "@/components/site/PageHeader";
 import { Reveal } from "@/components/site/Reveal";
 import { DOCUMENTS } from "@/lib/gtel-data";
 
-export const Route = createFileRoute("/bibliotheque")({
+export const Route = createFileRoute("/_authenticated/bibliotheque")({
   head: () => ({
     meta: [
       { title: "Bibliothèque de parrainage L3–L5 — Club GTEL" },
