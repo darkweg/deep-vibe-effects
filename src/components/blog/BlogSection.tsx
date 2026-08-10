@@ -295,12 +295,12 @@ function PostCard({
   directory,
 }: {
   post: Post;
-  author?: { display_name: string; niveau: string | null };
+  author: { display_name: string; niveau: string | null } | undefined;
   likes: { post_id: string; user_id: string }[];
   currentUserId: string | null;
   onToggleLike: (liked: boolean) => void;
   onDelete: () => void;
-  directory?: Map<string, { display_name: string; niveau: string | null }>;
+  directory: Map<string, { display_name: string; niveau: string | null }> | undefined;
 }) {
   const [open, setOpen] = useState(false);
   const liked = !!currentUserId && likes.some((l) => l.user_id === currentUserId);
@@ -389,7 +389,7 @@ function CommentThread({
 }: {
   postId: string;
   currentUserId: string | null;
-  directory?: Map<string, { display_name: string; niveau: string | null }>;
+  directory: Map<string, { display_name: string; niveau: string | null }> | undefined;
 }) {
   const qc = useQueryClient();
   const [texte, setTexte] = useState("");
