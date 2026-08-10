@@ -6,7 +6,7 @@ import { ParallaxMedia } from "@/components/site/ParallaxMedia";
 import { UES } from "@/lib/gtel-data";
 import towerImg from "@/assets/tower.jpg";
 
-export const Route = createFileRoute("/filiere")({
+export const Route = createFileRoute("/_authenticated/filiere")({
   head: () => ({
     meta: [
       { title: "La filière GTEL & ses unités d'enseignement — Club GTEL" },
