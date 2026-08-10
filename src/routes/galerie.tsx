@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { X } from "lucide-react";
 import { PageHeader } from "@/components/site/PageHeader";
 import { Reveal } from "@/components/site/Reveal";
+import { BlogSection } from "@/components/blog/BlogSection";
 import eventImg from "@/assets/event.jpg";
 import fiberImg from "@/assets/fiber.jpg";
 import studentsImg from "@/assets/students.jpg";
