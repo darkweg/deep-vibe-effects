@@ -1,13 +1,19 @@
-import { Link, useRouterState } from "@tanstack/react-router";
+import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
 import { motion, AnimatePresence } from "motion/react";
 import { useEffect, useState } from "react";
-import { Menu, X } from "lucide-react";
+import { LogOut, Menu, X } from "lucide-react";
+import { useQueryClient } from "@tanstack/react-query";
 import { NAV_LINKS } from "@/lib/gtel-data";
+import { useAuth } from "@/hooks/useAuth";
 
 export function SiteNav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const { user, profile, signOut } = useAuth();
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
