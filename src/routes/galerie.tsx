@@ -45,9 +45,9 @@ function Galerie() {
   return (
     <>
       <PageHeader
-        eyebrow="Galerie"
+        eyebrow="Galerie & blog"
         title="Les moments forts, album par album"
-        intro="Les photos publiées par la Cellule Communication, organisées par événement. Cliquez sur une image pour l'agrandir."
+        intro="Les photos publiées par la Cellule Communication, organisées par événement. Plus bas, le blog des membres : récits de TP, tutoriels réseau et vie du club."
       />
 
       <section className="container-x py-20">
@@ -60,7 +60,7 @@ function Galerie() {
                 className="media-fx scanlines group relative block h-full w-full"
               >
                 <img src={p.src} alt={p.alt} loading="lazy" className="h-full w-full object-cover" />
-                <span className="absolute bottom-4 left-4 z-3 font-mono text-[0.65rem] uppercase tracking-[0.2em] text-foreground opacity-0 transition-all duration-700 group-hover:translate-y-0 group-hover:opacity-100 translate-y-2">
+                <span className="absolute bottom-4 left-4 z-3 chip opacity-0 transition-all duration-700 group-hover:translate-y-0 group-hover:opacity-100 translate-y-2">
                   {p.album}
                 </span>
               </button>
@@ -68,6 +68,9 @@ function Galerie() {
           ))}
         </div>
       </section>
+
+      <BlogSection />
+
 
       <AnimatePresence>
         {active !== null && (
