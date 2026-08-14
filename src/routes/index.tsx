@@ -164,6 +164,14 @@ function Index() {
                 </Reveal>
               ))}
             </div>
+            <Reveal delay={0.3}>
+              <Link
+                to="/club"
+                className="mt-10 inline-flex items-center gap-2 border border-border px-6 py-3.5 font-mono text-xs uppercase tracking-[0.16em] transition-colors duration-500 hover:border-primary"
+              >
+                Découvrir le club <ArrowUpRight className="h-4 w-4" />
+              </Link>
+            </Reveal>
           </div>
 
           <div className="grid gap-6 sm:grid-cols-2">
