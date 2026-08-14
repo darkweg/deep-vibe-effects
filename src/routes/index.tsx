@@ -193,8 +193,8 @@ function Index() {
         </div>
       </section>
 
-      {/* Bandeau plein écran parallax */}
-      <section className="relative h-[70svh] min-h-[26rem] overflow-hidden">
+      {/* Bandeau bibliothèque — thème cendre (page /bibliotheque) */}
+      <section className="theme-ash relative h-[70svh] min-h-[26rem] overflow-hidden">
         <ParallaxMedia
           src={towerImg}
           alt="Antenne de télécommunications sous un ciel gris"
@@ -213,14 +213,21 @@ function Index() {
                 centralise ce que chaque promotion lègue à la suivante.
               </p>
             </Reveal>
+            <Reveal delay={0.3}>
+              <Link
+                to="/bibliotheque"
+                className="mt-8 inline-flex items-center gap-2 border border-border px-6 py-3.5 font-mono text-xs uppercase tracking-[0.16em] transition-colors duration-500 hover:border-primary"
+              >
+                Ouvrir la bibliothèque <ArrowUpRight className="h-4 w-4" />
+              </Link>
+            </Reveal>
           </div>
         </div>
       </section>
 
-      {/* Actualités */}
-      <section className="container-x py-28 md:py-36">
-        <div className="flex flex-wrap items-end justify-between gap-6">
-          <div>
+      {/* Actualités — thème noir doux (page /actualites) */}
+      <section className="theme-soft-black py-28 md:py-36">
+        <div className="container-x">
             <Reveal>
               <p className="eyebrow">02 — Actualités</p>
             </Reveal>
