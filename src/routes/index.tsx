@@ -139,9 +139,9 @@ function Index() {
       <Hero />
       <Marquee />
 
-      {/* Manifeste */}
-      <section className="container-x py-28 md:py-36">
-        <div className="grid gap-14 lg:grid-cols-[1fr_1.1fr] lg:gap-24">
+      {/* Manifeste — thème graphite (page /club) */}
+      <section className="theme-graphite py-28 md:py-36">
+        <div className="container-x grid gap-14 lg:grid-cols-[1fr_1.1fr] lg:gap-24">
           <div>
             <Reveal>
               <p className="eyebrow">01 — Le club</p>
@@ -164,6 +164,14 @@ function Index() {
                 </Reveal>
               ))}
             </div>
+            <Reveal delay={0.3}>
+              <Link
+                to="/club"
+                className="mt-10 inline-flex items-center gap-2 border border-border px-6 py-3.5 font-mono text-xs uppercase tracking-[0.16em] transition-colors duration-500 hover:border-primary"
+              >
+                Découvrir le club <ArrowUpRight className="h-4 w-4" />
+              </Link>
+            </Reveal>
           </div>
 
           <div className="grid gap-6 sm:grid-cols-2">
@@ -185,8 +193,8 @@ function Index() {
         </div>
       </section>
 
-      {/* Bandeau plein écran parallax */}
-      <section className="relative h-[70svh] min-h-[26rem] overflow-hidden">
+      {/* Bandeau bibliothèque — thème cendre (page /bibliotheque) */}
+      <section className="theme-ash relative h-[70svh] min-h-[26rem] overflow-hidden">
         <ParallaxMedia
           src={towerImg}
           alt="Antenne de télécommunications sous un ciel gris"
@@ -205,14 +213,23 @@ function Index() {
                 centralise ce que chaque promotion lègue à la suivante.
               </p>
             </Reveal>
+            <Reveal delay={0.3}>
+              <Link
+                to="/bibliotheque"
+                className="mt-8 inline-flex items-center gap-2 border border-border px-6 py-3.5 font-mono text-xs uppercase tracking-[0.16em] transition-colors duration-500 hover:border-primary"
+              >
+                Ouvrir la bibliothèque <ArrowUpRight className="h-4 w-4" />
+              </Link>
+            </Reveal>
           </div>
         </div>
       </section>
 
-      {/* Actualités */}
-      <section className="container-x py-28 md:py-36">
-        <div className="flex flex-wrap items-end justify-between gap-6">
-          <div>
+      {/* Actualités — thème noir doux (page /actualites) */}
+      <section className="theme-soft-black py-28 md:py-36">
+        <div className="container-x">
+          <div className="flex flex-wrap items-end justify-between gap-6">
+            <div>
             <Reveal>
               <p className="eyebrow">02 — Actualités</p>
             </Reveal>
@@ -254,11 +271,12 @@ function Index() {
               </Link>
             </Reveal>
           ))}
+          </div>
         </div>
       </section>
 
-      {/* Filière */}
-      <section className="border-y bg-ink py-28 md:py-36">
+      {/* Filière — thème ardoise (page /filiere) */}
+      <section className="theme-slate border-y py-28 md:py-36">
         <div className="container-x">
           <div className="grid gap-14 lg:grid-cols-[1fr_1.2fr] lg:gap-24">
             <div className="lg:sticky lg:top-32 lg:self-start">
@@ -306,8 +324,9 @@ function Index() {
         </div>
       </section>
 
-      {/* Galerie teaser */}
-      <section className="container-x py-28 md:py-36">
+      {/* Galerie teaser — thème bleu profond (page /galerie) */}
+      <section className="theme-deep-blue py-28 md:py-36">
+        <div className="container-x">
         <Reveal>
           <p className="eyebrow">04 — Galerie</p>
         </Reveal>
@@ -334,10 +353,11 @@ function Index() {
             </Reveal>
           ))}
         </div>
+        </div>
       </section>
 
-      {/* CTA */}
-      <section className="relative overflow-hidden border-t py-28 md:py-36">
+      {/* CTA — thème minuit (page /contact) */}
+      <section className="theme-midnight relative overflow-hidden border-t py-28 md:py-36">
         <div className="pointer-events-none absolute inset-x-0 -bottom-40 mx-auto h-96 w-[60rem] rounded-full bg-primary/20 blur-[140px]" />
         <div className="container-x relative text-center">
           <h2 className="mx-auto max-w-4xl text-4xl leading-[1.02] font-semibold md:text-6xl">

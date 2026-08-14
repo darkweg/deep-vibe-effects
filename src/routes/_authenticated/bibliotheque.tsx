@@ -41,7 +41,7 @@ function Bibliotheque() {
   }, [niveau, q]);
 
   return (
-    <>
+    <div className="theme-ash min-h-screen">
       <PageHeader
         eyebrow="Bibliothèque de parrainage"
         title="La mémoire académique de la filière"
@@ -116,6 +116,6 @@ function Bibliotheque() {
           )}
         </div>
       </section>
-    </>
+    </div>
   );
 }

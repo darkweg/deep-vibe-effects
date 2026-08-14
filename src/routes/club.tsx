@@ -34,7 +34,7 @@ const JALONS = [
 
 function Club() {
   return (
-    <>
+    <div className="theme-graphite min-h-screen">
       <PageHeader
         eyebrow="Le club"
         title="Origine, identité et Bureau"
@@ -129,6 +129,6 @@ function Club() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 }

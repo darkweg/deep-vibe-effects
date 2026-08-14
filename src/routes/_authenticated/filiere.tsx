@@ -32,7 +32,7 @@ function Filiere() {
   const liste = UES.filter((u) => niveau === "Tous" || u.niveau === niveau);
 
   return (
-    <>
+    <div className="theme-slate min-h-screen">
       <PageHeader
         eyebrow="La filière"
         title="Génie des Télécommunications"
@@ -114,6 +114,6 @@ function Filiere() {
           ))}
         </div>
       </section>
-    </>
+    </div>
   );
 }
