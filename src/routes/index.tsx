@@ -5,6 +5,7 @@ import { ArrowUpRight, ArrowDown } from "lucide-react";
 import { Reveal, RevealText } from "@/components/site/Reveal";
 import { ParallaxMedia } from "@/components/site/ParallaxMedia";
 import { ACTUALITES, CHIFFRES, UES } from "@/lib/gtel-data";
+import { useAuth } from "@/hooks/useAuth";
 import heroImg from "@/assets/hero.jpg";
 import studentsImg from "@/assets/students.jpg";
 import fiberImg from "@/assets/fiber.jpg";
@@ -32,6 +33,7 @@ export const Route = createFileRoute("/")({
 });
 
 function Hero() {
+  const { isMember } = useAuth();
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
   const scale = useTransform(scrollYProgress, [0, 1], [1, 1.18]);
@@ -77,10 +79,12 @@ function Hero() {
             <Reveal delay={0.45}>
               <div className="flex flex-wrap gap-3">
                 <Link
-                  to="/bibliotheque"
+                  to={isMember ? "/bibliotheque" : "/auth"}
                   className="group relative inline-flex items-center gap-2 overflow-hidden bg-primary px-6 py-3.5 font-mono text-xs uppercase tracking-[0.16em] text-primary-foreground"
                 >
-                  <span className="relative">Bibliothèque de parrainage</span>
+                  <span className="relative">
+                    {isMember ? "Bibliothèque de parrainage" : "Espace membre"}
+                  </span>
                   <ArrowUpRight className="relative h-4 w-4 transition-transform duration-500 group-hover:translate-x-1 group-hover:-translate-y-1" />
                 </Link>
                 <Link
@@ -134,6 +138,7 @@ function Marquee() {
 }
 
 function Index() {
+  const { isMember } = useAuth();
   return (
     <>
       <Hero />
@@ -193,7 +198,8 @@ function Index() {
         </div>
       </section>
 
-      {/* Bandeau bibliothèque — thème cendre (page /bibliotheque) */}
+      {/* Bandeau bibliothèque — réservé aux membres */}
+      {isMember && (
       <section className="theme-ash relative h-[70svh] min-h-[26rem] overflow-hidden">
         <ParallaxMedia
           src={towerImg}
@@ -224,6 +230,7 @@ function Index() {
           </div>
         </div>
       </section>
+      )}
 
       {/* Actualités — thème noir doux (page /actualites) */}
       <section className="theme-soft-black py-28 md:py-36">
@@ -275,7 +282,8 @@ function Index() {
         </div>
       </section>
 
-      {/* Filière — thème ardoise (page /filiere) */}
+      {/* Filière — réservée aux membres */}
+      {isMember && (
       <section className="theme-slate border-y py-28 md:py-36">
         <div className="container-x">
           <div className="grid gap-14 lg:grid-cols-[1fr_1.2fr] lg:gap-24">
@@ -323,6 +331,7 @@ function Index() {
           </div>
         </div>
       </section>
+      )}
 
       {/* Galerie teaser — thème bleu profond (page /galerie) */}
       <section className="theme-deep-blue py-28 md:py-36">

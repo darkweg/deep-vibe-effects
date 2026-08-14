@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { Download, Search } from "lucide-react";
+import { MemberGate } from "@/components/site/MemberGate";
 import { PageHeader } from "@/components/site/PageHeader";
 import { Reveal } from "@/components/site/Reveal";
 import { DOCUMENTS } from "@/lib/gtel-data";
@@ -41,6 +42,7 @@ function Bibliotheque() {
   }, [niveau, q]);
 
   return (
+    <MemberGate>
     <div className="theme-ash min-h-screen">
       <PageHeader
         eyebrow="Bibliothèque de parrainage"
@@ -117,5 +119,6 @@ function Bibliotheque() {
         </div>
       </section>
     </div>
+    </MemberGate>
   );
 }

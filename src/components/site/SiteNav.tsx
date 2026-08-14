@@ -10,7 +10,7 @@ export function SiteNav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
-  const { user, profile, signOut } = useAuth();
+  const { user, profile, signOut, isMember } = useAuth();
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
@@ -43,7 +43,7 @@ export function SiteNav() {
         </Link>
 
         <div className="hidden items-center gap-7 lg:flex">
-          {NAV_LINKS.map((link) => (
+          {NAV_LINKS.filter((l) => !l.memberOnly || isMember).map((link) => (
             <Link
               key={link.to}
               to={link.to}
@@ -104,7 +104,7 @@ export function SiteNav() {
             className="overflow-hidden lg:hidden"
           >
             <div className="container-x flex flex-col gap-1 pt-6 pb-4">
-              {NAV_LINKS.map((link, i) => (
+              {NAV_LINKS.filter((l) => !l.memberOnly || isMember).map((link, i) => (
                 <motion.div
                   key={link.to}
                   initial={{ opacity: 0, x: -16 }}

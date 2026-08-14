@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
+import { MemberGate } from "@/components/site/MemberGate";
 import { PageHeader } from "@/components/site/PageHeader";
 import { Reveal } from "@/components/site/Reveal";
 import { ParallaxMedia } from "@/components/site/ParallaxMedia";
@@ -32,6 +33,7 @@ function Filiere() {
   const liste = UES.filter((u) => niveau === "Tous" || u.niveau === niveau);
 
   return (
+    <MemberGate>
     <div className="theme-slate min-h-screen">
       <PageHeader
         eyebrow="La filière"
@@ -115,5 +117,6 @@ function Filiere() {
         </div>
       </section>
     </div>
+    </MemberGate>
   );
 }

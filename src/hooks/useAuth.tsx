@@ -4,10 +4,15 @@ import { supabase } from "@/integrations/supabase/client";
 
 type Profile = { id: string; display_name: string; niveau: string | null; avatar_url: string | null };
 
+export type AppRole = "membre" | "communication" | "admin";
+
 type AuthValue = {
   user: User | null;
   session: Session | null;
   profile: Profile | null;
+  roles: AppRole[];
+  isMember: boolean;
+  isCommunication: boolean;
   loading: boolean;
   signOut: () => Promise<void>;
 };
@@ -16,6 +21,9 @@ const AuthContext = createContext<AuthValue>({
   user: null,
   session: null,
   profile: null,
+  roles: [],
+  isMember: false,
+  isCommunication: false,
   loading: true,
   signOut: async () => {},
 });
@@ -23,6 +31,7 @@ const AuthContext = createContext<AuthValue>({
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [session, setSession] = useState<Session | null>(null);
   const [profile, setProfile] = useState<Profile | null>(null);
+  const [roles, setRoles] = useState<AppRole[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -42,6 +51,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (!userId) {
       setProfile(null);
+      setRoles([]);
       return;
     }
     let cancelled = false;
@@ -53,6 +63,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       .then(({ data }) => {
         if (!cancelled) setProfile((data as Profile) ?? null);
       });
+    supabase
+      .from("user_roles")
+      .select("role")
+      .eq("user_id", userId)
+      .then(({ data }) => {
+        if (!cancelled) setRoles(((data ?? []) as { role: AppRole }[]).map((r) => r.role));
+      });
     return () => {
       cancelled = true;
     };
@@ -63,12 +80,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       session,
       user: session?.user ?? null,
       profile,
+      roles,
+      isMember: roles.length > 0,
+      isCommunication: roles.includes("communication") || roles.includes("admin"),
       loading,
       signOut: async () => {
         await supabase.auth.signOut();
       },
     }),
-    [session, profile, loading],
+    [session, profile, roles, loading],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
