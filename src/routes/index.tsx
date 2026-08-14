@@ -353,10 +353,11 @@ function Index() {
             </Reveal>
           ))}
         </div>
+        </div>
       </section>
 
-      {/* CTA */}
-      <section className="relative overflow-hidden border-t py-28 md:py-36">
+      {/* CTA — thème minuit (page /contact) */}
+      <section className="theme-midnight relative overflow-hidden border-t py-28 md:py-36">
         <div className="pointer-events-none absolute inset-x-0 -bottom-40 mx-auto h-96 w-[60rem] rounded-full bg-primary/20 blur-[140px]" />
         <div className="container-x relative text-center">
           <h2 className="mx-auto max-w-4xl text-4xl leading-[1.02] font-semibold md:text-6xl">
