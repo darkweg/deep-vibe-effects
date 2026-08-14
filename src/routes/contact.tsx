@@ -38,7 +38,7 @@ function Contact() {
   };
 
   return (
-    <>
+    <div className="theme-midnight min-h-screen">
       <PageHeader
         eyebrow="Contact"
         title="Écrire au Bureau du club"
@@ -127,6 +127,6 @@ function Contact() {
           </Reveal>
         </div>
       </section>
-    </>
+    </div>
   );
 }

@@ -44,7 +44,7 @@ function Galerie() {
   const [active, setActive] = useState<number | null>(null);
 
   return (
-    <>
+    <div className="theme-deep-blue min-h-screen">
       <PageHeader
         eyebrow="Galerie & blog"
         title="Les moments forts, album par album"
@@ -111,6 +111,6 @@ function Galerie() {
           </motion.div>
         )}
       </AnimatePresence>
-    </>
+    </div>
   );
 }

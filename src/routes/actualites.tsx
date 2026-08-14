@@ -36,7 +36,7 @@ function Actualites() {
   const liste = ACTUALITES.filter((a) => filtre === "Toutes" || a.categorie === filtre);
 
   return (
-    <>
+    <div className="theme-soft-black min-h-screen">
       <PageHeader
         eyebrow="Actualités & annonces"
         title="Ce qui se passe dans la filière"
@@ -89,6 +89,6 @@ function Actualites() {
           ))}
         </div>
       </section>
-    </>
+    </div>
   );
 }
