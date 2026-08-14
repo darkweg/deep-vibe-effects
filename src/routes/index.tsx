@@ -324,8 +324,9 @@ function Index() {
         </div>
       </section>
 
-      {/* Galerie teaser */}
-      <section className="container-x py-28 md:py-36">
+      {/* Galerie teaser — thème bleu profond (page /galerie) */}
+      <section className="theme-deep-blue py-28 md:py-36">
+        <div className="container-x">
         <Reveal>
           <p className="eyebrow">04 — Galerie</p>
         </Reveal>
