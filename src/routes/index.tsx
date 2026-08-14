@@ -228,6 +228,8 @@ function Index() {
       {/* Actualités — thème noir doux (page /actualites) */}
       <section className="theme-soft-black py-28 md:py-36">
         <div className="container-x">
+          <div className="flex flex-wrap items-end justify-between gap-6">
+            <div>
             <Reveal>
               <p className="eyebrow">02 — Actualités</p>
             </Reveal>
