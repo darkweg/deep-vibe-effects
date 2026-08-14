@@ -198,8 +198,8 @@ function Index() {
         </div>
       </section>
 
+      {/* Bandeau bibliothèque — réservé aux membres */}
       {isMember && (
-      {/* Bandeau bibliothèque — thème cendre (page /bibliotheque) */}
       <section className="theme-ash relative h-[70svh] min-h-[26rem] overflow-hidden">
         <ParallaxMedia
           src={towerImg}
@@ -282,8 +282,8 @@ function Index() {
         </div>
       </section>
 
+      {/* Filière — réservée aux membres */}
       {isMember && (
-      {/* Filière — thème ardoise (page /filiere) */}
       <section className="theme-slate border-y py-28 md:py-36">
         <div className="container-x">
           <div className="grid gap-14 lg:grid-cols-[1fr_1.2fr] lg:gap-24">
