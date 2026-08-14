@@ -139,9 +139,9 @@ function Index() {
       <Hero />
       <Marquee />
 
-      {/* Manifeste */}
-      <section className="container-x py-28 md:py-36">
-        <div className="grid gap-14 lg:grid-cols-[1fr_1.1fr] lg:gap-24">
+      {/* Manifeste — thème graphite (page /club) */}
+      <section className="theme-graphite py-28 md:py-36">
+        <div className="container-x grid gap-14 lg:grid-cols-[1fr_1.1fr] lg:gap-24">
           <div>
             <Reveal>
               <p className="eyebrow">01 — Le club</p>
