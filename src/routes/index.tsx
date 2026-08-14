@@ -5,6 +5,7 @@ import { ArrowUpRight, ArrowDown } from "lucide-react";
 import { Reveal, RevealText } from "@/components/site/Reveal";
 import { ParallaxMedia } from "@/components/site/ParallaxMedia";
 import { ACTUALITES, CHIFFRES, UES } from "@/lib/gtel-data";
+import { useAuth } from "@/hooks/useAuth";
 import heroImg from "@/assets/hero.jpg";
 import studentsImg from "@/assets/students.jpg";
 import fiberImg from "@/assets/fiber.jpg";
@@ -32,6 +33,7 @@ export const Route = createFileRoute("/")({
 });
 
 function Hero() {
+  const { isMember } = useAuth();
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
   const scale = useTransform(scrollYProgress, [0, 1], [1, 1.18]);
@@ -136,6 +138,7 @@ function Marquee() {
 }
 
 function Index() {
+  const { isMember } = useAuth();
   return (
     <>
       <Hero />
