@@ -77,10 +77,12 @@ function Hero() {
             <Reveal delay={0.45}>
               <div className="flex flex-wrap gap-3">
                 <Link
-                  to="/bibliotheque"
+                  to={isMember ? "/bibliotheque" : "/auth"}
                   className="group relative inline-flex items-center gap-2 overflow-hidden bg-primary px-6 py-3.5 font-mono text-xs uppercase tracking-[0.16em] text-primary-foreground"
                 >
-                  <span className="relative">Bibliothèque de parrainage</span>
+                  <span className="relative">
+                    {isMember ? "Bibliothèque de parrainage" : "Espace membre"}
+                  </span>
                   <ArrowUpRight className="relative h-4 w-4 transition-transform duration-500 group-hover:translate-x-1 group-hover:-translate-y-1" />
                 </Link>
                 <Link
