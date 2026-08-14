@@ -198,6 +198,7 @@ function Index() {
         </div>
       </section>
 
+      {isMember && (
       {/* Bandeau bibliothèque — thème cendre (page /bibliotheque) */}
       <section className="theme-ash relative h-[70svh] min-h-[26rem] overflow-hidden">
         <ParallaxMedia
@@ -229,6 +230,7 @@ function Index() {
           </div>
         </div>
       </section>
+      )}
 
       {/* Actualités — thème noir doux (page /actualites) */}
       <section className="theme-soft-black py-28 md:py-36">
@@ -280,6 +282,7 @@ function Index() {
         </div>
       </section>
 
+      {isMember && (
       {/* Filière — thème ardoise (page /filiere) */}
       <section className="theme-slate border-y py-28 md:py-36">
         <div className="container-x">
@@ -328,6 +331,7 @@ function Index() {
           </div>
         </div>
       </section>
+      )}
 
       {/* Galerie teaser — thème bleu profond (page /galerie) */}
       <section className="theme-deep-blue py-28 md:py-36">
