@@ -4,10 +4,15 @@ import { supabase } from "@/integrations/supabase/client";
 
 type Profile = { id: string; display_name: string; niveau: string | null; avatar_url: string | null };
 
+export type AppRole = "membre" | "communication" | "admin";
+
 type AuthValue = {
   user: User | null;
   session: Session | null;
   profile: Profile | null;
+  roles: AppRole[];
+  isMember: boolean;
+  isCommunication: boolean;
   loading: boolean;
   signOut: () => Promise<void>;
 };
@@ -16,6 +21,9 @@ const AuthContext = createContext<AuthValue>({
   user: null,
   session: null,
   profile: null,
+  roles: [],
+  isMember: false,
+  isCommunication: false,
   loading: true,
   signOut: async () => {},
 });
