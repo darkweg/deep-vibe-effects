@@ -1,11 +1,11 @@
 export const NAV_LINKS = [
-  { to: "/", label: "Accueil" },
-  { to: "/actualites", label: "Actualités" },
-  { to: "/galerie", label: "Galerie" },
-  { to: "/filiere", label: "La filière" },
-  { to: "/bibliotheque", label: "Bibliothèque" },
-  { to: "/club", label: "Le club" },
-  { to: "/contact", label: "Contact" },
+  { to: "/", label: "Accueil", memberOnly: false },
+  { to: "/actualites", label: "Actualités", memberOnly: false },
+  { to: "/galerie", label: "Galerie", memberOnly: false },
+  { to: "/filiere", label: "La filière", memberOnly: true },
+  { to: "/bibliotheque", label: "Bibliothèque", memberOnly: true },
+  { to: "/club", label: "Le club", memberOnly: false },
+  { to: "/contact", label: "Contact", memberOnly: false },
 ] as const;
 
 export type Actualite = {
