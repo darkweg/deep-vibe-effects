@@ -271,11 +271,12 @@ function Index() {
               </Link>
             </Reveal>
           ))}
+          </div>
         </div>
       </section>
 
-      {/* Filière */}
-      <section className="border-y bg-ink py-28 md:py-36">
+      {/* Filière — thème ardoise (page /filiere) */}
+      <section className="theme-slate border-y py-28 md:py-36">
         <div className="container-x">
           <div className="grid gap-14 lg:grid-cols-[1fr_1.2fr] lg:gap-24">
             <div className="lg:sticky lg:top-32 lg:self-start">
