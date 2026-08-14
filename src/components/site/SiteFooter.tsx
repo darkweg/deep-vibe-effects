@@ -1,7 +1,9 @@
 import { Link } from "@tanstack/react-router";
 import { NAV_LINKS } from "@/lib/gtel-data";
+import { useAuth } from "@/hooks/useAuth";
 
 export function SiteFooter() {
+  const { isMember } = useAuth();
   return (
     <footer className="relative overflow-hidden border-t bg-ink">
       <div className="pointer-events-none absolute -top-40 left-1/2 h-80 w-[70rem] -translate-x-1/2 rounded-full bg-primary/15 blur-[120px]" />
@@ -17,7 +19,7 @@ export function SiteFooter() {
           <div>
             <p className="eyebrow">Navigation</p>
             <ul className="mt-4 space-y-2">
-              {NAV_LINKS.map((l) => (
+              {NAV_LINKS.filter((l) => !l.memberOnly || isMember).map((l) => (
                 <li key={l.to}>
                   <Link
                     to={l.to}
