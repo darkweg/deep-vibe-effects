@@ -50,6 +50,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (!userId) {
       setProfile(null);
+      setRoles([]);
       return;
     }
     let cancelled = false;
@@ -61,6 +62,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       .then(({ data }) => {
         if (!cancelled) setProfile((data as Profile) ?? null);
       });
+    supabase
+      .from("user_roles")
+      .select("role")
+      .eq("user_id", userId)
+      .then(({ data }) => {
+        if (!cancelled) setRoles(((data ?? []) as { role: AppRole }[]).map((r) => r.role));
+      });
     return () => {
       cancelled = true;
     };
@@ -71,12 +79,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       session,
       user: session?.user ?? null,
       profile,
+      roles,
+      isMember: roles.length > 0,
+      isCommunication: roles.includes("communication") || roles.includes("admin"),
       loading,
       signOut: async () => {
         await supabase.auth.signOut();
       },
     }),
-    [session, profile, loading],
+    [session, profile, roles, loading],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
