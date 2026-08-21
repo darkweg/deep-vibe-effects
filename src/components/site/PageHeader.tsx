@@ -1,4 +1,6 @@
 import { Reveal, RevealText } from "./Reveal";
+import { Ambient } from "./Ambient";
+import { Sparkles } from "lucide-react";
 
 export function PageHeader({
   eyebrow,
@@ -10,17 +12,20 @@ export function PageHeader({
   intro: string;
 }) {
   return (
-    <section className="relative overflow-hidden border-b pt-40 pb-20">
-      <div className="pointer-events-none absolute -top-32 right-0 h-96 w-96 rounded-full bg-primary/20 blur-[130px]" />
+    <section className="relative overflow-hidden border-b pt-40 pb-24">
+      <Ambient />
       <div className="container-x relative">
         <Reveal>
-          <p className="eyebrow">{eyebrow}</p>
+          <span className="badge-cyan">
+            <Sparkles className="h-3 w-3" />
+            {eyebrow}
+          </span>
         </Reveal>
-        <h1 className="mt-6 max-w-4xl text-5xl leading-[0.95] font-semibold md:text-7xl">
+        <h1 className="mt-7 max-w-5xl font-display text-5xl leading-[0.92] font-extrabold tracking-tight md:text-7xl lg:text-8xl">
           <RevealText text={title} />
         </h1>
         <Reveal delay={0.2}>
-          <p className="mt-8 max-w-2xl text-lg text-muted-foreground">{intro}</p>
+          <p className="mt-8 max-w-2xl text-lg text-mist">{intro}</p>
         </Reveal>
       </div>
     </section>
