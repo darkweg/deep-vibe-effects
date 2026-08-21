@@ -412,3 +412,128 @@
   background-color: oklch(0.245 0.016 250);
   color: var(--foreground);
 }
+
+/* ── Ultra-modern additions ─────────────────────────────────────── */
+
+@utility glass-card {
+  position: relative;
+  background: color-mix(in oklab, var(--surface) 55%, transparent);
+  backdrop-filter: blur(14px) saturate(150%);
+  border: 1px solid oklch(0.5 0.04 250 / 0.45);
+  transition:
+    border-color 0.5s var(--ease-out-expo),
+    box-shadow 0.5s var(--ease-out-expo),
+    transform 0.5s var(--ease-out-expo),
+    background 0.5s var(--ease-out-expo);
+
+  &:hover {
+    transform: translateY(-4px);
+    border-color: rgb(0 240 255 / 0.55);
+    box-shadow:
+      0 0 0 1px rgb(0 240 255 / 0.25),
+      0 24px 60px -30px rgb(0 102 255 / 0.75);
+    background: color-mix(in oklab, var(--surface-2) 60%, transparent);
+  }
+}
+
+@utility badge-cyan {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border: 1px solid rgb(0 240 255 / 0.4);
+  background: rgb(0 240 255 / 0.1);
+  color: #7df4ff;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 0.28rem 0.6rem;
+}
+
+@utility badge-cobalt {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border: 1px solid rgb(59 141 255 / 0.45);
+  background: rgb(0 102 255 / 0.16);
+  color: #a9ccff;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 0.28rem 0.6rem;
+}
+
+@utility badge-steel {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border: 1px solid oklch(0.5 0.03 250 / 0.6);
+  background: oklch(0.3 0.02 250 / 0.4);
+  color: var(--chalk);
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 0.28rem 0.6rem;
+}
+
+@utility text-cyan-glow {
+  color: #00f0ff;
+  text-shadow: 0 0 24px rgb(0 240 255 / 0.45);
+}
+
+@keyframes orb-float {
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(4%, -6%, 0) scale(1.12); }
+  100% { transform: translate3d(0, 0, 0) scale(1); }
+}
+
+@utility orb {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(110px);
+  pointer-events: none;
+  animation: orb-float 16s ease-in-out infinite;
+}
+
+@keyframes grid-drift {
+  from { background-position: 0 0, 0 0; }
+  to { background-position: 64px 64px, 64px 64px; }
+}
+
+@utility grid-drift {
+  background-image:
+    linear-gradient(rgb(0 240 255 / 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(0 240 255 / 0.07) 1px, transparent 1px);
+  background-size: 64px 64px;
+  animation: grid-drift 18s linear infinite;
+}
+
+@keyframes sheen {
+  0% { transform: translateX(-120%); }
+  100% { transform: translateX(220%); }
+}
+
+@utility hover-sheen {
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 45%;
+    background: linear-gradient(100deg, transparent, rgb(255 255 255 / 0.22), transparent);
+    transform: translateX(-120%);
+    pointer-events: none;
+  }
+
+  &:hover::before {
+    animation: sheen 0.9s var(--ease-out-expo);
+  }
+}
