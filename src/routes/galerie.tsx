@@ -42,6 +42,11 @@ const PHOTOS = [
 
 function Galerie() {
   const [active, setActive] = useState<number | null>(null);
+  const [album, setAlbum] = useState("Tous");
+  const albums = ["Tous", ...Array.from(new Set(PHOTOS.map((p) => p.album)))];
+  const visibles = PHOTOS.map((p, i) => ({ ...p, i })).filter(
+    (p) => album === "Tous" || p.album === album,
+  );
 
   return (
     <div className="theme-deep-blue min-h-screen">
@@ -52,23 +57,35 @@ function Galerie() {
       />
 
       <section className="container-x py-20">
-        <div className="grid auto-rows-[16rem] grid-cols-1 gap-4 md:grid-cols-4">
-          {PHOTOS.map((p, i) => (
-            <Reveal key={p.album} delay={0.05 * i} className={`${p.span} h-full`}>
-              <button
+        <Reveal>
+          <FilterTabs items={albums} active={album} onChange={setAlbum} layoutId="galerie-tab" />
+        </Reveal>
+
+        <motion.div layout className="mt-12 grid auto-rows-[16rem] grid-cols-1 gap-4 md:grid-cols-4">
+          <AnimatePresence mode="popLayout">
+            {visibles.map((p, idx) => (
+              <motion.button
+                key={p.album}
+                layout
+                initial={{ opacity: 0, scale: 0.94 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.94 }}
+                transition={{ duration: 0.5, delay: 0.04 * idx, ease: [0.16, 1, 0.3, 1] }}
                 type="button"
-                onClick={() => setActive(i)}
-                className="media-fx scanlines group relative block h-full w-full"
+                onClick={() => setActive(p.i)}
+                className={`media-fx scanlines group relative block h-full w-full overflow-hidden rounded-2xl ring-1 ring-border transition-all duration-500 hover:ring-glow/70 hover:shadow-[0_30px_70px_-35px_rgb(0_102_255/0.9)] ${album === "Tous" ? p.span : ""}`}
               >
                 <img src={p.src} alt={p.alt} loading="lazy" className="h-full w-full object-cover" />
-                <span className="absolute bottom-4 left-4 z-3 chip opacity-0 transition-all duration-700 group-hover:translate-y-0 group-hover:opacity-100 translate-y-2">
+                <span className="badge-cyan absolute bottom-4 left-4 z-3 translate-y-2 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+                  <ImageIcon className="h-3 w-3" />
                   {p.album}
                 </span>
-              </button>
-            </Reveal>
-          ))}
-        </div>
+              </motion.button>
+            ))}
+          </AnimatePresence>
+        </motion.div>
       </section>
+
 
       <BlogSection />
 
