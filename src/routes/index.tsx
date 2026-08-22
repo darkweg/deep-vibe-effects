@@ -1,11 +1,24 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion, useScroll, useTransform } from "motion/react";
 import { useRef } from "react";
-import { ArrowUpRight, ArrowDown } from "lucide-react";
+import {
+  ArrowUpRight,
+  ArrowDown,
+  BookOpen,
+  CalendarDays,
+  GraduationCap,
+  Images,
+  Newspaper,
+  Radio,
+  Users,
+} from "lucide-react";
 import { Reveal, RevealText } from "@/components/site/Reveal";
+import { Ambient } from "@/components/site/Ambient";
+import { Counter } from "@/components/site/Counter";
 import { ParallaxMedia } from "@/components/site/ParallaxMedia";
 import { ACTUALITES, CHIFFRES, UES } from "@/lib/gtel-data";
 import { useAuth } from "@/hooks/useAuth";
+
 import heroImg from "@/assets/hero.jpg";
 import studentsImg from "@/assets/students.jpg";
 import fiberImg from "@/assets/fiber.jpg";
