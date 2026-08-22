@@ -170,11 +170,14 @@ function Index() {
         <div className="container-x grid gap-14 lg:grid-cols-[1fr_1.1fr] lg:gap-24">
           <div>
             <Reveal>
-              <p className="eyebrow">01 — Le club</p>
+              <span className="badge-cobalt">
+                <Users className="h-3 w-3" /> 01 — Le club
+              </span>
             </Reveal>
-            <h2 className="mt-6 text-4xl leading-[1.02] font-semibold md:text-6xl">
+            <h2 className="mt-6 font-display text-4xl leading-[1.02] font-extrabold md:text-6xl">
               <RevealText text="Une filière, une mémoire, une communauté." />
             </h2>
+
             <Reveal delay={0.2}>
               <p className="mt-8 text-lg leading-relaxed text-muted-foreground">
                 Le club GTEL rassemble les étudiants du Génie des Télécommunications de l'ENSPY.
