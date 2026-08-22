@@ -267,45 +267,47 @@ function Index() {
             <Reveal>
               <p className="eyebrow">02 — Actualités</p>
             </Reveal>
-            <h2 className="mt-6 text-4xl font-semibold md:text-5xl">
+            <h2 className="mt-6 font-display text-4xl font-extrabold md:text-6xl">
               <RevealText text="À la une du département" />
             </h2>
           </div>
           <Reveal delay={0.2}>
             <Link
               to="/actualites"
-              className="hover-line font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground hover:text-foreground"
+              className="btn-ghost inline-flex items-center gap-2 rounded-full px-5 py-2.5"
             >
+              <Newspaper className="h-3.5 w-3.5" />
               Toutes les actualités
             </Link>
           </Reveal>
         </div>
 
-        <div className="mt-14 divide-y divide-border/60 border-y border-border/60">
+        <div className="mt-14 grid gap-5 md:grid-cols-3">
           {ACTUALITES.slice(0, 3).map((a, i) => (
-            <Reveal key={a.slug} delay={0.08 * i}>
+            <Reveal key={a.slug} delay={0.08 * i} className="h-full">
               <Link
                 to="/actualites"
-                className="group grid gap-4 py-8 transition-colors duration-500 md:grid-cols-[9rem_1fr_auto] md:items-baseline md:gap-8"
+                className="glass-card group flex h-full flex-col rounded-2xl p-7"
               >
-                <span className="font-mono text-xs tracking-[0.16em] text-steel uppercase">
-                  {a.date}
-                </span>
-                <span>
-                  <span className="block font-display text-2xl leading-snug transition-colors duration-500 group-hover:text-glow md:text-3xl">
-                    {a.titre}
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="badge-cyan">{a.categorie}</span>
+                  <span className="badge-steel">
+                    <CalendarDays className="h-3 w-3" />
+                    {a.date}
                   </span>
-                  <span className="mt-2 block max-w-2xl text-sm text-muted-foreground">
-                    {a.resume}
-                  </span>
+                </div>
+                <span className="mt-5 block font-display text-2xl leading-snug font-bold transition-colors duration-500 group-hover:text-cyan-glow">
+                  {a.titre}
                 </span>
-                <span className="border border-border px-3 py-1 font-mono text-[0.65rem] tracking-[0.16em] uppercase text-muted-foreground">
-                  {a.categorie}
+                <span className="mt-3 block text-sm text-mist">{a.resume}</span>
+                <span className="mt-6 inline-flex items-center gap-1.5 font-mono text-[0.65rem] uppercase tracking-[0.16em] text-glow">
+                  Lire <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-500 group-hover:translate-x-1 group-hover:-translate-y-1" />
                 </span>
               </Link>
             </Reveal>
           ))}
           </div>
+
         </div>
       </section>
 
