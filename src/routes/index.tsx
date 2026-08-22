@@ -57,12 +57,17 @@ function Hero() {
         />
       </motion.div>
 
-      <motion.div style={{ opacity }} className="relative flex h-full items-end pb-20">
+      <Ambient className="z-1 opacity-90" />
+
+      <motion.div style={{ opacity }} className="relative z-2 flex h-full items-end pb-20">
         <div className="container-x">
           <Reveal y={0}>
-            <p className="eyebrow">École Nationale Supérieure Polytechnique de Yaoundé</p>
+            <span className="badge-cyan">
+              <Radio className="h-3 w-3" />
+              École Nationale Supérieure Polytechnique de Yaoundé
+            </span>
           </Reveal>
-          <h1 className="mt-6 max-w-5xl text-[13vw] leading-[0.86] font-bold tracking-tighter sm:text-[9vw] lg:text-[7.5rem]">
+          <h1 className="mt-6 max-w-5xl font-display text-5xl leading-[0.86] font-extrabold tracking-tighter sm:text-6xl md:text-[9vw] lg:text-[8.5rem]">
             <RevealText text="CLUB GTEL" />
             <span className="block text-gradient-blue">
               <RevealText text="Télécommunications" delay={0.15} />
@@ -71,7 +76,7 @@ function Hero() {
 
           <div className="mt-10 flex flex-col gap-8 border-t border-border/60 pt-8 md:flex-row md:items-end md:justify-between">
             <Reveal delay={0.35}>
-              <p className="max-w-md text-base text-muted-foreground">
+              <p className="max-w-md text-base text-mist">
                 Un point d'information unique sur la vie du département, la filière et la mémoire
                 académique transmise de promotion en promotion.
               </p>
@@ -80,8 +85,9 @@ function Hero() {
               <div className="flex flex-wrap gap-3">
                 <Link
                   to={isMember ? "/bibliotheque" : "/auth"}
-                  className="group relative inline-flex items-center gap-2 overflow-hidden bg-primary px-6 py-3.5 font-mono text-xs uppercase tracking-[0.16em] text-primary-foreground"
+                  className="btn-glow hover-sheen group inline-flex items-center gap-2 rounded-full px-6 py-3.5"
                 >
+                  {isMember ? <BookOpen className="h-4 w-4" /> : <Users className="h-4 w-4" />}
                   <span className="relative">
                     {isMember ? "Bibliothèque de parrainage" : "Espace membre"}
                   </span>
@@ -89,8 +95,9 @@ function Hero() {
                 </Link>
                 <Link
                   to="/actualites"
-                  className="group inline-flex items-center gap-2 border border-border px-6 py-3.5 font-mono text-xs uppercase tracking-[0.16em] transition-colors duration-500 hover:border-primary"
+                  className="btn-ghost group inline-flex items-center gap-2 rounded-full px-6 py-3.5"
                 >
+                  <Newspaper className="h-4 w-4" />
                   Actualités
                 </Link>
               </div>
@@ -98,6 +105,7 @@ function Hero() {
           </div>
         </div>
       </motion.div>
+
 
       <motion.div
         style={{ opacity }}
