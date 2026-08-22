@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, MapPin, Mail, ShieldCheck, Send } from "lucide-react";
 import { PageHeader } from "@/components/site/PageHeader";
 import { Reveal } from "@/components/site/Reveal";
 
@@ -87,8 +87,9 @@ function Contact() {
 
               <button
                 type="submit"
-                className="group inline-flex items-center gap-2 bg-primary px-8 py-4 font-mono text-xs uppercase tracking-[0.16em] text-primary-foreground transition-opacity duration-500 hover:opacity-90"
+                className="btn-glow hover-sheen group inline-flex items-center gap-2 rounded-full px-8 py-4"
               >
+                <Send className="h-4 w-4" />
                 {sent ? "Message envoyé" : "Envoyer"}
                 <ArrowUpRight className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-1 group-hover:-translate-y-1" />
               </button>
@@ -102,9 +103,9 @@ function Contact() {
           </Reveal>
 
           <Reveal delay={0.2}>
-            <div className="space-y-10 border-l border-border/60 pl-8">
+            <div className="glass-card space-y-10 rounded-2xl p-8">
               <div>
-                <p className="eyebrow">Adresse</p>
+                <p className="badge-cyan"><MapPin className="h-3 w-3" /> Adresse</p>
                 <p className="mt-3 text-muted-foreground">
                   École Nationale Supérieure Polytechnique
                   <br />
@@ -113,11 +114,11 @@ function Contact() {
                 </p>
               </div>
               <div>
-                <p className="eyebrow">E-mail</p>
+                <p className="badge-cyan"><Mail className="h-3 w-3" /> E-mail</p>
                 <p className="mt-3 text-muted-foreground">club.gtel@enspy.cm</p>
               </div>
               <div>
-                <p className="eyebrow">Espace membre</p>
+                <p className="badge-cyan"><ShieldCheck className="h-3 w-3" /> Espace membre</p>
                 <p className="mt-3 text-sm text-muted-foreground">
                   Réservé à la Cellule Communication, au Président et à l'Administrateur du site.
                   Les accès sont délivrés par le Bureau en début de mandat.

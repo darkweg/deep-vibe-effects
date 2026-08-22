@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { CalendarDays, Users } from "lucide-react";
 import { PageHeader } from "@/components/site/PageHeader";
 import { Reveal, RevealText } from "@/components/site/Reveal";
 import { ParallaxMedia } from "@/components/site/ParallaxMedia";
@@ -47,11 +48,11 @@ function Club() {
             <ParallaxMedia
               src={studentsImg}
               alt="Membres du club GTEL en séance de travail"
-              className="h-[30rem] w-full"
+              className="h-[30rem] w-full rounded-2xl"
             />
           </Reveal>
           <div className="lg:pt-10">
-            <h2 className="text-4xl leading-[1.05] font-semibold md:text-5xl">
+            <h2 className="font-display text-4xl leading-[1.05] font-extrabold md:text-6xl">
               <RevealText text="Transmettre plus qu'un diplôme" />
             </h2>
             <Reveal delay={0.2}>
@@ -74,13 +75,13 @@ function Club() {
       <section className="border-y bg-ink py-24">
         <div className="container-x">
           <Reveal>
-            <p className="eyebrow">Chronologie</p>
+            <span className="badge-cyan"><CalendarDays className="h-3 w-3" /> Chronologie</span>
           </Reveal>
           <div className="mt-12 grid gap-px bg-border/60 md:grid-cols-4">
             {JALONS.map((j, i) => (
               <Reveal key={j.annee} delay={0.08 * i} className="h-full">
-                <div className="group h-full bg-ink p-8 transition-colors duration-500 hover:bg-secondary/50">
-                  <p className="font-display text-4xl font-bold text-gradient-blue">{j.annee}</p>
+                <div className="glass-card group h-full rounded-2xl p-8">
+                  <p className="font-display text-4xl font-extrabold text-gradient-blue">{j.annee}</p>
                   <p className="mt-4 text-sm text-muted-foreground">{j.texte}</p>
                 </div>
               </Reveal>
@@ -91,21 +92,18 @@ function Club() {
 
       <section className="container-x py-24">
         <Reveal>
-          <p className="eyebrow">Bureau actuel</p>
+          <span className="badge-cyan"><Users className="h-3 w-3" /> Bureau actuel</span>
         </Reveal>
-        <h2 className="mt-6 text-4xl font-semibold md:text-5xl">
+        <h2 className="mt-6 font-display text-4xl font-extrabold md:text-6xl">
           <RevealText text="Celles et ceux qui font tourner le club" />
         </h2>
 
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {BUREAU.map((m, i) => (
             <Reveal key={m.nom} delay={0.07 * i}>
-              <div className="group relative overflow-hidden border border-border/70 p-7 transition-colors duration-500 hover:border-primary/60">
-                <span className="absolute inset-x-0 bottom-0 h-px origin-left scale-x-0 bg-primary transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100" />
-                <p className="font-mono text-[0.65rem] uppercase tracking-[0.18em] text-glow">
-                  {m.role}
-                </p>
-                <p className="mt-3 font-display text-xl">{m.nom}</p>
+              <div className="glass-card group rounded-2xl p-7">
+                <span className="badge-cyan">{m.role}</span>
+                <p className="mt-4 font-display text-xl font-bold">{m.nom}</p>
                 <p className="mt-1 text-sm text-steel">{m.promo}</p>
               </div>
             </Reveal>
