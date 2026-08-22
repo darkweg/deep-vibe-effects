@@ -1,7 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
+import { AnimatePresence, motion } from "motion/react";
+import { CalendarDays, GraduationCap, LayoutGrid, PartyPopper, Users } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import { PageHeader } from "@/components/site/PageHeader";
 import { Reveal } from "@/components/site/Reveal";
+import { FilterTabs } from "@/components/site/FilterTabs";
 import { ParallaxMedia } from "@/components/site/ParallaxMedia";
 import { ACTUALITES } from "@/lib/gtel-data";
 import eventImg from "@/assets/event.jpg";
@@ -30,6 +34,13 @@ export const Route = createFileRoute("/actualites")({
 
 const IMAGES = [eventImg, fiberImg, studentsImg, libraryImg];
 
+const CAT_ICONS: Record<string, LucideIcon> = {
+  Toutes: LayoutGrid,
+  Événement: PartyPopper,
+  Formation: GraduationCap,
+  "Vie du club": Users,
+};
+
 function Actualites() {
   const categories = ["Toutes", ...Array.from(new Set(ACTUALITES.map((a) => a.categorie)))];
   const [filtre, setFiltre] = useState("Toutes");
@@ -45,49 +56,56 @@ function Actualites() {
 
       <section className="container-x py-20">
         <Reveal>
-          <div className="flex flex-wrap gap-2">
-            {categories.map((c) => (
-              <button
-                key={c}
-                type="button"
-                onClick={() => setFiltre(c)}
-                className={`border px-4 py-2 font-mono text-[0.65rem] uppercase tracking-[0.18em] transition-all duration-500 ${
-                  filtre === c
-                    ? "border-primary bg-primary text-primary-foreground"
-                    : "border-border text-muted-foreground hover:border-primary/60 hover:text-foreground"
-                }`}
-              >
-                {c}
-              </button>
-            ))}
-          </div>
+          <FilterTabs
+            items={categories}
+            active={filtre}
+            onChange={setFiltre}
+            layoutId="actu-tab"
+            icons={CAT_ICONS}
+          />
         </Reveal>
 
-        <div className="mt-14 space-y-16">
-          {liste.map((a, i) => (
-            <Reveal key={a.slug} delay={0.06 * i}>
-              <article className="group grid gap-8 md:grid-cols-[1.1fr_1.4fr] md:items-center">
-                <ParallaxMedia
-                  src={IMAGES[i % IMAGES.length] as string}
-                  alt={a.titre}
-                  className="h-[20rem] w-full"
-                  strength={40}
-                />
-                <div>
-                  <div className="flex items-center gap-3 font-mono text-[0.65rem] uppercase tracking-[0.18em] text-steel">
-                    <span className="text-glow">{a.categorie}</span>
-                    <span>·</span>
-                    <span>{a.date}</span>
+        <motion.div layout className="mt-14 space-y-10">
+          <AnimatePresence mode="popLayout">
+            {liste.map((a, i) => {
+              const Icon = CAT_ICONS[a.categorie] ?? PartyPopper;
+              return (
+                <motion.article
+                  key={a.slug}
+                  layout
+                  initial={{ opacity: 0, y: 28 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -16 }}
+                  transition={{ duration: 0.6, delay: 0.05 * i, ease: [0.16, 1, 0.3, 1] }}
+                  className="glass-card group grid gap-8 rounded-2xl p-4 md:grid-cols-[1.1fr_1.4fr] md:items-center md:p-6"
+                >
+                  <ParallaxMedia
+                    src={IMAGES[i % IMAGES.length] as string}
+                    alt={a.titre}
+                    className="h-[18rem] w-full rounded-xl"
+                    strength={40}
+                  />
+                  <div>
+                    <div className="flex flex-wrap items-center gap-3">
+                      <span className="badge-cyan">
+                        <Icon className="h-3 w-3" />
+                        {a.categorie}
+                      </span>
+                      <span className="badge-steel">
+                        <CalendarDays className="h-3 w-3" />
+                        {a.date}
+                      </span>
+                    </div>
+                    <h2 className="mt-5 font-display text-3xl leading-tight font-bold transition-colors duration-500 group-hover:text-cyan-glow md:text-4xl">
+                      {a.titre}
+                    </h2>
+                    <p className="mt-4 max-w-xl text-mist">{a.resume}</p>
                   </div>
-                  <h2 className="mt-4 font-display text-3xl leading-tight transition-colors duration-500 group-hover:text-glow md:text-4xl">
-                    {a.titre}
-                  </h2>
-                  <p className="mt-4 max-w-xl text-muted-foreground">{a.resume}</p>
-                </div>
-              </article>
-            </Reveal>
-          ))}
-        </div>
+                </motion.article>
+              );
+            })}
+          </AnimatePresence>
+        </motion.div>
       </section>
     </div>
   );

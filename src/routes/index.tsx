@@ -1,11 +1,24 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion, useScroll, useTransform } from "motion/react";
 import { useRef } from "react";
-import { ArrowUpRight, ArrowDown } from "lucide-react";
+import {
+  ArrowUpRight,
+  ArrowDown,
+  BookOpen,
+  CalendarDays,
+  GraduationCap,
+  Images,
+  Newspaper,
+  Radio,
+  Users,
+} from "lucide-react";
 import { Reveal, RevealText } from "@/components/site/Reveal";
+import { Ambient } from "@/components/site/Ambient";
+import { Counter } from "@/components/site/Counter";
 import { ParallaxMedia } from "@/components/site/ParallaxMedia";
 import { ACTUALITES, CHIFFRES, UES } from "@/lib/gtel-data";
 import { useAuth } from "@/hooks/useAuth";
+
 import heroImg from "@/assets/hero.jpg";
 import studentsImg from "@/assets/students.jpg";
 import fiberImg from "@/assets/fiber.jpg";
@@ -57,12 +70,17 @@ function Hero() {
         />
       </motion.div>
 
-      <motion.div style={{ opacity }} className="relative flex h-full items-end pb-20">
+      <Ambient className="z-1 opacity-90" />
+
+      <motion.div style={{ opacity }} className="relative z-2 flex h-full items-end pb-20">
         <div className="container-x">
           <Reveal y={0}>
-            <p className="eyebrow">École Nationale Supérieure Polytechnique de Yaoundé</p>
+            <span className="badge-cyan">
+              <Radio className="h-3 w-3" />
+              École Nationale Supérieure Polytechnique de Yaoundé
+            </span>
           </Reveal>
-          <h1 className="mt-6 max-w-5xl text-[13vw] leading-[0.86] font-bold tracking-tighter sm:text-[9vw] lg:text-[7.5rem]">
+          <h1 className="mt-6 max-w-5xl font-display text-5xl leading-[0.86] font-extrabold tracking-tighter sm:text-6xl md:text-[9vw] lg:text-[8.5rem]">
             <RevealText text="CLUB GTEL" />
             <span className="block text-gradient-blue">
               <RevealText text="Télécommunications" delay={0.15} />
@@ -71,7 +89,7 @@ function Hero() {
 
           <div className="mt-10 flex flex-col gap-8 border-t border-border/60 pt-8 md:flex-row md:items-end md:justify-between">
             <Reveal delay={0.35}>
-              <p className="max-w-md text-base text-muted-foreground">
+              <p className="max-w-md text-base text-mist">
                 Un point d'information unique sur la vie du département, la filière et la mémoire
                 académique transmise de promotion en promotion.
               </p>
@@ -80,8 +98,9 @@ function Hero() {
               <div className="flex flex-wrap gap-3">
                 <Link
                   to={isMember ? "/bibliotheque" : "/auth"}
-                  className="group relative inline-flex items-center gap-2 overflow-hidden bg-primary px-6 py-3.5 font-mono text-xs uppercase tracking-[0.16em] text-primary-foreground"
+                  className="btn-glow hover-sheen group inline-flex items-center gap-2 rounded-full px-6 py-3.5"
                 >
+                  {isMember ? <BookOpen className="h-4 w-4" /> : <Users className="h-4 w-4" />}
                   <span className="relative">
                     {isMember ? "Bibliothèque de parrainage" : "Espace membre"}
                   </span>
@@ -89,8 +108,9 @@ function Hero() {
                 </Link>
                 <Link
                   to="/actualites"
-                  className="group inline-flex items-center gap-2 border border-border px-6 py-3.5 font-mono text-xs uppercase tracking-[0.16em] transition-colors duration-500 hover:border-primary"
+                  className="btn-ghost group inline-flex items-center gap-2 rounded-full px-6 py-3.5"
                 >
+                  <Newspaper className="h-4 w-4" />
                   Actualités
                 </Link>
               </div>
@@ -98,6 +118,7 @@ function Hero() {
           </div>
         </div>
       </motion.div>
+
 
       <motion.div
         style={{ opacity }}
@@ -149,11 +170,14 @@ function Index() {
         <div className="container-x grid gap-14 lg:grid-cols-[1fr_1.1fr] lg:gap-24">
           <div>
             <Reveal>
-              <p className="eyebrow">01 — Le club</p>
+              <span className="badge-cobalt">
+                <Users className="h-3 w-3" /> 01 — Le club
+              </span>
             </Reveal>
-            <h2 className="mt-6 text-4xl leading-[1.02] font-semibold md:text-6xl">
+            <h2 className="mt-6 font-display text-4xl leading-[1.02] font-extrabold md:text-6xl">
               <RevealText text="Une filière, une mémoire, une communauté." />
             </h2>
+
             <Reveal delay={0.2}>
               <p className="mt-8 text-lg leading-relaxed text-muted-foreground">
                 Le club GTEL rassemble les étudiants du Génie des Télécommunications de l'ENSPY.
@@ -161,20 +185,26 @@ function Index() {
                 conserve les ressources académiques accumulées au fil des promotions.
               </p>
             </Reveal>
-            <div className="mt-12 grid grid-cols-2 gap-8">
+            <div className="mt-12 grid grid-cols-2 gap-5">
               {CHIFFRES.map((c, i) => (
                 <Reveal key={c.label} delay={0.1 * i}>
-                  <p className="font-display text-5xl font-bold text-gradient-blue">{c.valeur}</p>
-                  <p className="mt-2 text-sm text-muted-foreground">{c.label}</p>
+                  <div className="glass-card rounded-2xl p-6">
+                    <Counter
+                      value={c.valeur}
+                      className="font-display text-5xl font-extrabold text-gradient-blue"
+                    />
+                    <p className="mt-2 text-sm text-mist">{c.label}</p>
+                  </div>
                 </Reveal>
               ))}
             </div>
+
             <Reveal delay={0.3}>
               <Link
                 to="/club"
-                className="mt-10 inline-flex items-center gap-2 border border-border px-6 py-3.5 font-mono text-xs uppercase tracking-[0.16em] transition-colors duration-500 hover:border-primary"
+                className="btn-ghost mt-10 inline-flex items-center gap-2 rounded-full px-6 py-3.5"
               >
-                Découvrir le club <ArrowUpRight className="h-4 w-4" />
+                <Users className="h-4 w-4" /> Découvrir le club <ArrowUpRight className="h-4 w-4" />
               </Link>
             </Reveal>
           </div>
@@ -184,14 +214,14 @@ function Index() {
               <ParallaxMedia
                 src={studentsImg}
                 alt="Étudiants GTEL travaillant sur des équipements réseau"
-                className="h-[22rem] w-full"
+                className="h-[22rem] w-full rounded-2xl"
               />
             </Reveal>
             <Reveal delay={0.15}>
               <ParallaxMedia
                 src={fiberImg}
                 alt="Faisceau de fibres optiques bleues"
-                className="h-[22rem] w-full"
+                className="h-[22rem] w-full rounded-2xl"
               />
             </Reveal>
           </div>
@@ -210,7 +240,7 @@ function Index() {
         />
         <div className="relative z-3 flex h-full items-center">
           <div className="container-x">
-            <h2 className="max-w-3xl text-4xl leading-[1.02] font-semibold md:text-6xl">
+            <h2 className="max-w-3xl font-display text-4xl leading-[1.02] font-extrabold md:text-6xl">
               <RevealText text="Ce qui se transmet ne doit pas se perdre." />
             </h2>
             <Reveal delay={0.2}>
@@ -222,9 +252,9 @@ function Index() {
             <Reveal delay={0.3}>
               <Link
                 to="/bibliotheque"
-                className="mt-8 inline-flex items-center gap-2 border border-border px-6 py-3.5 font-mono text-xs uppercase tracking-[0.16em] transition-colors duration-500 hover:border-primary"
+                className="btn-glow hover-sheen mt-8 inline-flex items-center gap-2 rounded-full px-6 py-3.5"
               >
-                Ouvrir la bibliothèque <ArrowUpRight className="h-4 w-4" />
+                <BookOpen className="h-4 w-4" /> Ouvrir la bibliothèque <ArrowUpRight className="h-4 w-4" />
               </Link>
             </Reveal>
           </div>
@@ -238,47 +268,49 @@ function Index() {
           <div className="flex flex-wrap items-end justify-between gap-6">
             <div>
             <Reveal>
-              <p className="eyebrow">02 — Actualités</p>
+              <span className="badge-cobalt"><Newspaper className="h-3 w-3" /> 02 — Actualités</span>
             </Reveal>
-            <h2 className="mt-6 text-4xl font-semibold md:text-5xl">
+            <h2 className="mt-6 font-display text-4xl font-extrabold md:text-6xl">
               <RevealText text="À la une du département" />
             </h2>
           </div>
           <Reveal delay={0.2}>
             <Link
               to="/actualites"
-              className="hover-line font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground hover:text-foreground"
+              className="btn-ghost inline-flex items-center gap-2 rounded-full px-5 py-2.5"
             >
+              <Newspaper className="h-3.5 w-3.5" />
               Toutes les actualités
             </Link>
           </Reveal>
         </div>
 
-        <div className="mt-14 divide-y divide-border/60 border-y border-border/60">
+        <div className="mt-14 grid gap-5 md:grid-cols-3">
           {ACTUALITES.slice(0, 3).map((a, i) => (
-            <Reveal key={a.slug} delay={0.08 * i}>
+            <Reveal key={a.slug} delay={0.08 * i} className="h-full">
               <Link
                 to="/actualites"
-                className="group grid gap-4 py-8 transition-colors duration-500 md:grid-cols-[9rem_1fr_auto] md:items-baseline md:gap-8"
+                className="glass-card group flex h-full flex-col rounded-2xl p-7"
               >
-                <span className="font-mono text-xs tracking-[0.16em] text-steel uppercase">
-                  {a.date}
-                </span>
-                <span>
-                  <span className="block font-display text-2xl leading-snug transition-colors duration-500 group-hover:text-glow md:text-3xl">
-                    {a.titre}
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="badge-cyan">{a.categorie}</span>
+                  <span className="badge-steel">
+                    <CalendarDays className="h-3 w-3" />
+                    {a.date}
                   </span>
-                  <span className="mt-2 block max-w-2xl text-sm text-muted-foreground">
-                    {a.resume}
-                  </span>
+                </div>
+                <span className="mt-5 block font-display text-2xl leading-snug font-bold transition-colors duration-500 group-hover:text-cyan-glow">
+                  {a.titre}
                 </span>
-                <span className="border border-border px-3 py-1 font-mono text-[0.65rem] tracking-[0.16em] uppercase text-muted-foreground">
-                  {a.categorie}
+                <span className="mt-3 block text-sm text-mist">{a.resume}</span>
+                <span className="mt-6 inline-flex items-center gap-1.5 font-mono text-[0.65rem] uppercase tracking-[0.16em] text-glow">
+                  Lire <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-500 group-hover:translate-x-1 group-hover:-translate-y-1" />
                 </span>
               </Link>
             </Reveal>
           ))}
           </div>
+
         </div>
       </section>
 
@@ -289,13 +321,13 @@ function Index() {
           <div className="grid gap-14 lg:grid-cols-[1fr_1.2fr] lg:gap-24">
             <div className="lg:sticky lg:top-32 lg:self-start">
               <Reveal>
-                <p className="eyebrow">03 — La filière</p>
+                <span className="badge-cobalt"><GraduationCap className="h-3 w-3" /> 03 — La filière</span>
               </Reveal>
-              <h2 className="mt-6 text-4xl leading-[1.02] font-semibold md:text-5xl">
+              <h2 className="mt-6 font-display text-4xl leading-[1.02] font-extrabold md:text-6xl">
                 <RevealText text="Unités d'enseignement, de la L3 à la L5" />
               </h2>
               <Reveal delay={0.2}>
-                <p className="mt-6 text-muted-foreground">
+                <p className="mt-6 text-mist">
                   Chaque UE est présentée avec son volume horaire, ses crédits, son semestre et
                   l'enseignant responsable lorsque l'information est disponible.
                 </p>
@@ -303,8 +335,9 @@ function Index() {
               <Reveal delay={0.3}>
                 <Link
                   to="/filiere"
-                  className="mt-8 inline-flex items-center gap-2 border border-primary/60 px-6 py-3.5 font-mono text-xs uppercase tracking-[0.16em] transition-colors duration-500 hover:bg-primary hover:text-primary-foreground"
+                  className="btn-glow hover-sheen mt-8 inline-flex items-center gap-2 rounded-full px-6 py-3.5"
                 >
+                  <GraduationCap className="h-4 w-4" />
                   Explorer la filière <ArrowUpRight className="h-4 w-4" />
                 </Link>
               </Reveal>
@@ -313,17 +346,14 @@ function Index() {
             <div className="space-y-4">
               {UES.slice(0, 4).map((ue, i) => (
                 <Reveal key={ue.code} delay={0.08 * i}>
-                  <div className="group relative overflow-hidden border border-border/70 p-7 transition-colors duration-500 hover:border-primary/60">
-                    <span className="absolute inset-x-0 bottom-0 h-px origin-left scale-x-0 bg-primary transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100" />
-                    <div className="flex flex-wrap items-center gap-3 font-mono text-[0.65rem] uppercase tracking-[0.18em] text-steel">
-                      <span className="text-glow">{ue.code}</span>
-                      <span>·</span>
-                      <span>{ue.niveau}</span>
-                      <span>·</span>
-                      <span>{ue.credits} crédits</span>
+                  <div className="glass-card group rounded-2xl p-7">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <span className="badge-cyan">{ue.code}</span>
+                      <span className="badge-cobalt">{ue.niveau}</span>
+                      <span className="badge-steel">{ue.credits} crédits</span>
                     </div>
-                    <h3 className="mt-3 font-display text-2xl">{ue.intitule}</h3>
-                    <p className="mt-3 text-sm text-muted-foreground">{ue.resume}</p>
+                    <h3 className="mt-4 font-display text-2xl font-bold">{ue.intitule}</h3>
+                    <p className="mt-3 text-sm text-mist">{ue.resume}</p>
                   </div>
                 </Reveal>
               ))}
@@ -337,9 +367,11 @@ function Index() {
       <section className="theme-deep-blue py-28 md:py-36">
         <div className="container-x">
         <Reveal>
-          <p className="eyebrow">04 — Galerie</p>
+          <span className="badge-cobalt">
+            <Images className="h-3 w-3" /> 04 — Galerie
+          </span>
         </Reveal>
-        <h2 className="mt-6 max-w-3xl text-4xl leading-[1.02] font-semibold md:text-6xl">
+        <h2 className="mt-6 max-w-3xl font-display text-4xl leading-[1.02] font-extrabold md:text-6xl">
           <RevealText text="La vie du club, image par image" />
         </h2>
 
@@ -351,9 +383,15 @@ function Index() {
           ].map((item, i) => (
             <Reveal key={item.label} delay={0.1 * i}>
               <Link to="/galerie" className="group block">
-                <ParallaxMedia src={item.src} alt={item.alt} className="h-[26rem] w-full" strength={40} />
+                <ParallaxMedia
+                  src={item.src}
+                  alt={item.alt}
+                  className="h-[26rem] w-full rounded-2xl ring-1 ring-border transition-all duration-500 group-hover:ring-glow/60 group-hover:shadow-[0_30px_70px_-35px_rgb(0_102_255/0.9)]"
+                  strength={40}
+                />
                 <div className="mt-4 flex items-center justify-between">
-                  <span className="font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground">
+                  <span className="badge-steel">
+                    <Images className="h-3 w-3" />
                     {item.label}
                   </span>
                   <ArrowUpRight className="h-4 w-4 text-steel transition-transform duration-500 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-glow" />
@@ -367,13 +405,13 @@ function Index() {
 
       {/* CTA — thème minuit (page /contact) */}
       <section className="theme-midnight relative overflow-hidden border-t py-28 md:py-36">
-        <div className="pointer-events-none absolute inset-x-0 -bottom-40 mx-auto h-96 w-[60rem] rounded-full bg-primary/20 blur-[140px]" />
+        <Ambient />
         <div className="container-x relative text-center">
-          <h2 className="mx-auto max-w-4xl text-4xl leading-[1.02] font-semibold md:text-6xl">
+          <h2 className="mx-auto max-w-4xl font-display text-4xl leading-[1.02] font-extrabold md:text-6xl">
             <RevealText text="Rejoignez la Cellule Communication" />
           </h2>
           <Reveal delay={0.2}>
-            <p className="mx-auto mt-6 max-w-xl text-muted-foreground">
+            <p className="mx-auto mt-6 max-w-xl text-mist">
               Publier une annonce, alimenter la galerie ou déposer un document dans la bibliothèque :
               tout passe par un espace membre simple à prendre en main.
             </p>
@@ -381,11 +419,14 @@ function Index() {
           <Reveal delay={0.3}>
             <Link
               to="/contact"
-              className="mt-10 inline-flex items-center gap-2 bg-primary px-8 py-4 font-mono text-xs uppercase tracking-[0.16em] text-primary-foreground transition-opacity duration-500 hover:opacity-90"
+              className="btn-glow hover-sheen mt-10 inline-flex items-center gap-2 rounded-full px-8 py-4"
             >
               Nous écrire <ArrowUpRight className="h-4 w-4" />
             </Link>
           </Reveal>
+        </div>
+      </section>
+
         </div>
       </section>
     </>
