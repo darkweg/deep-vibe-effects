@@ -202,9 +202,9 @@ function Index() {
             <Reveal delay={0.3}>
               <Link
                 to="/club"
-                className="mt-10 inline-flex items-center gap-2 border border-border px-6 py-3.5 font-mono text-xs uppercase tracking-[0.16em] transition-colors duration-500 hover:border-primary"
+                className="btn-ghost mt-10 inline-flex items-center gap-2 rounded-full px-6 py-3.5"
               >
-                Découvrir le club <ArrowUpRight className="h-4 w-4" />
+                <Users className="h-4 w-4" /> Découvrir le club <ArrowUpRight className="h-4 w-4" />
               </Link>
             </Reveal>
           </div>
@@ -214,14 +214,14 @@ function Index() {
               <ParallaxMedia
                 src={studentsImg}
                 alt="Étudiants GTEL travaillant sur des équipements réseau"
-                className="h-[22rem] w-full"
+                className="h-[22rem] w-full rounded-2xl"
               />
             </Reveal>
             <Reveal delay={0.15}>
               <ParallaxMedia
                 src={fiberImg}
                 alt="Faisceau de fibres optiques bleues"
-                className="h-[22rem] w-full"
+                className="h-[22rem] w-full rounded-2xl"
               />
             </Reveal>
           </div>
@@ -240,7 +240,7 @@ function Index() {
         />
         <div className="relative z-3 flex h-full items-center">
           <div className="container-x">
-            <h2 className="max-w-3xl text-4xl leading-[1.02] font-semibold md:text-6xl">
+            <h2 className="max-w-3xl font-display text-4xl leading-[1.02] font-extrabold md:text-6xl">
               <RevealText text="Ce qui se transmet ne doit pas se perdre." />
             </h2>
             <Reveal delay={0.2}>
@@ -252,9 +252,9 @@ function Index() {
             <Reveal delay={0.3}>
               <Link
                 to="/bibliotheque"
-                className="mt-8 inline-flex items-center gap-2 border border-border px-6 py-3.5 font-mono text-xs uppercase tracking-[0.16em] transition-colors duration-500 hover:border-primary"
+                className="btn-glow hover-sheen mt-8 inline-flex items-center gap-2 rounded-full px-6 py-3.5"
               >
-                Ouvrir la bibliothèque <ArrowUpRight className="h-4 w-4" />
+                <BookOpen className="h-4 w-4" /> Ouvrir la bibliothèque <ArrowUpRight className="h-4 w-4" />
               </Link>
             </Reveal>
           </div>
@@ -268,7 +268,7 @@ function Index() {
           <div className="flex flex-wrap items-end justify-between gap-6">
             <div>
             <Reveal>
-              <p className="eyebrow">02 — Actualités</p>
+              <span className="badge-cobalt"><Newspaper className="h-3 w-3" /> 02 — Actualités</span>
             </Reveal>
             <h2 className="mt-6 font-display text-4xl font-extrabold md:text-6xl">
               <RevealText text="À la une du département" />
@@ -321,7 +321,7 @@ function Index() {
           <div className="grid gap-14 lg:grid-cols-[1fr_1.2fr] lg:gap-24">
             <div className="lg:sticky lg:top-32 lg:self-start">
               <Reveal>
-                <p className="eyebrow">03 — La filière</p>
+                <span className="badge-cobalt"><GraduationCap className="h-3 w-3" /> 03 — La filière</span>
               </Reveal>
               <h2 className="mt-6 font-display text-4xl leading-[1.02] font-extrabold md:text-6xl">
                 <RevealText text="Unités d'enseignement, de la L3 à la L5" />
