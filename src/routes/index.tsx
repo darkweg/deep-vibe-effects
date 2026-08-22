@@ -182,14 +182,20 @@ function Index() {
                 conserve les ressources académiques accumulées au fil des promotions.
               </p>
             </Reveal>
-            <div className="mt-12 grid grid-cols-2 gap-8">
+            <div className="mt-12 grid grid-cols-2 gap-5">
               {CHIFFRES.map((c, i) => (
                 <Reveal key={c.label} delay={0.1 * i}>
-                  <p className="font-display text-5xl font-bold text-gradient-blue">{c.valeur}</p>
-                  <p className="mt-2 text-sm text-muted-foreground">{c.label}</p>
+                  <div className="glass-card rounded-2xl p-6">
+                    <Counter
+                      value={c.valeur}
+                      className="font-display text-5xl font-extrabold text-gradient-blue"
+                    />
+                    <p className="mt-2 text-sm text-mist">{c.label}</p>
+                  </div>
                 </Reveal>
               ))}
             </div>
+
             <Reveal delay={0.3}>
               <Link
                 to="/club"
