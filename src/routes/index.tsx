@@ -82,7 +82,7 @@ function Hero() {
           </Reveal>
           <h1 className="mt-6 max-w-6xl font-display text-[clamp(2.5rem,9.5vw,6.5rem)] leading-[0.9] font-extrabold tracking-tighter">
             <RevealText text="CLUB GTEL" />
-            <span className="block text-[0.82em] text-gradient-blue">
+            <span className="block text-[clamp(1.5rem,5.4vw,4.6rem)] text-gradient-blue">
               <RevealText text="Télécommunications" delay={0.15} />
             </span>
           </h1>
