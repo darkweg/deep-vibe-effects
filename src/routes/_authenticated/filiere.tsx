@@ -73,14 +73,14 @@ function Filiere() {
         <div className="mt-12 grid gap-5 md:grid-cols-2">
           {liste.map((ue, i) => (
             <Reveal key={ue.code} delay={0.06 * i}>
-              <article className="group relative h-full overflow-hidden border border-border/70 p-8 transition-colors duration-500 hover:border-primary/60">
+              <article className="glass-card group relative h-full overflow-hidden rounded-2xl p-8">
                 <span className="absolute inset-x-0 top-0 h-px origin-left scale-x-0 bg-primary transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100" />
                 <div className="flex items-start justify-between gap-4">
                   <div>
                     <p className="font-mono text-xs tracking-[0.18em] text-glow">{ue.code}</p>
                     <h2 className="mt-2 font-display text-2xl leading-snug">{ue.intitule}</h2>
                   </div>
-                  <span className="border border-border px-2.5 py-1 font-mono text-[0.6rem] tracking-[0.18em] text-muted-foreground">
+                  <span className="badge-cyan">
                     {ue.niveau} · {ue.semestre}
                   </span>
                 </div>

@@ -70,7 +70,7 @@ function Bibliotheque() {
               ))}
             </div>
 
-            <label className="flex items-center gap-3 border border-border px-4 py-2.5 transition-colors duration-500 focus-within:border-primary md:w-80">
+            <label className="glass-card flex items-center gap-3 rounded-full px-5 py-2.5 focus-within:border-primary md:w-80">
               <Search className="h-4 w-4 text-steel" />
               <input
                 value={q}
