@@ -80,7 +80,7 @@ function Hero() {
               École Nationale Supérieure Polytechnique de Yaoundé
             </span>
           </Reveal>
-          <h1 className="mt-6 max-w-5xl font-display text-5xl leading-[0.86] font-extrabold tracking-tighter sm:text-6xl md:text-[9vw] lg:text-[8.5rem]">
+          <h1 className="mt-6 max-w-6xl font-display text-5xl leading-[0.88] font-extrabold tracking-tighter sm:text-6xl md:text-[7.5vw] lg:text-[6.5rem]">
             <RevealText text="CLUB GTEL" />
             <span className="block text-gradient-blue">
               <RevealText text="Télécommunications" delay={0.15} />
@@ -427,8 +427,7 @@ function Index() {
         </div>
       </section>
 
-        </div>
-      </section>
+
     </>
   );
 }
