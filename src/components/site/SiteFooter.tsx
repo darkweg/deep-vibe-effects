@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { ArrowUpRight, Building2, Mail, MapPin, Radio } from "lucide-react";
 import { NAV_LINKS } from "@/lib/gtel-data";
 import { useAuth } from "@/hooks/useAuth";
-import logo from "@/assets/gtel-logo.jpg.asset.json";
+import logo from "@/assets/gtel-logo.jpg";
 
 export function SiteFooter() {
   const { isMember } = useAuth();
@@ -14,7 +14,7 @@ export function SiteFooter() {
           <div>
             <div className="flex items-center gap-3">
               <img
-                src={logo.url}
+                src={logo}
                 alt="Logo du Club Génie Télécom"
                 className="h-12 w-12 rounded-lg object-cover ring-1 ring-glow/30"
                 loading="lazy"

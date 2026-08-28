@@ -17,7 +17,7 @@ import {
 import { useQueryClient } from "@tanstack/react-query";
 import { NAV_LINKS } from "@/lib/gtel-data";
 import { useAuth } from "@/hooks/useAuth";
-import logo from "@/assets/gtel-logo.jpg.asset.json";
+import logo from "@/assets/gtel-logo.jpg";
 
 const NAV_ICONS: Record<string, LucideIcon> = {
   "/": Home,
@@ -57,7 +57,7 @@ export function SiteNav() {
       <nav className="container-x flex items-center justify-between gap-6">
         <Link to="/" className="group flex items-center gap-3">
           <img
-            src={logo.url}
+            src={logo}
             alt="Logo Club GTEL"
             className="h-10 w-10 rounded-lg object-cover ring-1 ring-glow/40 transition-all duration-500 group-hover:ring-glow"
           />

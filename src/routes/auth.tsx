@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { Loader2, LogIn, ShieldCheck, Sparkles } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import { lovable } from "@/integrations/lovable/index";
 import { useAuth } from "@/hooks/useAuth";
 import { Reveal } from "@/components/site/Reveal";
 import { PageHeader } from "@/components/site/PageHeader";
@@ -49,7 +48,7 @@ function AuthPage() {
     setBusy(true);
     try {
       if (mode === "signup") {
-        const { error } = await supabase.auth.signUp({
+        const { data, error } = await supabase.auth.signUp({
           email,
           password,
           options: {
@@ -58,10 +57,21 @@ function AuthPage() {
           },
         });
         if (error) throw error;
-        toast.success("Bienvenue dans le club !");
+        if (data.session) {
+          toast.success("Bienvenue dans le club !");
+          await router.invalidate();
+          navigate({ to: "/galerie", replace: true });
+          return;
+        }
+        toast.success("Compte créé. Vérifiez votre boîte mail pour confirmer votre adresse, puis connectez-vous.");
+        return;
       } else {
-        const { error } = await supabase.auth.signInWithPassword({ email, password });
+        const { data, error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
+        if (!data.session) {
+          toast.info("Votre adresse n'est pas encore confirmée. Vérifiez votre boîte mail.");
+          return;
+        }
         toast.success("Connexion réussie");
       }
       await router.invalidate();
@@ -74,16 +84,18 @@ function AuthPage() {
   }
 
   async function onGoogle() {
-    const result = await lovable.auth.signInWithOAuth("google", {
-      redirect_uri: window.location.origin,
+    setBusy(true);
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        redirectTo: window.location.origin,
+      },
     });
-    if (result.error) {
-      toast.error("Connexion Google impossible pour le moment.");
+    setBusy(false);
+    if (error) {
+      toast.error(error.message || "Connexion Google impossible pour le moment.");
       return;
     }
-    if (result.redirected) return;
-    await router.invalidate();
-    navigate({ to: "/galerie", replace: true });
   }
 
   return (
