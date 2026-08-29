@@ -14,12 +14,11 @@ export function Counter({ value, className, duration = 1600 }: Props) {
   const inView = useInView(ref, { once: true, margin: "-60px" });
   const reduced = useReducedMotion();
 
-  const match = value.match(/\d+/);
-  const target = match ? Number(match[0]) : 0;
-  const [n, setN] = useState(reduced || !match ? target : 0);
+  const target = Number(value.match(/\d+/)?.[0] ?? 0);
+  const [n, setN] = useState(reduced || !target ? target : 0);
 
   useEffect(() => {
-    if (!inView || reduced || !match) return;
+    if (!inView || reduced || !target) return;
     let raf = 0;
     const start = performance.now();
     const tick = (now: number) => {
@@ -30,9 +29,9 @@ export function Counter({ value, className, duration = 1600 }: Props) {
     };
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
-  }, [inView, reduced, target, duration, match]);
+  }, [inView, reduced, target, duration]);
 
-  const display = match ? value.replace(match[0], String(n)) : value;
+  const display = target ? value.replace(String(target), String(n)) : value;
 
   return (
     <span ref={ref} className={className}>

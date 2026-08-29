@@ -249,18 +249,21 @@
 }
 
 @keyframes marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
+  0% { transform: translateX(0); }
+  14% { transform: translateX(-14%); }
+  26% { transform: translateX(-14%); }
+  40% { transform: translateX(-28%); }
+  52% { transform: translateX(-28%); }
+  66% { transform: translateX(-40%); }
+  76% { transform: translateX(-40%); }
+  90% { transform: translateX(-48%); }
+  100% { transform: translateX(-50%); }
 }
 
 @utility marquee-track {
   display: flex;
   width: max-content;
-  animation: marquee 40s linear infinite;
+  animation: marquee 28s linear infinite;
 }
 
 @keyframes pulse-ring {
