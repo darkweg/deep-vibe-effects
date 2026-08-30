@@ -17,7 +17,7 @@ import event2Img from "@/assets/event2.jpg";
 import fiber2Img from "@/assets/fiber2.jpg";
 import students2Img from "@/assets/students2.jpg";
 import journeeImg from "@/assets/journee.jpg";
-import students3Img from "@/assets/students3.jpg";
+import arduinoImg from "@/assets/arduino.jpg";
 
 
 export const Route = createFileRoute("/galerie")({
@@ -43,10 +43,12 @@ const PHOTOS = [
   { src: studentsImg, alt: "Travaux pratiques réseau", album: "TP réseaux"},
   { src: eventImg, alt: "Soirée de remise du club GTEL", album: "Forum Télécoms" },
   { src: fiberImg, alt: "Atelier fibre optique", album: "Atelier fibre", span: "" },
-  { src: students2Img, alt: "Travaux pratiques réseau", album: "TP réseaux", span: "" },
+  { src: students2Img, alt: "Travaux pratiques", album: "TP réseaux", span: "" },
+  { src: arduinoImg, alt: "Laboratoire de télécommunications", album: "Atelier Arduino", span: "" },
   { src: towerImg, alt: "Sortie terrain sur pylône", album: "Sortie terrain", span: "md:col-span-2" },
   { src: libraryImg, alt: "Collecte de documents de parrainage", album: "Parrainage", span: "" },
-  { src: journeeImg, alt: "Laboratoire de télécommunications", album: "Laboratoire", span: "" },
+  { src: journeeImg, alt: "Laboratoire ", album: "Sortie terrain", span: "" },
+  
 ];
 
 function Galerie() {

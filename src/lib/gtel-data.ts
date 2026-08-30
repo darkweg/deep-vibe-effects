@@ -17,14 +17,7 @@ export type Actualite = {
 };
 
 export const ACTUALITES: Actualite[] = [
-  {
-    slug: "Visite d'Entreprise",
-    titre: "Une chaleureuse acceuil de L'ART",
-    categorie: "Evenements",
-    date: "Mai 2026",
-    resume:
-      " Nous avons visiter les locaux de l'ART ou nous avons été a chaque fois instruits par different encadreurs exceptionels sur les réalités du secteur des télécomunications au Cameroun",
-  },
+  
   {
     slug: "Forum: INFOS GTEL 2029",
     titre: "Forum Télécoms ENSPY 2029 : appel à candidatures",
@@ -55,7 +48,15 @@ export const ACTUALITES: Actualite[] = [
     categorie: "Evenements",
     date: "Février 2026",
     resume:
-      "Conférence, Presentations de projets, Hautes personnalités et Institutions du domaines des télécommunications étaient présents",
+      "Conférence, Presentations de projets, des Hautes personnalités et Institutions du domaines des télécommunications étaient présentes",
+  },
+  {
+    slug: "Visite d'Entreprise",
+    titre: "Une chaleureuse acceuil de L'ART",
+    categorie: "Evenements",
+    date: "Mai 2026",
+    resume:
+      " Nous avons visiter les locaux de l'ART ou nous avons été a chaque fois instruits par different encadreurs exceptionels sur les réalités du secteur des télécomunications au Cameroun",
   },
 ];
 
@@ -612,10 +613,17 @@ export const DOCUMENTS: Doc[] = [
 ];
 
 export const BUREAU = [
-  { nom: "Pokam Franc Migwel", role: "Président", promo: "GTEL 3" },
-  { nom: "Ariane N.", role: "Cellule Communication", promo: "GTEL 4" },
-  { nom: "Serge T.", role: "Pôle Parrainage", promo: "GTEL 5" },
-  { nom: "Laure M.", role: "Trésorerie", promo: "GTEL 4" },
+  { nom: "Tia Tchoffo Brandon", role: "Président", promo: "GTEL 4" },
+  { nom: "Kenfack Richecard Alias Richesse", role: "Cellule Communication", promo: "GTEL 4" },
+  { nom: "Mbassi Effa Nicolas", role: "Pôle Parrainage", promo: "GTEL 4" },
+  { nom: "Kouamen Suzel", role: "Trésorerie", promo: "GTEL 4" },
+  { nom: "Vmessah Ida", role: "Adjointe a la Cellule Communication", promo: "GTEL 4" },
+  { nom: "Wokam Melvine", role: "Adjoint a la Trésorerie", promo: "GTEL 4" },
+  { nom: "Pokam Franc", role: "Cellule Innovation", promo: "GTEL 4" },
+  { nom: "Ehon Nayang Eric", role: "Adjoint a la Cellule Innovation", promo: "GTEL 4" },
+  { nom: "Mbozo'o Carmen", role: "Censeur", promo: "GTEL 4" },
+  { nom: "Bomo Roland", role: "Cellule Relations extérieures", promo: "GTEL 4" },
+  { nom: "Djouma Noé", role: "Ajoint a la Cellule Relations extérieures", promo: "GTEL 4" },
 ];
 
 export const CHIFFRES = [
