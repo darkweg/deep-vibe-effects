@@ -1,13 +1,15 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowUpRight, Building2, Mail, MapPin, Radio } from "lucide-react";
+import { ArrowUpRight, Building2, Mail, MapPin, Radio, } from "lucide-react";
 import { NAV_LINKS } from "@/lib/gtel-data";
 import { useAuth } from "@/hooks/useAuth";
 import logo from "@/assets/gtel-logo.jpg";
+import {SiTiktok, SiWhatsapp } from '@icons-pack/react-simple-icons';
+import { Linkedin } from 'lucide-react'; 
 
 export function SiteFooter() {
   const { isMember } = useAuth();
   return (
-    <footer className="relative overflow-hidden border-t bg-ink">
+    <footer className="theme-dark-shell relative overflow-hidden border-t bg-ink">
       <div className="pointer-events-none absolute -top-40 left-1/2 h-80 w-[70rem] -translate-x-1/2 rounded-full bg-primary/20 blur-[120px]" />
       <div className="container-x relative py-20">
         <div className="grid gap-12 md:grid-cols-[1.4fr_1fr_1fr]">
@@ -57,8 +59,12 @@ export function SiteFooter() {
                 Université de Yaoundé I, Cameroun
               </li>
               <li className="flex items-start gap-2">
-                <Mail className="mt-0.5 h-4 w-4 shrink-0 text-glow" />
-                club.gtel@enspy.cm
+                <Linkedin className="mt-0.5 h-4 w-4 shrink-0 text-glow" size={24}/>
+                CLUB GTEL ENSPY
+              </li>
+              <li className="flex items-start gap-2">
+                <SiWhatsapp className="mt-0.5 h-4 w-4 shrink-0 text-glow" size={24}/>
+                CLUB GTEL ENSPY
               </li>
             </ul>
           </div>

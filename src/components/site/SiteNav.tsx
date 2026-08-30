@@ -50,8 +50,8 @@ export function SiteNav() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-700 ${
-        scrolled ? "glass-panel border-b py-3" : "border-b border-transparent py-5"
+      className={`theme-dark-shell fixed inset-x-0 top-0 z-50 transition-all duration-700 ${
+        scrolled ? "glass-panel border-b py-3" : "bg-background/90 border-b border-transparent py-5"
       }`}
     >
       <nav className="container-x flex items-center justify-between gap-6">

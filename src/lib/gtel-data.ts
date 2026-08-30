@@ -18,36 +18,44 @@ export type Actualite = {
 
 export const ACTUALITES: Actualite[] = [
   {
-    slug: "forum-telecoms-2026",
-    titre: "Forum Télécoms ENSPY 2026 : appel à candidatures",
-    categorie: "Événement",
-    date: "24 juillet 2026",
+    slug: "Visite d'Entreprise",
+    titre: "Une chaleureuse acceuil de L'ART",
+    categorie: "Evenements",
+    date: "Mai 2026",
     resume:
-      "Trois jours de conférences, démonstrations réseau et rencontres avec les opérateurs nationaux. Les inscriptions des équipes GTEL sont ouvertes jusqu'au 12 août.",
+      " Nous avons visiter les locaux de l'ART ou nous avons été a chaque fois instruits par different encadreurs exceptionels sur les réalités du secteur des télécomunications au Cameroun",
+  },
+  {
+    slug: "Forum: INFOS GTEL 2029",
+    titre: "Forum Télécoms ENSPY 2029 : appel à candidatures",
+    categorie: "Annonce",
+    date: "Aout 2026",
+    resume:
+      " Nous avons créer un forums pour vous. Venez afin qu'on parle de vos préoccupations",
   },
   {
     slug: "atelier-fibre-optique",
     titre: "Atelier soudure fibre optique avec le laboratoire réseaux",
     categorie: "Formation",
-    date: "11 juillet 2026",
+    date: "Novembre 2026",
     resume:
-      "Douze places encadrées par les L5 pour manipuler soudeuse, OTDR et jarretières monomodes dans les conditions du terrain.",
+      "Encadrées par les L4 pour manipuler soudeuse, OTDR et jarretières monomodes dans les conditions du terrain.",
   },
   {
     slug: "nouveau-bureau",
     titre: "Le nouveau Bureau du club GTEL est installé",
     categorie: "Vie du club",
-    date: "02 juillet 2026",
+    date: "Décembre 2026",
     resume:
       "Passation officielle entre les promotions : Présidence, Cellule Communication et pôle Parrainage sont désormais au complet.",
   },
   {
-    slug: "bibliotheque-parrainage",
-    titre: "La bibliothèque de parrainage passe le cap des 200 documents",
-    categorie: "Annonce",
-    date: "18 juin 2026",
+    slug: "Journée Internationale des télécommunications 2026",
+    titre: "La Journée intenationale des télécoms vous retrouve à l'ENSPY",
+    categorie: "Evenements",
+    date: "Février 2026",
     resume:
-      "Anciens sujets, TD corrigés et supports de cours de L3 à L5, désormais indexés par niveau et par unité d'enseignement.",
+      "Conférence, Presentations de projets, Hautes personnalités et Institutions du domaines des télécommunications étaient présents",
   },
 ];
 

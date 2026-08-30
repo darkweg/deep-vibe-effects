@@ -13,6 +13,12 @@ import studentsImg from "@/assets/students.jpg";
 import libraryImg from "@/assets/library.jpg";
 import towerImg from "@/assets/tower.jpg";
 import heroImg from "@/assets/hero.jpg";
+import event2Img from "@/assets/event2.jpg";
+import fiber2Img from "@/assets/fiber2.jpg";
+import students2Img from "@/assets/students2.jpg";
+import journeeImg from "@/assets/journee.jpg";
+import students3Img from "@/assets/students3.jpg";
+
 
 export const Route = createFileRoute("/galerie")({
   head: () => ({
@@ -34,12 +40,13 @@ export const Route = createFileRoute("/galerie")({
 });
 
 const PHOTOS = [
-  { src: eventImg, alt: "Soirée de remise du club GTEL", album: "Forum Télécoms", span: "md:col-span-2 md:row-span-2" },
+  { src: studentsImg, alt: "Travaux pratiques réseau", album: "TP réseaux"},
+  { src: eventImg, alt: "Soirée de remise du club GTEL", album: "Forum Télécoms" },
   { src: fiberImg, alt: "Atelier fibre optique", album: "Atelier fibre", span: "" },
-  { src: studentsImg, alt: "Travaux pratiques réseau", album: "TP réseaux", span: "" },
+  { src: students2Img, alt: "Travaux pratiques réseau", album: "TP réseaux", span: "" },
   { src: towerImg, alt: "Sortie terrain sur pylône", album: "Sortie terrain", span: "md:col-span-2" },
   { src: libraryImg, alt: "Collecte de documents de parrainage", album: "Parrainage", span: "" },
-  { src: heroImg, alt: "Laboratoire de télécommunications", album: "Laboratoire", span: "" },
+  { src: journeeImg, alt: "Laboratoire de télécommunications", album: "Laboratoire", span: "" },
 ];
 
 function Galerie() {
@@ -51,7 +58,7 @@ function Galerie() {
   );
 
   return (
-    <div className="theme-deep-blue min-h-screen">
+    <div className="not-even:theme-deep-blue min-h-screen">
       <PageHeader
         eyebrow="Galerie & blog"
         title="Les moments forts, album par album"
