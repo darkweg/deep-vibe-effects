@@ -168,16 +168,16 @@ export function SiteNav() {
                     await signOut();
                     navigate({ to: "/", replace: true });
                   }}
-                  className="btn-ghost mt-4 inline-flex items-center gap-2 rounded-full px-5 py-3"
+                  className="btn-ghost mt-4 inline-flex items-center gap-2 rounded-full px-5 py-3  text-white"
                 >
-                  <LogOut className="h-4 w-4" /> Sortir
+                  <LogOut className="h-4 w-4  text-white" /> Sortir
                 </button>
               ) : (
                 <Link
                   to="/auth"
-                  className="btn-glow mt-4 inline-flex items-center justify-center gap-2 rounded-full px-5 py-3"
+                  className="btn-glow mt-4 inline-flex items-center justify-center gap-2 rounded-full px-5 py-3  text-white"
                 >
-                  <Users className="h-4 w-4" /> Espace membre
+                  <Users className="h-4 w-4  text-white" /> Espace membre
                 </Link>
               )}
             </div>

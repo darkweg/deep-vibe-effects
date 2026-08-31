@@ -53,7 +53,8 @@ function Actualites() {
         eyebrow="Actualités & annonces"
         title="Ce qui se passe dans la filière"
         intro="Événements, appels à candidature, formations et vie du Bureau. Le fil est alimenté par la Cellule Communication."
-      />
+     titleClassName="text-blue-950"
+   />
 
       <section className="container-x py-20">
         <Reveal>

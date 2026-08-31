@@ -80,16 +80,16 @@ function Hero() {
               École Nationale Supérieure Polytechnique de Yaoundé
             </span>
           </Reveal>
-          <h1 className="mt-6 max-w-6xl font-display text-[clamp(2.5rem,9.5vw,6.5rem)] leading-[0.9] font-extrabold tracking-tighter">
+          <h1 className="mt-6 max-w-6xl font-display text-[clamp(2.5rem,9.5vw,6.5rem)] leading-[0.9] font-extrabold tracking-tighter text-white">
             <RevealText text="CLUB GTEL" />
-            <span className="block text-[clamp(1.5rem,5.4vw,4.6rem)] text-gradient-blue">
+            <span className="block text-[clamp(1.5rem,5.4vw,4.6rem)] text-blue-600 ">
               <RevealText text="Télécommunications" delay={0.15} />
             </span>
           </h1>
 
           <div className="mt-10 flex flex-col gap-8 border-t border-border/60 pt-8 md:flex-row md:items-end md:justify-between">
             <Reveal delay={0.35}>
-              <p className="max-w-md text-base text-mist">
+              <p className="max-w-md text-base text-white" >
                 Un point d'information unique sur la vie du département, la filière et la mémoire
                 académique transmise de promotion en promotion.
               </p>
@@ -100,18 +100,18 @@ function Hero() {
                   to={isMember ? "/bibliotheque" : "/auth"}
                   className="btn-glow hover-sheen group inline-flex items-center gap-2 rounded-full px-6 py-3.5"
                 >
-                  {isMember ? <BookOpen className="h-4 w-4" /> : <Users className="h-4 w-4" />}
-                  <span className="relative">
+                  {isMember ? <BookOpen className="h-4 w-4  text-white " /> : <Users className="h-4 w-4  text-white" />}
+                  <span className="relative text-white">
                     {isMember ? "Bibliothèque de parrainage" : "Espace membre"}
                   </span>
-                  <ArrowUpRight className="relative h-4 w-4 transition-transform duration-500 group-hover:translate-x-1 group-hover:-translate-y-1" />
+                  <ArrowUpRight className="relative h-4 w-4 transition-transform duration-500 group-hover:translate-x-1 group-hover:-translate-y-1 text-white"/>
                 </Link>
                 <Link
                   to="/actualites"
                   className="btn-ghost group inline-flex items-center gap-2 rounded-full px-6 py-3.5"
                 >
-                  <Newspaper className="h-4 w-4" />
-                  Actualités
+                  <Newspaper className="h-4 w-4 text-white" />
+                 <p className="text-white">Actualités</p> 
                 </Link>
               </div>
             </Reveal>
@@ -170,8 +170,8 @@ function Index() {
         <div className="container-x grid gap-14 lg:grid-cols-[1fr_1.1fr] lg:gap-24">
           <div>
             <Reveal>
-              <span className="badge-cobalt">
-                <Users className="h-3 w-3" /> 01 — Le club
+              <span className="badge-cobalt  text-blue-950">
+                <Users className="h-3 w-3  text-blue-950" /> 01 — Le club
               </span>
             </Reveal>
             <h2 className="mt-6 font-display text-4xl leading-[1.02] font-extrabold md:text-6xl">
@@ -191,8 +191,8 @@ function Index() {
                   <div className="glass-card rounded-2xl p-6">
                     <Counter
                       value={c.valeur}
-                      className="font-display text-5xl font-extrabold text-gradient-blue"
-                    />
+                      className="font-display text-5xl font-extrabold text-gradient-blue  text-blue-950"
+                   />
                     <p className="mt-2 text-sm text-mist">{c.label}</p>
                   </div>
                 </Reveal>
@@ -318,10 +318,10 @@ function Index() {
       {isMember && (
       <section className="theme-slate border-y py-28 md:py-36">
         <div className="container-x">
-          <div className="grid gap-14 lg:grid-cols-[1fr_1.2fr] lg:gap-24">
+          <div className="grid gap-14 lg:grid-cols-[1fr_1.2fr] lg:gap-24 text-blue-950">
             <div className="lg:sticky lg:top-32 lg:self-start">
               <Reveal>
-                <span className="badge-cobalt"><GraduationCap className="h-3 w-3" /> 03 — La filière</span>
+                <span className="badge-cobalt"><GraduationCap className="h-3 w-3 text-blue-950" /> 03 — La filière</span>
               </Reveal>
               <h2 className="mt-6 font-display text-4xl leading-[1.02] font-extrabold md:text-6xl">
                 <RevealText text="Unités d'enseignement, de la L3 à la L5" />
