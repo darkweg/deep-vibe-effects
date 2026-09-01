@@ -51,55 +51,52 @@
 :root {
   --radius: 0.25rem;
 
-  /* Blue / black / gray — extended contrast ladder */
-  --void: #05070d;
-  --ink: #070a12;
-  --background: #090d16;
-  --surface: #0f1524;
-  --surface-2: #161d30;
-  --surface-3: #232c45;
-  --foreground: oklch(0.985 0.004 250);
-  --chalk: oklch(0.9 0.008 250);
-  --mist: oklch(0.79 0.014 250);
-  --steel: oklch(0.66 0.03 250);
-  --card: #0f1524;
-  --card-foreground: oklch(0.985 0.004 250);
-  --popover: #0f1524;
-  --popover-foreground: oklch(0.985 0.004 250);
-  --cobalt: #0066ff;
-  --primary: #0066ff;
-  --azure: #3b8dff;
-  --glow: #00f0ff;
-  --cyan: #00f0ff;
-  --primary-foreground: oklch(0.99 0 0);
-  --secondary: #161d30;
-  --secondary-foreground: oklch(0.985 0.004 250);
-  --muted: #161d30;
-  --muted-foreground: oklch(0.78 0.016 250);
-  --accent: #232c45;
-  --accent-foreground: oklch(0.985 0.004 250);
-  --destructive: oklch(0.62 0.22 25);
-  --destructive-foreground: oklch(0.98 0 0);
-  --border: oklch(0.45 0.04 250 / 55%);
-  --input: oklch(0.38 0.03 250);
-  --ring: #00f0ff;
+  /* Warm sand light theme — slate ink, orange CTA, indigo secondary */
+  --void: #FFFFFF;
+  --ink: #F4F1EA;
+  --background: #FDFBF7;
+  --surface: #F4F1EA;
+  --surface-2: #EDE8DD;
+  --surface-3: #E2DBCB;
+  --foreground: #0F172A;
+  --chalk: #1E293B;
+  --mist: #475569;
+  --steel: #64748B;
+  --card: #F4F1EA;
+  --card-foreground: #0F172A;
+  --popover: #FFFFFF;
+  --popover-foreground: #0F172A;
+  --cobalt: #EA580C;
+  --primary: #EA580C;
+  --azure: #2563EB;
+  --glow: #2563EB;
+  --cyan: #2563EB;
+  --primary-foreground: #FFFFFF;
+  --secondary: #F4F1EA;
+  --secondary-foreground: #0F172A;
+  --muted: #F1EDE4;
+  --muted-foreground: #64748B;
+  --accent: #EDE8DD;
+  --accent-foreground: #0F172A;
+  --destructive: oklch(0.58 0.21 27);
+  --destructive-foreground: #FFFFFF;
+  --border: #E2DBCB;
+  --input: #D9D2C2;
+  --ring: #EA580C;
 
   --gradient-hero: linear-gradient(
     to bottom,
-    oklch(0.11 0.013 250 / 0.25) 0%,
-    oklch(0.09 0.013 250 / 0.78) 55%,
-    #090d16 100%
+    rgb(253 251 247 / 0.35) 0%,
+    rgb(253 251 247 / 0.85) 52%,
+    #FDFBF7 100%
   );
-  --gradient-blue: linear-gradient(120deg, #0066ff, #3b8dff 45%, #00f0ff);
-  --gradient-panel: linear-gradient(
-    160deg,
-    oklch(0.26 0.022 250 / 0.7),
-    oklch(0.13 0.014 250 / 0.9)
-  );
-  --shadow-lift: 0 30px 80px -40px rgb(0 102 255 / 0.65);
-  --shadow-hard: 0 1px 0 0 rgb(0 240 255 / 0.16), 0 24px 60px -32px oklch(0 0 0 / 0.9);
+  --gradient-blue: linear-gradient(120deg, #EA580C, #F97316 45%, #2563EB);
+  --gradient-panel: linear-gradient(160deg, #FFFFFF, #F4F1EA);
+  --shadow-lift: 0 30px 80px -40px rgb(15 23 42 / 0.28);
+  --shadow-hard: 0 1px 0 0 rgb(255 255 255 / 0.9), 0 18px 44px -28px rgb(15 23 42 / 0.28);
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
+
 
 
 @layer base {
