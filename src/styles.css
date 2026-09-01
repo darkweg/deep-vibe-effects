@@ -386,33 +386,39 @@
 
 
 /* ── Section color themes (shared between homepage sections and their sub-pages) ── */
+/* Actualités */
 @utility theme-soft-black {
-  background-color: oklch(0.13 0.014 250);
+  background-color: #FDFBF7;
   color: var(--foreground);
 }
 
+/* La filière */
 @utility theme-slate {
-  background-color: oklch(0.205 0.019 250);
+  background-color: #F1F5F9;
   color: var(--foreground);
 }
 
+/* Galerie */
 @utility theme-deep-blue {
-  background-color: oklch(0.19 0.055 258);
+  background-color: #E9EFFB;
   color: var(--foreground);
 }
 
+/* Le club */
 @utility theme-graphite {
-  background-color: oklch(0.165 0.012 250);
+  background-color: #F4F1EA;
   color: var(--foreground);
 }
 
+/* Contact */
 @utility theme-midnight {
-  background-color: oklch(0.1 0.03 258);
+  background-color: #FFF1E8;
   color: var(--foreground);
 }
 
+/* Bibliothèque */
 @utility theme-ash {
-  background-color: oklch(0.245 0.016 250);
+  background-color: #EFEBE1;
   color: var(--foreground);
 }
 
