@@ -218,9 +218,9 @@
 
 
 @utility glass-panel {
-  background: oklch(0.18 0.017 250 / 0.6);
-  backdrop-filter: blur(18px) saturate(140%);
-  border: 1px solid oklch(0.62 0.19 253 / 0.18);
+  background: rgb(253 251 247 / 0.82);
+  backdrop-filter: blur(18px) saturate(130%);
+  border: 1px solid var(--border);
 }
 
 @utility hover-line {
