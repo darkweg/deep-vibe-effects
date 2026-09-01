@@ -516,8 +516,8 @@
 
 @utility grid-drift {
   background-image:
-    linear-gradient(rgb(0 240 255 / 0.07) 1px, transparent 1px),
-    linear-gradient(90deg, rgb(0 240 255 / 0.07) 1px, transparent 1px);
+    linear-gradient(rgb(15 23 42 / 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(15 23 42 / 0.05) 1px, transparent 1px);
   background-size: 64px 64px;
   animation: grid-drift 18s linear infinite;
 }
