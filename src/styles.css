@@ -426,9 +426,10 @@
 
 @utility glass-card {
   position: relative;
-  background: color-mix(in oklab, var(--surface) 55%, transparent);
-  backdrop-filter: blur(14px) saturate(150%);
-  border: 1px solid oklch(0.5 0.04 250 / 0.45);
+  background: rgb(255 255 255 / 0.72);
+  backdrop-filter: blur(14px) saturate(120%);
+  border: 1px solid var(--border);
+  box-shadow: 0 10px 30px -24px rgb(15 23 42 / 0.4);
   transition:
     border-color 0.5s var(--ease-out-expo),
     box-shadow 0.5s var(--ease-out-expo),
@@ -437,11 +438,11 @@
 
   &:hover {
     transform: translateY(-4px);
-    border-color: rgb(0 240 255 / 0.55);
+    border-color: rgb(37 99 235 / 0.45);
     box-shadow:
-      0 0 0 1px rgb(0 240 255 / 0.25),
-      0 24px 60px -30px rgb(0 102 255 / 0.75);
-    background: color-mix(in oklab, var(--surface-2) 60%, transparent);
+      0 0 0 1px rgb(37 99 235 / 0.16),
+      0 24px 55px -30px rgb(15 23 42 / 0.45);
+    background: #FFFFFF;
   }
 }
 
@@ -449,9 +450,9 @@
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  border: 1px solid rgb(0 240 255 / 0.4);
-  background: rgb(0 240 255 / 0.1);
-  color: #7df4ff;
+  border: 1px solid rgb(37 99 235 / 0.3);
+  background: rgb(37 99 235 / 0.09);
+  color: #1D4ED8;
   font-family: var(--font-mono);
   font-size: 0.6rem;
   font-weight: 500;
@@ -464,9 +465,9 @@
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  border: 1px solid rgb(59 141 255 / 0.45);
-  background: rgb(0 102 255 / 0.16);
-  color: #a9ccff;
+  border: 1px solid rgb(234 88 12 / 0.32);
+  background: rgb(234 88 12 / 0.1);
+  color: #C2410C;
   font-family: var(--font-mono);
   font-size: 0.6rem;
   font-weight: 500;
@@ -479,9 +480,9 @@
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  border: 1px solid oklch(0.5 0.03 250 / 0.6);
-  background: oklch(0.3 0.02 250 / 0.4);
-  color: var(--chalk);
+  border: 1px solid var(--border);
+  background: rgb(100 116 139 / 0.1);
+  color: var(--mist);
   font-family: var(--font-mono);
   font-size: 0.6rem;
   font-weight: 500;
@@ -491,8 +492,7 @@
 }
 
 @utility text-cyan-glow {
-  color: #00f0ff;
-  text-shadow: 0 0 24px rgb(0 240 255 / 0.45);
+  color: #EA580C;
 }
 
 @keyframes orb-float {
