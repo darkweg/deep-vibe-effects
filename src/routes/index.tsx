@@ -110,8 +110,8 @@ function Hero() {
                   to="/actualites"
                   className="btn-ghost group inline-flex items-center gap-2 rounded-full px-6 py-3.5"
                 >
-                  <Newspaper className="h-4 w-4 text-white" />
-                 <p className="text-white">Actualités</p> 
+                  <Newspaper className="h-4 w-4 text-foreground" />
+                  <span className="text-foreground">Actualités</span>
                 </Link>
               </div>
             </Reveal>
