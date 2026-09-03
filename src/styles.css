@@ -582,7 +582,8 @@ body {
 @utility theme-ash {
   background-color: #EFEBE1;
   color: var(--foreground);
-}
+
+
 
 
   & .text-cyan-glow {
