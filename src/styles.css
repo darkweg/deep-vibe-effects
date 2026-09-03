@@ -189,7 +189,23 @@ body::after {
   margin-inline: auto;
   width: 100%;
   max-width: 84rem;
-  padding-inline: 1.5rem;
+  padding-inline: 1rem;
+}
+@media (min-width: 640px) {
+  .container-x {
+    padding-inline: 1.5rem;
+  }
+}
+@media (min-width: 1024px) {
+  .container-x {
+    padding-inline: 2rem;
+  }
+}
+
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 /* Editorial eyebrow label */

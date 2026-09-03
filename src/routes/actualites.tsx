@@ -79,12 +79,12 @@ function Actualites() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -16 }}
                   transition={{ duration: 0.6, delay: 0.05 * i, ease: [0.16, 1, 0.3, 1] }}
-                  className="glass-card group grid gap-8 rounded-2xl p-4 md:grid-cols-[1.1fr_1.4fr] md:items-center md:p-6"
+                  className="glass-card group grid gap-5 rounded-2xl p-3 sm:gap-8 sm:p-4 md:grid-cols-[1.1fr_1.4fr] md:items-center md:p-6"
                 >
                   <ParallaxMedia
                     src={IMAGES[i % IMAGES.length] as string}
                     alt={a.titre}
-                    className="h-[18rem] w-full rounded-xl"
+                    className="aspect-video h-auto w-full rounded-xl md:aspect-auto md:h-[18rem]"
                     strength={40}
                   />
                   <div>
@@ -98,7 +98,7 @@ function Actualites() {
                         {a.date}
                       </span>
                     </div>
-                    <h2 className="mt-5 font-display text-3xl leading-tight font-bold transition-colors duration-500 group-hover:text-cyan-glow md:text-4xl">
+                    <h2 className="mt-4 font-display text-2xl sm:mt-5 sm:text-3xl leading-tight font-bold transition-colors duration-500 group-hover:text-cyan-glow md:text-4xl">
                       {a.titre}
                     </h2>
                     <p className="mt-4 max-w-xl text-mist">{a.resume}</p>

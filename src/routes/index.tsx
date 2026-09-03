@@ -72,7 +72,7 @@ function Hero() {
 
       <Ambient className="z-1 opacity-90" />
 
-      <motion.div style={{ opacity }} className="relative z-2 flex h-full items-end pb-20">
+      <motion.div style={{ opacity }} className="relative z-2 flex h-full items-end pb-14 sm:pb-20">
         <div className="container-x">
           <Reveal y={0}>
             <span className="badge-cyan">
@@ -95,7 +95,7 @@ function Hero() {
               </p>
             </Reveal>
             <Reveal delay={0.45}>
-              <div className="flex flex-wrap gap-3">
+              <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                 <Link
                   to={isMember ? "/bibliotheque" : "/auth"}
                   className="btn-glow hover-sheen group inline-flex items-center gap-2 rounded-full px-6 py-3.5"
@@ -185,13 +185,13 @@ function Index() {
                 conserve les ressources académiques accumulées au fil des promotions.
               </p>
             </Reveal>
-            <div className="mt-12 grid grid-cols-2 gap-5">
+            <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5">
               {CHIFFRES.map((c, i) => (
                 <Reveal key={c.label} delay={0.1 * i}>
                   <div className="glass-card rounded-2xl p-6">
                     <Counter
                       value={c.valeur}
-                      className="font-display text-5xl font-extrabold text-gradient-blue  text-blue-950"
+                      className="font-display text-4xl sm:text-5xl font-extrabold text-gradient-blue  text-blue-950"
                    />
                     <p className="mt-2 text-sm text-mist">{c.label}</p>
                   </div>
@@ -214,14 +214,14 @@ function Index() {
               <ParallaxMedia
                 src={studentsImg}
                 alt="Étudiants GTEL travaillant sur des équipements réseau"
-                className="h-[22rem] w-full rounded-2xl"
+                className="h-64 w-full rounded-2xl sm:h-[22rem]"
               />
             </Reveal>
             <Reveal delay={0.15}>
               <ParallaxMedia
                 src={fiberImg}
                 alt="Faisceau de fibres optiques bleues"
-                className="h-[22rem] w-full rounded-2xl"
+                className="h-64 w-full rounded-2xl sm:h-[22rem]"
               />
             </Reveal>
           </div>
@@ -265,7 +265,7 @@ function Index() {
       {/* Actualités — thème noir doux (page /actualites) */}
       <section className="theme-soft-black py-16 sm:py-24 md:py-36">
         <div className="container-x">
-          <div className="flex flex-wrap items-end justify-between gap-6">
+          <div className="flex flex-col items-start gap-6 sm:flex-row sm:flex-wrap sm:items-end sm:justify-between">
             <div>
             <Reveal>
               <span className="badge-cobalt"><Newspaper className="h-3 w-3" /> 02 — Actualités</span>
@@ -285,7 +285,7 @@ function Index() {
           </Reveal>
         </div>
 
-        <div className="mt-14 grid gap-5 md:grid-cols-3">
+        <div className="mt-10 grid gap-5 sm:mt-14 sm:grid-cols-2 lg:grid-cols-3">
           {ACTUALITES.slice(0, 3).map((a, i) => (
             <Reveal key={a.slug} delay={0.08 * i} className="h-full">
               <Link
@@ -375,7 +375,7 @@ function Index() {
           <RevealText text="La vie du club, image par image" />
         </h2>
 
-        <div className="mt-14 grid gap-6 md:grid-cols-3">
+        <div className="mt-10 grid gap-6 sm:mt-14 sm:grid-cols-2 lg:grid-cols-3">
           {[
             { src: eventImg, alt: "Cérémonie du club GTEL en amphithéâtre", label: "Forum Télécoms" },
             { src: libraryImg, alt: "Documents de parrainage empilés sur un bureau", label: "Parrainage" },
@@ -386,7 +386,7 @@ function Index() {
                 <ParallaxMedia
                   src={item.src}
                   alt={item.alt}
-                  className="h-[26rem] w-full rounded-2xl ring-1 ring-border transition-all duration-500 group-hover:ring-glow/60 group-hover:shadow-[0_30px_70px_-35px_rgb(0_102_255/0.9)]"
+                  className="h-72 w-full rounded-2xl sm:h-[26rem] ring-1 ring-border transition-all duration-500 group-hover:ring-glow/60 group-hover:shadow-[0_30px_70px_-35px_rgb(0_102_255/0.9)]"
                   strength={40}
                 />
                 <div className="mt-4 flex items-center justify-between">

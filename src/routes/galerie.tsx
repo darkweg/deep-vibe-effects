@@ -72,7 +72,7 @@ function Galerie() {
           <FilterTabs items={albums} active={album} onChange={setAlbum} layoutId="galerie-tab" />
         </Reveal>
 
-        <motion.div layout className="mt-12 grid auto-rows-[16rem] grid-cols-1 gap-4 md:grid-cols-4">
+        <motion.div layout className="mt-10 grid auto-rows-[13rem] grid-cols-1 gap-4 sm:auto-rows-[16rem] sm:grid-cols-2 md:grid-cols-4">
           <AnimatePresence mode="popLayout">
             {visibles.map((p, idx) => (
               <motion.button
