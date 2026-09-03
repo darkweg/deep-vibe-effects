@@ -6,10 +6,12 @@ export function PageHeader({
   eyebrow,
   title,
   intro,
+  titleClassName = "",
 }: {
   eyebrow: string;
   title: string;
   intro: string;
+  titleClassName?: string;
 }) {
   return (
     <section className="relative overflow-hidden border-b pt-40 pb-24">
@@ -21,7 +23,7 @@ export function PageHeader({
             {eyebrow}
           </span>
         </Reveal>
-        <h1 className="mt-7 max-w-5xl font-display text-5xl leading-[0.92] font-extrabold tracking-tight md:text-7xl lg:text-8xl">
+        <h1 className={`mt-7 max-w-5xl font-display text-5xl leading-[0.92] font-extrabold tracking-tight md:text-7xl lg:text-8xl ${titleClassName}`}>
           <RevealText text={title} />
         </h1>
         <Reveal delay={0.2}>

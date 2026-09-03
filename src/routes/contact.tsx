@@ -115,7 +115,7 @@ function Contact() {
               </div>
               <div>
                 <p className="badge-cyan"><Mail className="h-3 w-3" /> E-mail</p>
-                <p className="mt-3 text-muted-foreground">club.gtel@enspy.cm</p>
+                <p className="mt-3 text-muted-foreground">wambougloria@gmail.com</p>
               </div>
               <div>
                 <p className="badge-cyan"><ShieldCheck className="h-3 w-3" /> Espace membre</p>

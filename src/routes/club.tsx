@@ -5,7 +5,7 @@ import { Reveal, RevealText } from "@/components/site/Reveal";
 import { ParallaxMedia } from "@/components/site/ParallaxMedia";
 import { BUREAU } from "@/lib/gtel-data";
 import studentsImg from "@/assets/students.jpg";
-import eventImg from "@/assets/event.jpg";
+import heroImg from "@/assets/hero.jpg";
 
 export const Route = createFileRoute("/club")({
   head: () => ({
@@ -35,11 +35,11 @@ const JALONS = [
 
 function Club() {
   return (
-    <div className="theme-graphite min-h-screen">
+    <div className="theme-soft-black min-h-screen">
       <PageHeader
         eyebrow="Le club"
         title="Origine, identité et Bureau"
-        intro="Né de l'entraide entre promotions, le club GTEL s'est structuré pour porter la voix de la filière Génie des Télécommunications au sein de l'ENSPY."
+        intro="Né de l'entraide entre les promotions, le club GTEL s'est structuré pour porter la voix de la filière Génie des Télécommunications au sein de l'ENSPY."
       />
 
       <section className="container-x py-24">
@@ -113,7 +113,7 @@ function Club() {
 
       <section className="relative h-[60svh] min-h-[22rem] overflow-hidden border-t">
         <ParallaxMedia
-          src={eventImg}
+          src={heroImg}
           alt="Assemblée du club GTEL en amphithéâtre"
           className="absolute inset-0 h-full w-full"
           strength={80}

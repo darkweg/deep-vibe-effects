@@ -51,6 +51,50 @@
 :root {
   --radius: 0.25rem;
 
+
+  /* Fond clair — nouveau thème par défaut du site */
+  --void: #f4f6fb;
+  --ink: #eef1f8;
+  --background: oklch(0.96 0.008 250);
+  --surface: oklch(1 0 0 / 0.72);
+  --surface-2: oklch(0.98 0.005 250);
+  --surface-3: oklch(0.94 0.01 250);
+  --foreground: oklch(0.22 0.04 258);
+  --chalk: oklch(0.28 0.09 258);
+  --mist: oklch(0.22 0.04 258);
+  --steel: oklch(0.5 0.03 250);
+  --card: oklch(1 0 0 / 0.72);
+  --card-foreground: oklch(0.22 0.04 258);
+  --popover: #ffffff;
+  --popover-foreground: oklch(0.22 0.04 258);
+  --cobalt: #0066ff;
+  --primary: #0066ff;
+  --azure: #3b8dff;
+  --glow: oklch(0.55 0.18 220);
+  --cyan: oklch(0.55 0.18 220);
+  --primary-foreground: oklch(0.99 0 0);
+  --secondary: oklch(0.94 0.01 250);
+  --secondary-foreground: oklch(0.22 0.04 258);
+  --muted: oklch(0.94 0.01 250);
+  --muted-foreground: oklch(0.42 0.03 250);
+  --accent: oklch(0.9 0.02 250);
+  --accent-foreground: oklch(0.22 0.04 258);
+  --destructive: oklch(0.62 0.22 25);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: oklch(0.6 0.15 230 / 0.35);
+  --input: oklch(0.85 0.02 250);
+  --ring: oklch(0.55 0.18 220);
+
+  --gradient-hero: linear-gradient(to bottom,
+      oklch(0.98 0.005 250 / 0.25) 0%,
+      oklch(31.674% 0.05205 254.633 / 0.78) 90%,
+      #0b152e 100%);
+  --gradient-panel: linear-gradient(160deg, oklch(1 0 0 / 0.7) 0%, oklch(0.96 0.008 250 / 0.9) 0%);
+  --shadow-lift: 0 30px 80px -40px rgb(0 102 255 / 0.25);
+  --shadow-hard: 0 1px 0 0 rgb(0 102 255 / 0.1), 0 24px 60px -32px oklch(0.5 0.15 258 / 0.2);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
   /* Warm sand light theme — slate ink, orange CTA, indigo secondary */
   --void: #FFFFFF;
   --ink: #F4F1EA;
@@ -99,6 +143,7 @@
 
 
 
+
 @layer base {
   * {
     border-color: var(--color-border);
@@ -128,7 +173,18 @@
     color: var(--primary-foreground);
   }
 }
+body {
+  position: relative;
+}
 
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: oklch(0.15 0.03 258 / 0.17);
+  pointer-events: none;
+  z-index: 40;
+}
 @utility container-x {
   margin-inline: auto;
   width: 100%;
@@ -174,12 +230,19 @@
     content: "";
     position: absolute;
     inset: 0;
+
+    background: linear-gradient(140deg,
+        oklch(0.62 0.19 253 / 0.35),
+        transparent 55%,
+        oklch(0.1 0.012 250 / 0.65));
+
     background: linear-gradient(
       140deg,
       rgb(37 99 235 / 0.14),
       transparent 55%,
       rgb(234 88 12 / 0.12)
     );
+
     opacity: 0.9;
     transition: opacity 0.8s var(--ease-out-expo);
     pointer-events: none;
@@ -205,6 +268,15 @@
     inset: 0;
     z-index: 2;
     pointer-events: none;
+
+    background-image: repeating-linear-gradient(to bottom,
+        oklch(0 0 0 / 0.22) 0px,
+        oklch(0 0 0 / 0.22) 1px,
+        transparent 1px,
+        transparent 3px);
+    opacity: 0.4;
+    mix-blend-mode: multiply;
+
     background-image: repeating-linear-gradient(
       to bottom,
       rgb(15 23 42 / 0.05) 0px,
@@ -213,6 +285,7 @@
       transparent 4px
     );
     opacity: 0.35;
+
   }
 }
 
@@ -246,15 +319,41 @@
 }
 
 @keyframes marquee {
-  0% { transform: translateX(0); }
-  14% { transform: translateX(-14%); }
-  26% { transform: translateX(-14%); }
-  40% { transform: translateX(-28%); }
-  52% { transform: translateX(-28%); }
-  66% { transform: translateX(-40%); }
-  76% { transform: translateX(-40%); }
-  90% { transform: translateX(-48%); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0);
+  }
+
+  14% {
+    transform: translateX(-14%);
+  }
+
+  26% {
+    transform: translateX(-14%);
+  }
+
+  40% {
+    transform: translateX(-28%);
+  }
+
+  52% {
+    transform: translateX(-28%);
+  }
+
+  66% {
+    transform: translateX(-40%);
+  }
+
+  76% {
+    transform: translateX(-40%);
+  }
+
+  90% {
+    transform: translateX(-48%);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 @utility marquee-track {
@@ -267,6 +366,7 @@
   0% {
     box-shadow: 0 0 0 0 oklch(0.62 0.19 253 / 0.5);
   }
+
   100% {
     box-shadow: 0 0 0 22px oklch(0.62 0.19 253 / 0);
   }
@@ -279,13 +379,22 @@
 /* --- Contrast & depth utilities --- */
 @utility panel {
   background: var(--gradient-panel);
+
+  border: 1px solid oklch(0.42 0.03 250 / 0.55) 0%;
+
   border: 1px solid var(--border);
+
   box-shadow: var(--shadow-hard);
 }
 
 @utility panel-raised {
+
+  background: var(--surface);
+  border: 1px solid oklch(0.5 0.04 250 / 0.5) 0%;
+
   background: #FFFFFF;
   border: 1px solid var(--border);
+
   box-shadow: var(--shadow-hard);
 }
 
@@ -388,6 +497,42 @@
 /* ── Section color themes (shared between homepage sections and their sub-pages) ── */
 /* Actualités */
 @utility theme-soft-black {
+
+  background-color: oklch(0.96 0.008 250);
+  color: oklch(0.22 0.04 258);
+  position: relative;
+
+  /* Trame réseau discrète en fond — évoque une grille de circuit/réseau télécom */
+  background-image:
+    linear-gradient(oklch(0.55 0.18 220 / 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, oklch(0.55 0.18 220 / 0.06) 1px, transparent 1px);
+  background-size: 48px 48px;
+
+  /* Titres en bleu profond — cohérent avec --cobalt, couleur signal/réseau */
+  & h1, & h2, & h3, & h4 {
+    color: oklch(0.28 0.09 258);
+  }
+
+  /* Chips/badges : bleu-cyan saturé, rappel direct du spectre fibre optique */
+  & .chip,
+  & .badge-cyan {
+    border-color: oklch(0.55 0.18 220 / 0.5);
+    background: oklch(0.55 0.18 220 / 0.12);
+    color: oklch(0.4 0.15 220);
+  }
+
+  & .badge-cobalt {
+    border-color: oklch(0.5 0.2 258 / 0.5);
+    background: oklch(0.5 0.2 258 / 0.14);
+    color: oklch(0.38 0.18 258);
+  }
+
+  & .badge-steel {
+    border-color: oklch(0.55 0.02 250 / 0.6);
+    background: oklch(0.7 0.01 250 / 0.5);
+    color: oklch(0.32 0.02 250);
+  }
+
   background-color: #FDFBF7;
   color: var(--foreground);
 }
@@ -422,6 +567,29 @@
   color: var(--foreground);
 }
 
+
+  & .text-cyan-glow {
+    color: oklch(0.42 0.16 220);
+    text-shadow: none;
+  }
+
+  /* Cartes : léger halo bleu façon "signal actif", cohérent avec l'univers réseau */
+  & .panel,
+  & .panel-raised,
+  & .glass-card {
+    background: oklch(1 0 0 / 0.72);
+    border: 1px solid oklch(0.6 0.15 230 / 0.35);
+    box-shadow:
+      0 0 0 1px oklch(0.6 0.18 220 / 0.08),
+      0 20px 50px -30px oklch(0.5 0.2 258 / 0.28);
+  }
+
+  /* Icônes/accents type "signal" — utile si tu as des indicateurs de statut/connexion */
+  & .signal-dot {
+    background: oklch(0.6 0.2 220);
+    box-shadow: 0 0 8px oklch(0.6 0.2 220 / 0.6);
+  }
+}
 /* ── Ultra-modern additions ─────────────────────────────────────── */
 
 @utility glass-card {
@@ -496,9 +664,17 @@
 }
 
 @keyframes orb-float {
-  0% { transform: translate3d(0, 0, 0) scale(1); }
-  50% { transform: translate3d(4%, -6%, 0) scale(1.12); }
-  100% { transform: translate3d(0, 0, 0) scale(1); }
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate3d(4%, -6%, 0) scale(1.12);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
 }
 
 @utility orb {
@@ -510,8 +686,13 @@
 }
 
 @keyframes grid-drift {
-  from { background-position: 0 0, 0 0; }
-  to { background-position: 64px 64px, 64px 64px; }
+  from {
+    background-position: 0 0, 0 0;
+  }
+
+  to {
+    background-position: 64px 64px, 64px 64px;
+  }
 }
 
 @utility grid-drift {
@@ -523,8 +704,13 @@
 }
 
 @keyframes sheen {
-  0% { transform: translateX(-120%); }
-  100% { transform: translateX(220%); }
+  0% {
+    transform: translateX(-120%);
+  }
+
+  100% {
+    transform: translateX(220%);
+  }
 }
 
 @utility hover-sheen {
@@ -545,4 +731,20 @@
   &:hover::before {
     animation: sheen 0.9s var(--ease-out-expo);
   }
+}
+
+@utility theme-dark-shell {
+  --background: #090d16;
+  --foreground: oklch(0.985 0.004 250);
+  --ink: #070a12;
+  --card: #0f1524;
+  --card-foreground: oklch(0.985 0.004 250);
+  --border: oklch(0.45 0.04 250 / 55%);
+  --muted-foreground: oklch(0.78 0.016 250);
+  --steel: oklch(0.66 0.03 250);
+  --glow: #00f0ff;
+  --cyan: #00f0ff;
+  --primary: #0066ff;
+  background-color: var(--background);
+  color: var(--foreground);
 }

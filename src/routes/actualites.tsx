@@ -11,7 +11,8 @@ import { ACTUALITES } from "@/lib/gtel-data";
 import eventImg from "@/assets/event.jpg";
 import fiberImg from "@/assets/fiber.jpg";
 import studentsImg from "@/assets/students.jpg";
-import libraryImg from "@/assets/library.jpg";
+import students2Img from "@/assets/students2.jpg";
+import journeeImg from "@/assets/journee.jpg";
 
 export const Route = createFileRoute("/actualites")({
   head: () => ({
@@ -32,7 +33,7 @@ export const Route = createFileRoute("/actualites")({
   component: Actualites,
 });
 
-const IMAGES = [eventImg, fiberImg, studentsImg, libraryImg];
+const IMAGES = [eventImg, fiberImg, students2Img, journeeImg,studentsImg];
 
 const CAT_ICONS: Record<string, LucideIcon> = {
   Toutes: LayoutGrid,
@@ -52,7 +53,8 @@ function Actualites() {
         eyebrow="Actualités & annonces"
         title="Ce qui se passe dans la filière"
         intro="Événements, appels à candidature, formations et vie du Bureau. Le fil est alimenté par la Cellule Communication."
-      />
+     titleClassName="text-blue-950"
+   />
 
       <section className="container-x py-20">
         <Reveal>
