@@ -80,9 +80,9 @@ function Hero() {
               École Nationale Supérieure Polytechnique de Yaoundé
             </span>
           </Reveal>
-          <h1 className="mt-6 max-w-6xl font-display text-[clamp(2.5rem,9.5vw,6.5rem)] leading-[0.9] font-extrabold tracking-tighter text-white">
+          <h1 className="mt-6 max-w-6xl font-display text-[clamp(2.2rem,8.5vw,6.5rem)] leading-[0.92] font-extrabold tracking-tight break-words text-white">
             <RevealText text="CLUB GTEL" />
-            <span className="block text-[clamp(1.5rem,5.4vw,4.6rem)] text-blue-600 ">
+            <span className="block text-[clamp(1.15rem,4.6vw,4.6rem)] text-blue-600 ">
               <RevealText text="Télécommunications" delay={0.15} />
             </span>
           </h1>
