@@ -95,8 +95,10 @@
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+:root {
   /* Warm sand light theme — slate ink, orange CTA, indigo secondary */
   --void: #FFFFFF;
+
   --ink: #F4F1EA;
   --background: #FDFBF7;
   --surface: #F4F1EA;
