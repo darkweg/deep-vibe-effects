@@ -166,7 +166,7 @@ function Index() {
       <Marquee />
 
       {/* Manifeste — thème graphite (page /club) */}
-      <section className="theme-graphite py-16 sm:py-14 sm:py-24 md:py-36">
+      <section className="theme-graphite py-16 sm:py-24 md:py-36">
         <div className="container-x grid gap-10 sm:gap-14 lg:grid-cols-[1fr_1.1fr] lg:gap-24">
           <div>
             <Reveal>
@@ -263,7 +263,7 @@ function Index() {
       )}
 
       {/* Actualités — thème noir doux (page /actualites) */}
-      <section className="theme-soft-black py-16 sm:py-14 sm:py-24 md:py-36">
+      <section className="theme-soft-black py-16 sm:py-24 md:py-36">
         <div className="container-x">
           <div className="flex flex-wrap items-end justify-between gap-6">
             <div>
@@ -316,7 +316,7 @@ function Index() {
 
       {/* Filière — réservée aux membres */}
       {isMember && (
-      <section className="theme-slate border-y py-16 sm:py-14 sm:py-24 md:py-36">
+      <section className="theme-slate border-y py-16 sm:py-24 md:py-36">
         <div className="container-x">
           <div className="grid gap-10 sm:gap-14 lg:grid-cols-[1fr_1.2fr] lg:gap-24 text-blue-950">
             <div className="lg:sticky lg:top-32 lg:self-start">
@@ -364,7 +364,7 @@ function Index() {
       )}
 
       {/* Galerie teaser — thème bleu profond (page /galerie) */}
-      <section className="theme-deep-blue py-16 sm:py-14 sm:py-24 md:py-36">
+      <section className="theme-deep-blue py-16 sm:py-24 md:py-36">
         <div className="container-x">
         <Reveal>
           <span className="badge-cobalt">
@@ -404,7 +404,7 @@ function Index() {
       </section>
 
       {/* CTA — thème minuit (page /contact) */}
-      <section className="theme-midnight relative overflow-hidden border-t py-16 sm:py-14 sm:py-24 md:py-36">
+      <section className="theme-midnight relative overflow-hidden border-t py-16 sm:py-24 md:py-36">
         <Ambient />
         <div className="container-x relative text-center">
           <h2 className="mx-auto max-w-4xl font-display text-3xl sm:text-4xl leading-[1.02] font-extrabold md:text-6xl">
