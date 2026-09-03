@@ -34,6 +34,7 @@ export function ParallaxMedia({
         src={src}
         alt={alt}
         loading={priority ? "eager" : "lazy"}
+        decoding="async"
         style={reduced ? {} : { y, height: `calc(100% + ${strength * 2}px)` }}
         className="absolute inset-0 h-full w-full object-cover"
       />
