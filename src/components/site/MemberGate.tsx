@@ -22,7 +22,7 @@ export function MemberGate({ children }: { children: ReactNode }) {
   if (user && isMember) return <>{children}</>;
 
   return (
-    <section className="container-x flex min-h-[60svh] items-center py-32">
+    <section className="container-x flex min-h-[60svh] items-center py-16 sm:py-32">
       <Reveal>
         <div className="panel noise relative max-w-xl p-10">
           <ShieldCheck className="h-6 w-6 text-glow" />

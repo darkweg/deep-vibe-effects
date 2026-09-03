@@ -72,7 +72,7 @@ function Hero() {
 
       <Ambient className="z-1 opacity-90" />
 
-      <motion.div style={{ opacity }} className="relative z-2 flex h-full items-end pb-20">
+      <motion.div style={{ opacity }} className="relative z-2 flex h-full items-end pb-14 sm:pb-20">
         <div className="container-x">
           <Reveal y={0}>
             <span className="badge-cyan">
@@ -80,9 +80,9 @@ function Hero() {
               École Nationale Supérieure Polytechnique de Yaoundé
             </span>
           </Reveal>
-          <h1 className="mt-6 max-w-6xl font-display text-[clamp(2.5rem,9.5vw,6.5rem)] leading-[0.9] font-extrabold tracking-tighter text-white">
+          <h1 className="mt-6 max-w-6xl font-display text-[clamp(2.2rem,8.5vw,6.5rem)] leading-[0.92] font-extrabold tracking-tight break-words text-white">
             <RevealText text="CLUB GTEL" />
-            <span className="block text-[clamp(1.5rem,5.4vw,4.6rem)] text-blue-600 ">
+            <span className="block text-[clamp(1.15rem,4.6vw,4.6rem)] text-blue-600 ">
               <RevealText text="Télécommunications" delay={0.15} />
             </span>
           </h1>
@@ -95,7 +95,7 @@ function Hero() {
               </p>
             </Reveal>
             <Reveal delay={0.45}>
-              <div className="flex flex-wrap gap-3">
+              <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                 <Link
                   to={isMember ? "/bibliotheque" : "/auth"}
                   className="btn-glow hover-sheen group inline-flex items-center gap-2 rounded-full px-6 py-3.5"
@@ -110,8 +110,8 @@ function Hero() {
                   to="/actualites"
                   className="btn-ghost group inline-flex items-center gap-2 rounded-full px-6 py-3.5"
                 >
-                  <Newspaper className="h-4 w-4 text-white" />
-                 <p className="text-white">Actualités</p> 
+                  <Newspaper className="h-4 w-4 text-foreground" />
+                  <span className="text-foreground">Actualités</span>
                 </Link>
               </div>
             </Reveal>
@@ -166,15 +166,15 @@ function Index() {
       <Marquee />
 
       {/* Manifeste — thème graphite (page /club) */}
-      <section className="theme-graphite py-28 md:py-36">
-        <div className="container-x grid gap-14 lg:grid-cols-[1fr_1.1fr] lg:gap-24">
+      <section className="theme-graphite py-16 sm:py-24 md:py-36">
+        <div className="container-x grid gap-10 sm:gap-14 lg:grid-cols-[1fr_1.1fr] lg:gap-24">
           <div>
             <Reveal>
               <span className="badge-cobalt  text-blue-950">
                 <Users className="h-3 w-3  text-blue-950" /> 01 — Le club
               </span>
             </Reveal>
-            <h2 className="mt-6 font-display text-4xl leading-[1.02] font-extrabold md:text-6xl">
+            <h2 className="mt-6 font-display text-3xl sm:text-4xl leading-[1.02] font-extrabold md:text-6xl">
               <RevealText text="Une filière, une mémoire, une communauté." />
             </h2>
 
@@ -185,13 +185,13 @@ function Index() {
                 conserve les ressources académiques accumulées au fil des promotions.
               </p>
             </Reveal>
-            <div className="mt-12 grid grid-cols-2 gap-5">
+            <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5">
               {CHIFFRES.map((c, i) => (
                 <Reveal key={c.label} delay={0.1 * i}>
                   <div className="glass-card rounded-2xl p-6">
                     <Counter
                       value={c.valeur}
-                      className="font-display text-5xl font-extrabold text-gradient-blue  text-blue-950"
+                      className="font-display text-4xl sm:text-5xl font-extrabold text-gradient-blue  text-blue-950"
                    />
                     <p className="mt-2 text-sm text-mist">{c.label}</p>
                   </div>
@@ -214,14 +214,14 @@ function Index() {
               <ParallaxMedia
                 src={studentsImg}
                 alt="Étudiants GTEL travaillant sur des équipements réseau"
-                className="h-[22rem] w-full rounded-2xl"
+                className="h-64 w-full rounded-2xl sm:h-[22rem]"
               />
             </Reveal>
             <Reveal delay={0.15}>
               <ParallaxMedia
                 src={fiberImg}
                 alt="Faisceau de fibres optiques bleues"
-                className="h-[22rem] w-full rounded-2xl"
+                className="h-64 w-full rounded-2xl sm:h-[22rem]"
               />
             </Reveal>
           </div>
@@ -240,7 +240,7 @@ function Index() {
         />
         <div className="relative z-3 flex h-full items-center">
           <div className="container-x">
-            <h2 className="max-w-3xl font-display text-4xl leading-[1.02] font-extrabold md:text-6xl">
+            <h2 className="max-w-3xl font-display text-3xl sm:text-4xl leading-[1.02] font-extrabold md:text-6xl">
               <RevealText text="Ce qui se transmet ne doit pas se perdre." />
             </h2>
             <Reveal delay={0.2}>
@@ -263,14 +263,14 @@ function Index() {
       )}
 
       {/* Actualités — thème noir doux (page /actualites) */}
-      <section className="theme-soft-black py-28 md:py-36">
+      <section className="theme-soft-black py-16 sm:py-24 md:py-36">
         <div className="container-x">
-          <div className="flex flex-wrap items-end justify-between gap-6">
+          <div className="flex flex-col items-start gap-6 sm:flex-row sm:flex-wrap sm:items-end sm:justify-between">
             <div>
             <Reveal>
               <span className="badge-cobalt"><Newspaper className="h-3 w-3" /> 02 — Actualités</span>
             </Reveal>
-            <h2 className="mt-6 font-display text-4xl font-extrabold md:text-6xl">
+            <h2 className="mt-6 font-display text-3xl sm:text-4xl font-extrabold md:text-6xl">
               <RevealText text="À la une du département" />
             </h2>
           </div>
@@ -285,7 +285,7 @@ function Index() {
           </Reveal>
         </div>
 
-        <div className="mt-14 grid gap-5 md:grid-cols-3">
+        <div className="mt-10 grid gap-5 sm:mt-14 sm:grid-cols-2 lg:grid-cols-3">
           {ACTUALITES.slice(0, 3).map((a, i) => (
             <Reveal key={a.slug} delay={0.08 * i} className="h-full">
               <Link
@@ -316,14 +316,14 @@ function Index() {
 
       {/* Filière — réservée aux membres */}
       {isMember && (
-      <section className="theme-slate border-y py-28 md:py-36">
+      <section className="theme-slate border-y py-16 sm:py-24 md:py-36">
         <div className="container-x">
-          <div className="grid gap-14 lg:grid-cols-[1fr_1.2fr] lg:gap-24 text-blue-950">
+          <div className="grid gap-10 sm:gap-14 lg:grid-cols-[1fr_1.2fr] lg:gap-24 text-blue-950">
             <div className="lg:sticky lg:top-32 lg:self-start">
               <Reveal>
                 <span className="badge-cobalt"><GraduationCap className="h-3 w-3 text-blue-950" /> 03 — La filière</span>
               </Reveal>
-              <h2 className="mt-6 font-display text-4xl leading-[1.02] font-extrabold md:text-6xl">
+              <h2 className="mt-6 font-display text-3xl sm:text-4xl leading-[1.02] font-extrabold md:text-6xl">
                 <RevealText text="Unités d'enseignement, de la L3 à la L5" />
               </h2>
               <Reveal delay={0.2}>
@@ -364,18 +364,18 @@ function Index() {
       )}
 
       {/* Galerie teaser — thème bleu profond (page /galerie) */}
-      <section className="theme-deep-blue py-28 md:py-36">
+      <section className="theme-deep-blue py-16 sm:py-24 md:py-36">
         <div className="container-x">
         <Reveal>
           <span className="badge-cobalt">
             <Images className="h-3 w-3" /> 04 — Galerie
           </span>
         </Reveal>
-        <h2 className="mt-6 max-w-3xl font-display text-4xl leading-[1.02] font-extrabold md:text-6xl">
+        <h2 className="mt-6 max-w-3xl font-display text-3xl sm:text-4xl leading-[1.02] font-extrabold md:text-6xl">
           <RevealText text="La vie du club, image par image" />
         </h2>
 
-        <div className="mt-14 grid gap-6 md:grid-cols-3">
+        <div className="mt-10 grid gap-6 sm:mt-14 sm:grid-cols-2 lg:grid-cols-3">
           {[
             { src: eventImg, alt: "Cérémonie du club GTEL en amphithéâtre", label: "Forum Télécoms" },
             { src: libraryImg, alt: "Documents de parrainage empilés sur un bureau", label: "Parrainage" },
@@ -386,7 +386,7 @@ function Index() {
                 <ParallaxMedia
                   src={item.src}
                   alt={item.alt}
-                  className="h-[26rem] w-full rounded-2xl ring-1 ring-border transition-all duration-500 group-hover:ring-glow/60 group-hover:shadow-[0_30px_70px_-35px_rgb(0_102_255/0.9)]"
+                  className="h-72 w-full rounded-2xl sm:h-[26rem] ring-1 ring-border transition-all duration-500 group-hover:ring-glow/60 group-hover:shadow-[0_30px_70px_-35px_rgb(0_102_255/0.9)]"
                   strength={40}
                 />
                 <div className="mt-4 flex items-center justify-between">
@@ -404,10 +404,10 @@ function Index() {
       </section>
 
       {/* CTA — thème minuit (page /contact) */}
-      <section className="theme-midnight relative overflow-hidden border-t py-28 md:py-36">
+      <section className="theme-midnight relative overflow-hidden border-t py-16 sm:py-24 md:py-36">
         <Ambient />
         <div className="container-x relative text-center">
-          <h2 className="mx-auto max-w-4xl font-display text-4xl leading-[1.02] font-extrabold md:text-6xl">
+          <h2 className="mx-auto max-w-4xl font-display text-3xl sm:text-4xl leading-[1.02] font-extrabold md:text-6xl">
             <RevealText text="Rejoignez la Cellule Communication" />
           </h2>
           <Reveal delay={0.2}>

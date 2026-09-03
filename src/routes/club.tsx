@@ -42,8 +42,8 @@ function Club() {
         intro="Né de l'entraide entre les promotions, le club GTEL s'est structuré pour porter la voix de la filière Génie des Télécommunications au sein de l'ENSPY."
       />
 
-      <section className="container-x py-24">
-        <div className="grid gap-14 lg:grid-cols-2 lg:gap-20">
+      <section className="container-x py-14 sm:py-24">
+        <div className="grid gap-10 sm:gap-14 lg:grid-cols-2 lg:gap-20">
           <Reveal>
             <ParallaxMedia
               src={studentsImg}
@@ -52,7 +52,7 @@ function Club() {
             />
           </Reveal>
           <div className="lg:pt-10">
-            <h2 className="font-display text-4xl leading-[1.05] font-extrabold md:text-6xl">
+            <h2 className="font-display text-3xl sm:text-4xl leading-[1.05] font-extrabold md:text-6xl">
               <RevealText text="Transmettre plus qu'un diplôme" />
             </h2>
             <Reveal delay={0.2}>
@@ -72,7 +72,7 @@ function Club() {
         </div>
       </section>
 
-      <section className="border-y bg-ink py-24">
+      <section className="border-y bg-ink py-14 sm:py-24">
         <div className="container-x">
           <Reveal>
             <span className="badge-cyan"><CalendarDays className="h-3 w-3" /> Chronologie</span>
@@ -81,7 +81,7 @@ function Club() {
             {JALONS.map((j, i) => (
               <Reveal key={j.annee} delay={0.08 * i} className="h-full">
                 <div className="glass-card group h-full rounded-2xl p-8">
-                  <p className="font-display text-4xl font-extrabold text-gradient-blue">{j.annee}</p>
+                  <p className="font-display text-3xl sm:text-4xl font-extrabold text-gradient-blue">{j.annee}</p>
                   <p className="mt-4 text-sm text-muted-foreground">{j.texte}</p>
                 </div>
               </Reveal>
@@ -90,11 +90,11 @@ function Club() {
         </div>
       </section>
 
-      <section className="container-x py-24">
+      <section className="container-x py-14 sm:py-24">
         <Reveal>
           <span className="badge-cyan"><Users className="h-3 w-3" /> Bureau actuel</span>
         </Reveal>
-        <h2 className="mt-6 font-display text-4xl font-extrabold md:text-6xl">
+        <h2 className="mt-6 font-display text-3xl sm:text-4xl font-extrabold md:text-6xl">
           <RevealText text="Celles et ceux qui font tourner le club" />
         </h2>
 

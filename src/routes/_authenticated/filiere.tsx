@@ -50,7 +50,7 @@ function Filiere() {
         />
       </section>
 
-      <section className="container-x py-20">
+      <section className="container-x py-12 sm:py-20">
         <Reveal>
           <div className="flex flex-wrap gap-2">
             {NIVEAUX.map((n) => (

@@ -1,11 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { CalendarDays, GraduationCap, LayoutGrid, PartyPopper, Users } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { PageHeader } from "@/components/site/PageHeader";
 import { Reveal } from "@/components/site/Reveal";
 import { FilterTabs } from "@/components/site/FilterTabs";
+import { NewsSkeleton } from "@/components/site/NewsSkeleton";
 import { ParallaxMedia } from "@/components/site/ParallaxMedia";
 import { ACTUALITES } from "@/lib/gtel-data";
 import eventImg from "@/assets/event.jpg";
@@ -43,9 +44,37 @@ const CAT_ICONS: Record<string, LucideIcon> = {
 };
 
 function Actualites() {
-  const categories = ["Toutes", ...Array.from(new Set(ACTUALITES.map((a) => a.categorie)))];
+  const categories = useMemo(
+    () => ["Toutes", ...Array.from(new Set(ACTUALITES.map((a) => a.categorie)))],
+    [],
+  );
   const [filtre, setFiltre] = useState("Toutes");
-  const liste = ACTUALITES.filter((a) => filtre === "Toutes" || a.categorie === filtre);
+  const [ready, setReady] = useState(false);
+  const liste = useMemo(
+    () => ACTUALITES.filter((a) => filtre === "Toutes" || a.categorie === filtre),
+    [filtre],
+  );
+
+  // Warm the browser image cache once so tab switching never re-downloads media.
+  useEffect(() => {
+    let cancelled = false;
+    const done = () => !cancelled && setReady(true);
+    Promise.all(
+      IMAGES.map(
+        (src) =>
+          new Promise<void>((resolve) => {
+            const img = new Image();
+            img.onload = img.onerror = () => resolve();
+            img.src = src as string;
+          }),
+      ),
+    ).then(done);
+    const t = setTimeout(done, 1200);
+    return () => {
+      cancelled = true;
+      clearTimeout(t);
+    };
+  }, []);
 
   return (
     <div className="theme-soft-black min-h-screen">
@@ -56,7 +85,7 @@ function Actualites() {
      titleClassName="text-blue-950"
    />
 
-      <section className="container-x py-20">
+      <section className="container-x py-12 sm:py-20">
         <Reveal>
           <FilterTabs
             items={categories}
@@ -67,9 +96,17 @@ function Actualites() {
           />
         </Reveal>
 
-        <motion.div layout className="mt-14 space-y-10">
+        {!ready && (
+          <div className="mt-10 sm:mt-14">
+            <NewsSkeleton count={3} />
+          </div>
+        )}
+
+        <motion.div layout className="mt-10 space-y-8 sm:mt-14 sm:space-y-10">
           <AnimatePresence mode="popLayout">
-            {liste.map((a, i) => {
+            {ready &&
+              liste.map((a, i) => {
+
               const Icon = CAT_ICONS[a.categorie] ?? PartyPopper;
               return (
                 <motion.article
@@ -79,12 +116,12 @@ function Actualites() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -16 }}
                   transition={{ duration: 0.6, delay: 0.05 * i, ease: [0.16, 1, 0.3, 1] }}
-                  className="glass-card group grid gap-8 rounded-2xl p-4 md:grid-cols-[1.1fr_1.4fr] md:items-center md:p-6"
+                  className="glass-card group grid gap-5 rounded-2xl p-3 sm:gap-8 sm:p-4 md:grid-cols-[1.1fr_1.4fr] md:items-center md:p-6"
                 >
                   <ParallaxMedia
                     src={IMAGES[i % IMAGES.length] as string}
                     alt={a.titre}
-                    className="h-[18rem] w-full rounded-xl"
+                    className="aspect-video h-auto w-full rounded-xl md:aspect-auto md:h-[18rem]"
                     strength={40}
                   />
                   <div>
@@ -98,7 +135,7 @@ function Actualites() {
                         {a.date}
                       </span>
                     </div>
-                    <h2 className="mt-5 font-display text-3xl leading-tight font-bold transition-colors duration-500 group-hover:text-cyan-glow md:text-4xl">
+                    <h2 className="mt-4 font-display text-2xl sm:mt-5 sm:text-3xl leading-tight font-bold transition-colors duration-500 group-hover:text-cyan-glow md:text-4xl">
                       {a.titre}
                     </h2>
                     <p className="mt-4 max-w-xl text-mist">{a.resume}</p>

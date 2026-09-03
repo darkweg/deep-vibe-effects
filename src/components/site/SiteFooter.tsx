@@ -11,7 +11,7 @@ export function SiteFooter() {
   return (
     <footer className="theme-dark-shell relative overflow-hidden border-t bg-ink">
       <div className="pointer-events-none absolute -top-40 left-1/2 h-80 w-[70rem] -translate-x-1/2 rounded-full bg-primary/20 blur-[120px]" />
-      <div className="container-x relative py-20">
+      <div className="container-x relative py-12 sm:py-20">
         <div className="grid gap-12 md:grid-cols-[1.4fr_1fr_1fr]">
           <div>
             <div className="flex items-center gap-3">

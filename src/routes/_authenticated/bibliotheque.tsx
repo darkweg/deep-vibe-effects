@@ -50,7 +50,7 @@ function Bibliotheque() {
         intro="Anciens sujets, TD corrigés et supports transmis par les promotions précédentes. Téléchargement libre pour tous les visiteurs, dépôt réservé aux contributeurs."
       />
 
-      <section className="container-x py-20">
+      <section className="container-x py-12 sm:py-20">
         <Reveal>
           <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <div className="flex flex-wrap gap-2">

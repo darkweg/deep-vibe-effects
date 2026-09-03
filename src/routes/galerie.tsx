@@ -67,12 +67,12 @@ function Galerie() {
         intro="Les photos publiées par la Cellule Communication, organisées par événement. Plus bas, le blog des membres : récits de TP, tutoriels réseau et vie du club."
       />
 
-      <section className="container-x py-20">
+      <section className="container-x py-12 sm:py-20">
         <Reveal>
           <FilterTabs items={albums} active={album} onChange={setAlbum} layoutId="galerie-tab" />
         </Reveal>
 
-        <motion.div layout className="mt-12 grid auto-rows-[16rem] grid-cols-1 gap-4 md:grid-cols-4">
+        <motion.div layout className="mt-10 grid auto-rows-[13rem] grid-cols-1 gap-4 sm:auto-rows-[16rem] sm:grid-cols-2 md:grid-cols-4">
           <AnimatePresence mode="popLayout">
             {visibles.map((p, idx) => (
               <motion.button

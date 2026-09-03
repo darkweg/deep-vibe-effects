@@ -106,7 +106,7 @@ function AuthPage() {
         intro="La filière et la bibliothèque de parrainage sont réservées aux membres. Créez votre compte étudiant pour y accéder et publier sur le blog du club."
       />
 
-      <section className="container-x grid gap-10 py-20 lg:grid-cols-[1.1fr_0.9fr]">
+      <section className="container-x grid gap-10 py-12 sm:py-20 lg:grid-cols-[1.1fr_0.9fr]">
         <Reveal>
           <div className="panel noise relative p-8 md:p-10">
             <div className="pointer-events-none absolute -top-24 -right-16 h-56 w-56 rounded-full bg-primary/25 blur-[110px]" />
