@@ -45,8 +45,8 @@ function Contact() {
         intro="Proposer une actualité, signaler un document manquant dans la bibliothèque ou rejoindre la Cellule Communication : ce formulaire arrive directement au Bureau."
       />
 
-      <section className="container-x py-20">
-        <div className="grid gap-14 lg:grid-cols-[1.3fr_1fr] lg:gap-24">
+      <section className="container-x py-12 sm:py-20">
+        <div className="grid gap-10 sm:gap-14 lg:grid-cols-[1.3fr_1fr] lg:gap-24">
           <Reveal>
             <form onSubmit={onSubmit} className="space-y-8">
               {CHAMPS.map((c) => (

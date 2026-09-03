@@ -166,15 +166,15 @@ function Index() {
       <Marquee />
 
       {/* Manifeste — thème graphite (page /club) */}
-      <section className="theme-graphite py-28 md:py-36">
-        <div className="container-x grid gap-14 lg:grid-cols-[1fr_1.1fr] lg:gap-24">
+      <section className="theme-graphite py-16 sm:py-14 sm:py-24 md:py-36">
+        <div className="container-x grid gap-10 sm:gap-14 lg:grid-cols-[1fr_1.1fr] lg:gap-24">
           <div>
             <Reveal>
               <span className="badge-cobalt  text-blue-950">
                 <Users className="h-3 w-3  text-blue-950" /> 01 — Le club
               </span>
             </Reveal>
-            <h2 className="mt-6 font-display text-4xl leading-[1.02] font-extrabold md:text-6xl">
+            <h2 className="mt-6 font-display text-3xl sm:text-4xl leading-[1.02] font-extrabold md:text-6xl">
               <RevealText text="Une filière, une mémoire, une communauté." />
             </h2>
 
@@ -240,7 +240,7 @@ function Index() {
         />
         <div className="relative z-3 flex h-full items-center">
           <div className="container-x">
-            <h2 className="max-w-3xl font-display text-4xl leading-[1.02] font-extrabold md:text-6xl">
+            <h2 className="max-w-3xl font-display text-3xl sm:text-4xl leading-[1.02] font-extrabold md:text-6xl">
               <RevealText text="Ce qui se transmet ne doit pas se perdre." />
             </h2>
             <Reveal delay={0.2}>
@@ -263,14 +263,14 @@ function Index() {
       )}
 
       {/* Actualités — thème noir doux (page /actualites) */}
-      <section className="theme-soft-black py-28 md:py-36">
+      <section className="theme-soft-black py-16 sm:py-14 sm:py-24 md:py-36">
         <div className="container-x">
           <div className="flex flex-wrap items-end justify-between gap-6">
             <div>
             <Reveal>
               <span className="badge-cobalt"><Newspaper className="h-3 w-3" /> 02 — Actualités</span>
             </Reveal>
-            <h2 className="mt-6 font-display text-4xl font-extrabold md:text-6xl">
+            <h2 className="mt-6 font-display text-3xl sm:text-4xl font-extrabold md:text-6xl">
               <RevealText text="À la une du département" />
             </h2>
           </div>
@@ -316,14 +316,14 @@ function Index() {
 
       {/* Filière — réservée aux membres */}
       {isMember && (
-      <section className="theme-slate border-y py-28 md:py-36">
+      <section className="theme-slate border-y py-16 sm:py-14 sm:py-24 md:py-36">
         <div className="container-x">
-          <div className="grid gap-14 lg:grid-cols-[1fr_1.2fr] lg:gap-24 text-blue-950">
+          <div className="grid gap-10 sm:gap-14 lg:grid-cols-[1fr_1.2fr] lg:gap-24 text-blue-950">
             <div className="lg:sticky lg:top-32 lg:self-start">
               <Reveal>
                 <span className="badge-cobalt"><GraduationCap className="h-3 w-3 text-blue-950" /> 03 — La filière</span>
               </Reveal>
-              <h2 className="mt-6 font-display text-4xl leading-[1.02] font-extrabold md:text-6xl">
+              <h2 className="mt-6 font-display text-3xl sm:text-4xl leading-[1.02] font-extrabold md:text-6xl">
                 <RevealText text="Unités d'enseignement, de la L3 à la L5" />
               </h2>
               <Reveal delay={0.2}>
@@ -364,14 +364,14 @@ function Index() {
       )}
 
       {/* Galerie teaser — thème bleu profond (page /galerie) */}
-      <section className="theme-deep-blue py-28 md:py-36">
+      <section className="theme-deep-blue py-16 sm:py-14 sm:py-24 md:py-36">
         <div className="container-x">
         <Reveal>
           <span className="badge-cobalt">
             <Images className="h-3 w-3" /> 04 — Galerie
           </span>
         </Reveal>
-        <h2 className="mt-6 max-w-3xl font-display text-4xl leading-[1.02] font-extrabold md:text-6xl">
+        <h2 className="mt-6 max-w-3xl font-display text-3xl sm:text-4xl leading-[1.02] font-extrabold md:text-6xl">
           <RevealText text="La vie du club, image par image" />
         </h2>
 
@@ -404,10 +404,10 @@ function Index() {
       </section>
 
       {/* CTA — thème minuit (page /contact) */}
-      <section className="theme-midnight relative overflow-hidden border-t py-28 md:py-36">
+      <section className="theme-midnight relative overflow-hidden border-t py-16 sm:py-14 sm:py-24 md:py-36">
         <Ambient />
         <div className="container-x relative text-center">
-          <h2 className="mx-auto max-w-4xl font-display text-4xl leading-[1.02] font-extrabold md:text-6xl">
+          <h2 className="mx-auto max-w-4xl font-display text-3xl sm:text-4xl leading-[1.02] font-extrabold md:text-6xl">
             <RevealText text="Rejoignez la Cellule Communication" />
           </h2>
           <Reveal delay={0.2}>

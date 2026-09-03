@@ -124,7 +124,7 @@ export function BlogSection() {
   const liste = (posts ?? []).filter((p) => filtre === "Tous" || p.categorie === filtre);
 
   return (
-    <section id="blog" className="relative overflow-hidden border-t border-border/60 bg-ink py-24">
+    <section id="blog" className="relative overflow-hidden border-t border-border/60 bg-ink py-14 sm:py-24">
       <div className="grid-lines pointer-events-none absolute inset-0 opacity-40" />
       <div className="pointer-events-none absolute top-1/3 -left-40 h-96 w-96 rounded-full bg-cobalt/30 blur-[140px]" />
 
@@ -133,7 +133,7 @@ export function BlogSection() {
           <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
             <div>
               <p className="eyebrow">Blog des membres</p>
-              <h2 className="mt-4 max-w-2xl font-display text-4xl leading-[1.05] md:text-6xl">
+              <h2 className="mt-4 max-w-2xl font-display text-3xl sm:text-4xl leading-[1.05] md:text-6xl">
                 Les <span className="text-gradient-blue">voix</span> de la filière
               </h2>
               <p className="mt-5 max-w-xl text-mist">

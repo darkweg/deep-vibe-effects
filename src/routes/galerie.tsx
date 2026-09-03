@@ -67,7 +67,7 @@ function Galerie() {
         intro="Les photos publiées par la Cellule Communication, organisées par événement. Plus bas, le blog des membres : récits de TP, tutoriels réseau et vie du club."
       />
 
-      <section className="container-x py-20">
+      <section className="container-x py-12 sm:py-20">
         <Reveal>
           <FilterTabs items={albums} active={album} onChange={setAlbum} layoutId="galerie-tab" />
         </Reveal>

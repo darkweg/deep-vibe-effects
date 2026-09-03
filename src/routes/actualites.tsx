@@ -56,7 +56,7 @@ function Actualites() {
      titleClassName="text-blue-950"
    />
 
-      <section className="container-x py-20">
+      <section className="container-x py-12 sm:py-20">
         <Reveal>
           <FilterTabs
             items={categories}
