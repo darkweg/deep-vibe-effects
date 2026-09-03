@@ -1,11 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { CalendarDays, GraduationCap, LayoutGrid, PartyPopper, Users } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { PageHeader } from "@/components/site/PageHeader";
 import { Reveal } from "@/components/site/Reveal";
 import { FilterTabs } from "@/components/site/FilterTabs";
+import { NewsSkeleton } from "@/components/site/NewsSkeleton";
 import { ParallaxMedia } from "@/components/site/ParallaxMedia";
 import { ACTUALITES } from "@/lib/gtel-data";
 import eventImg from "@/assets/event.jpg";
