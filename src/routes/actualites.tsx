@@ -43,9 +43,37 @@ const CAT_ICONS: Record<string, LucideIcon> = {
 };
 
 function Actualites() {
-  const categories = ["Toutes", ...Array.from(new Set(ACTUALITES.map((a) => a.categorie)))];
+  const categories = useMemo(
+    () => ["Toutes", ...Array.from(new Set(ACTUALITES.map((a) => a.categorie)))],
+    [],
+  );
   const [filtre, setFiltre] = useState("Toutes");
-  const liste = ACTUALITES.filter((a) => filtre === "Toutes" || a.categorie === filtre);
+  const [ready, setReady] = useState(false);
+  const liste = useMemo(
+    () => ACTUALITES.filter((a) => filtre === "Toutes" || a.categorie === filtre),
+    [filtre],
+  );
+
+  // Warm the browser image cache once so tab switching never re-downloads media.
+  useEffect(() => {
+    let cancelled = false;
+    const done = () => !cancelled && setReady(true);
+    Promise.all(
+      IMAGES.map(
+        (src) =>
+          new Promise<void>((resolve) => {
+            const img = new Image();
+            img.onload = img.onerror = () => resolve();
+            img.src = src as string;
+          }),
+      ),
+    ).then(done);
+    const t = setTimeout(done, 1200);
+    return () => {
+      cancelled = true;
+      clearTimeout(t);
+    };
+  }, []);
 
   return (
     <div className="theme-soft-black min-h-screen">
@@ -67,9 +95,17 @@ function Actualites() {
           />
         </Reveal>
 
-        <motion.div layout className="mt-14 space-y-10">
+        {!ready && (
+          <div className="mt-10 sm:mt-14">
+            <NewsSkeleton count={3} />
+          </div>
+        )}
+
+        <motion.div layout className="mt-10 space-y-8 sm:mt-14 sm:space-y-10">
           <AnimatePresence mode="popLayout">
-            {liste.map((a, i) => {
+            {ready &&
+              liste.map((a, i) => {
+
               const Icon = CAT_ICONS[a.categorie] ?? PartyPopper;
               return (
                 <motion.article
