@@ -9,11 +9,9 @@ import { FilterTabs } from "@/components/site/FilterTabs";
 import { NewsSkeleton } from "@/components/site/NewsSkeleton";
 import { ParallaxMedia } from "@/components/site/ParallaxMedia";
 import { ACTUALITES } from "@/lib/gtel-data";
-import eventImg from "@/assets/event.jpg";
-import fiberImg from "@/assets/fiber.jpg";
-import studentsImg from "@/assets/students.jpg";
-import students2Img from "@/assets/students2.jpg";
-import journeeImg from "@/assets/journee.jpg";
+import { ACTU_IMAGES } from "@/lib/actu-media";
+import { Link } from "@tanstack/react-router";
+import { ArrowUpRight } from "lucide-react";
 
 export const Route = createFileRoute("/actualites/")({
   head: () => ({
@@ -34,7 +32,7 @@ export const Route = createFileRoute("/actualites/")({
   component: Actualites,
 });
 
-const IMAGES = [eventImg, fiberImg, students2Img, journeeImg,studentsImg];
+const IMAGES = ACTU_IMAGES;
 
 const CAT_ICONS: Record<string, LucideIcon> = {
   Toutes: LayoutGrid,
@@ -110,14 +108,19 @@ function Actualites() {
               const Icon = CAT_ICONS[a.categorie] ?? PartyPopper;
               return (
                 <motion.article
-                  key={a.slug}
+                  key={a.id}
                   layout
                   initial={{ opacity: 0, y: 28 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -16 }}
                   transition={{ duration: 0.6, delay: 0.05 * i, ease: [0.16, 1, 0.3, 1] }}
-                  className="glass-card group grid gap-5 rounded-2xl p-3 sm:gap-8 sm:p-4 md:grid-cols-[1.1fr_1.4fr] md:items-center md:p-6"
+                  className="glass-card group rounded-2xl p-3 sm:p-4 md:p-6"
                 >
+                  <Link
+                    to="/actualites/$id"
+                    params={{ id: a.id }}
+                    className="grid gap-5 sm:gap-8 md:grid-cols-[1.1fr_1.4fr] md:items-center"
+                  >
                   <ParallaxMedia
                     src={IMAGES[i % IMAGES.length] as string}
                     alt={a.titre}
@@ -139,7 +142,12 @@ function Actualites() {
                       {a.titre}
                     </h2>
                     <p className="mt-4 max-w-xl text-mist">{a.resume}</p>
+                    <span className="mt-6 inline-flex items-center gap-2 font-mono text-[0.65rem] uppercase tracking-[0.2em] text-primary transition-transform duration-500 group-hover:translate-x-1">
+                      Lire l'article
+                      <ArrowUpRight className="h-3.5 w-3.5" />
+                    </span>
                   </div>
+                  </Link>
                 </motion.article>
               );
             })}
