@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as ActualitesRouteImport } from './routes/actualites'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ClubRouteImport } from './routes/club'
 import { Route as ContactRouteImport } from './routes/contact'
@@ -26,6 +27,11 @@ const IndexRoute = IndexRouteImport.update({
 } as any)
 const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
   id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ActualitesRoute = ActualitesRouteImport.update({
+  id: '/actualites',
+  path: '/actualites',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthRoute = AuthRouteImport.update({
@@ -60,13 +66,14 @@ const AuthenticatedFiliereRoute = AuthenticatedFiliereRouteImport.update({
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const ActualitesIndexRoute = ActualitesIndexRouteImport.update({
-  id: '/actualites/',
-  path: '/actualites/',
-  getParentRoute: () => rootRouteImport,
+  id: '/',
+  path: '/',
+  getParentRoute: () => ActualitesRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/actualites': typeof ActualitesRouteWithChildren
   '/auth': typeof AuthRoute
   '/club': typeof ClubRoute
   '/contact': typeof ContactRoute
@@ -89,6 +96,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/actualites': typeof ActualitesRouteWithChildren
   '/auth': typeof AuthRoute
   '/club': typeof ClubRoute
   '/contact': typeof ContactRoute
@@ -101,6 +109,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/actualites'
     | '/auth'
     | '/club'
     | '/contact'
@@ -122,6 +131,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/_authenticated'
+    | '/actualites'
     | '/auth'
     | '/club'
     | '/contact'
@@ -134,11 +144,11 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  ActualitesRoute: typeof ActualitesRouteWithChildren
   AuthRoute: typeof AuthRoute
   ClubRoute: typeof ClubRoute
   ContactRoute: typeof ContactRoute
   GalerieRoute: typeof GalerieRoute
-  ActualitesIndexRoute: typeof ActualitesIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -155,6 +165,13 @@ declare module '@tanstack/react-router' {
       path: ''
       fullPath: '/'
       preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/actualites': {
+      id: '/actualites'
+      path: '/actualites'
+      fullPath: '/actualites'
+      preLoaderRoute: typeof ActualitesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/auth': {
@@ -201,10 +218,10 @@ declare module '@tanstack/react-router' {
     }
     '/actualites/': {
       id: '/actualites/'
-      path: '/actualites'
+      path: '/'
       fullPath: '/actualites/'
       preLoaderRoute: typeof ActualitesIndexRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof ActualitesRoute
     }
   }
 }
@@ -222,14 +239,26 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
 const AuthenticatedRouteRouteWithChildren =
   AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
 
+interface ActualitesRouteChildren {
+  ActualitesIndexRoute: typeof ActualitesIndexRoute
+}
+
+const ActualitesRouteChildren: ActualitesRouteChildren = {
+  ActualitesIndexRoute: ActualitesIndexRoute,
+}
+
+const ActualitesRouteWithChildren = ActualitesRoute._addFileChildren(
+  ActualitesRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  ActualitesRoute: ActualitesRouteWithChildren,
   AuthRoute: AuthRoute,
   ClubRoute: ClubRoute,
   ContactRoute: ContactRoute,
   GalerieRoute: GalerieRoute,
-  ActualitesIndexRoute: ActualitesIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
