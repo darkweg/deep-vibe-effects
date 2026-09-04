@@ -18,6 +18,8 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as GalerieRouteImport } from './routes/galerie'
 import { Route as AuthenticatedBibliothequeRouteImport } from './routes/_authenticated/bibliotheque'
 import { Route as AuthenticatedFiliereRouteImport } from './routes/_authenticated/filiere'
+import { Route as ActualitesIndexRouteImport } from './routes/actualites.index'
+import { Route as ActualitesIdRouteImport } from './routes/actualites.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -64,38 +66,53 @@ const AuthenticatedFiliereRoute = AuthenticatedFiliereRouteImport.update({
   path: '/filiere',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const ActualitesIndexRoute = ActualitesIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ActualitesRoute,
+} as any)
+const ActualitesIdRoute = ActualitesIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => ActualitesRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/actualites': typeof ActualitesRoute
+  '/actualites': typeof ActualitesRouteWithChildren
   '/auth': typeof AuthRoute
   '/club': typeof ClubRoute
   '/contact': typeof ContactRoute
   '/galerie': typeof GalerieRoute
   '/bibliotheque': typeof AuthenticatedBibliothequeRoute
   '/filiere': typeof AuthenticatedFiliereRoute
+  '/actualites/$id': typeof ActualitesIdRoute
+  '/actualites/': typeof ActualitesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/actualites': typeof ActualitesRoute
   '/auth': typeof AuthRoute
   '/club': typeof ClubRoute
   '/contact': typeof ContactRoute
   '/galerie': typeof GalerieRoute
   '/bibliotheque': typeof AuthenticatedBibliothequeRoute
   '/filiere': typeof AuthenticatedFiliereRoute
+  '/actualites/$id': typeof ActualitesIdRoute
+  '/actualites': typeof ActualitesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
-  '/actualites': typeof ActualitesRoute
+  '/actualites': typeof ActualitesRouteWithChildren
   '/auth': typeof AuthRoute
   '/club': typeof ClubRoute
   '/contact': typeof ContactRoute
   '/galerie': typeof GalerieRoute
   '/_authenticated/bibliotheque': typeof AuthenticatedBibliothequeRoute
   '/_authenticated/filiere': typeof AuthenticatedFiliereRoute
+  '/actualites/$id': typeof ActualitesIdRoute
+  '/actualites/': typeof ActualitesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -108,16 +125,19 @@ export interface FileRouteTypes {
     | '/galerie'
     | '/bibliotheque'
     | '/filiere'
+    | '/actualites/$id'
+    | '/actualites/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/actualites'
     | '/auth'
     | '/club'
     | '/contact'
     | '/galerie'
     | '/bibliotheque'
     | '/filiere'
+    | '/actualites/$id'
+    | '/actualites'
   id:
     | '__root__'
     | '/'
@@ -129,12 +149,14 @@ export interface FileRouteTypes {
     | '/galerie'
     | '/_authenticated/bibliotheque'
     | '/_authenticated/filiere'
+    | '/actualites/$id'
+    | '/actualites/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
-  ActualitesRoute: typeof ActualitesRoute
+  ActualitesRoute: typeof ActualitesRouteWithChildren
   AuthRoute: typeof AuthRoute
   ClubRoute: typeof ClubRoute
   ContactRoute: typeof ContactRoute
@@ -206,6 +228,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedFiliereRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/actualites/': {
+      id: '/actualites/'
+      path: '/'
+      fullPath: '/actualites/'
+      preLoaderRoute: typeof ActualitesIndexRouteImport
+      parentRoute: typeof ActualitesRoute
+    }
+    '/actualites/$id': {
+      id: '/actualites/$id'
+      path: '/$id'
+      fullPath: '/actualites/$id'
+      preLoaderRoute: typeof ActualitesIdRouteImport
+      parentRoute: typeof ActualitesRoute
+    }
   }
 }
 
@@ -222,10 +258,24 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
 const AuthenticatedRouteRouteWithChildren =
   AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
 
+interface ActualitesRouteChildren {
+  ActualitesIdRoute: typeof ActualitesIdRoute
+  ActualitesIndexRoute: typeof ActualitesIndexRoute
+}
+
+const ActualitesRouteChildren: ActualitesRouteChildren = {
+  ActualitesIdRoute: ActualitesIdRoute,
+  ActualitesIndexRoute: ActualitesIndexRoute,
+}
+
+const ActualitesRouteWithChildren = ActualitesRoute._addFileChildren(
+  ActualitesRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
-  ActualitesRoute: ActualitesRoute,
+  ActualitesRoute: ActualitesRouteWithChildren,
   AuthRoute: AuthRoute,
   ClubRoute: ClubRoute,
   ContactRoute: ContactRoute,

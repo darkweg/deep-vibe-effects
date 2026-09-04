@@ -9,55 +9,96 @@ export const NAV_LINKS = [
 ] as const;
 
 export type Actualite = {
+  id: string;
   slug: string;
   titre: string;
   categorie: string;
   date: string;
   resume: string;
+  corps: string[];
+  linkedin: string;
 };
+
+const LINKEDIN_CLUB = "https://www.linkedin.com/company/club-gtel-enspy/";
 
 export const ACTUALITES: Actualite[] = [
   
   {
+    id: "forum-infos-gtel-2029",
     slug: "Forum: INFOS GTEL 2029",
     titre: "Forum Télécoms ENSPY 2029 : appel à candidatures",
     categorie: "Annonce",
     date: "Aout 2026",
     resume:
       " Nous avons créer un forums pour vous. Venez afin qu'on parle de vos préoccupations",
+    corps: [
+      "Le club GTEL ouvre les candidatures pour le Forum Télécoms ENSPY 2029, un rendez-vous pensé comme un espace d'échange direct entre les étudiants de la filière, les anciens et les professionnels du secteur.",
+      "Pendant deux jours, les participants pourront présenter leurs projets, poser leurs questions sur les parcours d'insertion et rencontrer les entreprises partenaires du département de Télécommunications.",
+      "Les candidatures se font auprès de la Cellule Communication. Chaque dossier doit préciser le niveau, la thématique proposée et le format souhaité : démonstration, poster ou intervention courte.",
+    ],
+    linkedin: LINKEDIN_CLUB,
   },
   {
+    id: "atelier-fibre-optique",
     slug: "atelier-fibre-optique",
     titre: "Atelier soudure fibre optique avec le laboratoire réseaux",
     categorie: "Formation",
     date: "Novembre 2026",
     resume:
       "Encadrées par les L4 pour manipuler soudeuse, OTDR et jarretières monomodes dans les conditions du terrain.",
+    corps: [
+      "L'atelier fibre optique réunit chaque promotion autour du matériel du laboratoire réseaux : soudeuse à fusion, cliveuse, réflectomètre OTDR et jeux de jarretières monomodes.",
+      "Les L4 encadrent les groupes par binômes. L'objectif est simple : réussir une soudure propre, mesurer l'atténuation obtenue et interpréter correctement la trace OTDR.",
+      "La session se termine par un débriefing collectif sur les bonnes pratiques de terrain, du nettoyage des connecteurs à la gestion des rayons de courbure.",
+    ],
+    linkedin: LINKEDIN_CLUB,
   },
   {
+    id: "nouveau-bureau",
     slug: "nouveau-bureau",
     titre: "Le nouveau Bureau du club GTEL est installé",
     categorie: "Vie du club",
     date: "Décembre 2026",
     resume:
       "Passation officielle entre les promotions : Présidence, Cellule Communication et pôle Parrainage sont désormais au complet.",
+    corps: [
+      "La passation entre les promotions s'est tenue en présence des membres du club et des délégués de la filière.",
+      "Le nouveau Bureau est désormais au complet : Présidence, Vice-présidence, Cellule Communication, pôle Parrainage et trésorerie.",
+      "La feuille de route annoncée met l'accent sur la documentation partagée, les ateliers pratiques et une présence renforcée du club sur les réseaux.",
+    ],
+    linkedin: LINKEDIN_CLUB,
   },
   {
+    id: "journee-internationale-telecoms-2026",
     slug: "Journée Internationale des télécommunications 2026",
     titre: "La Journée intenationale des télécoms vous retrouve à l'ENSPY",
     categorie: "Evenements",
     date: "Février 2026",
     resume:
       "Conférence, Presentations de projets, des Hautes personnalités et Institutions du domaines des télécommunications étaient présentes",
+    corps: [
+      "La Journée internationale des télécommunications a rassemblé à l'ENSPY étudiants, enseignants et institutions du secteur autour d'un programme de conférences et de démonstrations.",
+      "Les étudiants de la filière ont présenté leurs projets : supervision réseau, prototypes IoT, dimensionnement radio et outils de mesure développés en interne.",
+      "Les échanges avec les personnalités invitées ont porté sur l'évolution du secteur au Cameroun et sur les compétences attendues des jeunes ingénieurs télécoms.",
+    ],
+    linkedin: LINKEDIN_CLUB,
   },
   {
+    id: "visite-art",
     slug: "Visite d'Entreprise",
     titre: "Une chaleureuse acceuil de L'ART",
     categorie: "Evenements",
     date: "Mai 2026",
     resume:
       " Nous avons visiter les locaux de l'ART ou nous avons été a chaque fois instruits par different encadreurs exceptionels sur les réalités du secteur des télécomunications au Cameroun",
+    corps: [
+      "La délégation du club GTEL a été reçue dans les locaux de l'Agence de Régulation des Télécommunications pour une visite guidée des différents services.",
+      "Les encadreurs ont détaillé les missions de contrôle du spectre, la certification des équipements et le suivi de la qualité de service des opérateurs.",
+      "La visite s'est conclue par une séance de questions-réponses sur les métiers de la régulation et les opportunités de stage pour les étudiants de la filière.",
+    ],
+    linkedin: LINKEDIN_CLUB,
   },
+
 ];
 
 export type UE = {

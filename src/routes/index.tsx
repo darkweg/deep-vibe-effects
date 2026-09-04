@@ -287,9 +287,10 @@ function Index() {
 
         <div className="mt-10 grid gap-5 sm:mt-14 sm:grid-cols-2 lg:grid-cols-3">
           {ACTUALITES.slice(0, 3).map((a, i) => (
-            <Reveal key={a.slug} delay={0.08 * i} className="h-full">
+            <Reveal key={a.id} delay={0.08 * i} className="h-full">
               <Link
-                to="/actualites"
+                to="/actualites/$id"
+                params={{ id: a.id }}
                 className="glass-card group flex h-full flex-col rounded-2xl p-7"
               >
                 <div className="flex flex-wrap items-center gap-2">
