@@ -1,13 +1,25 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { AnimatePresence, motion } from "motion/react";
-import { Heart, MessageCircle, PenLine, Send, Trash2, Loader2 } from "lucide-react";
+import {
+  Hash,
+  Heart,
+  Images,
+  Linkedin,
+  Loader2,
+  MessageCircle,
+  PenLine,
+  Send,
+  Trash2,
+  X,
+} from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { toast } from "sonner";
 import { z } from "zod";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { Reveal } from "@/components/site/Reveal";
+import { feedPhotos, hashString } from "@/lib/actu-media";
 
 type Post = {
   id: string;
@@ -23,10 +35,18 @@ type Comment = { id: string; post_id: string; author_id: string; contenu: string
 
 const CATEGORIES = ["Général", "Réseaux", "Vie du club", "Tutoriel", "Retour d'expérience"];
 
+const CATEGORY_TAGS: Record<string, string[]> = {
+  "Général": ["#GTEL", "#ENSPY"],
+  "Réseaux": ["#Réseaux", "#FibreOptique"],
+  "Vie du club": ["#VieDuClub", "#GTEL"],
+  "Tutoriel": ["#Tutoriel", "#TravauxPratiques"],
+  "Retour d'expérience": ["#RetourDExpérience", "#Terrain"],
+};
+
+const LINKEDIN_CLUB = "https://www.linkedin.com/company/club-gtel-enspy/";
+
 const postSchema = z.object({
-  titre: z.string().trim().min(4, "Titre trop court").max(120, "Titre trop long"),
-  chapeau: z.string().trim().max(240, "Chapeau trop long"),
-  contenu: z.string().trim().min(20, "Le contenu doit faire au moins 20 caractères").max(6000),
+  contenu: z.string().trim().min(20, "La légende doit faire au moins 20 caractères").max(2000),
 });
 
 function initials(name: string) {
@@ -36,6 +56,21 @@ function initials(name: string) {
     .slice(0, 2)
     .map((w) => w.charAt(0).toUpperCase())
     .join("");
+}
+
+/** Keep the feed light: show the first two sentences of the caption. */
+function caption(text: string) {
+  const clean = text.replace(/\s+/g, " ").trim();
+  const sentences = clean.match(/[^.!?]+[.!?]?/g) ?? [clean];
+  const short = sentences.slice(0, 2).join(" ").trim();
+  return { short, hasMore: short.length < clean.length, full: clean };
+}
+
+function tagsFor(post: Post, niveau: string | null | undefined) {
+  const inline = (post.contenu.match(/#[\p{L}\p{N}_]+/gu) ?? []).slice(0, 3);
+  const base = CATEGORY_TAGS[post.categorie] ?? ["#GTEL"];
+  const extras = niveau ? [`#${niveau}`] : [];
+  return Array.from(new Set([...inline, ...base, ...extras])).slice(0, 4);
 }
 
 function useDirectory() {
@@ -55,7 +90,7 @@ export function BlogSection() {
   const { user, profile } = useAuth();
   const qc = useQueryClient();
   const [composerOpen, setComposerOpen] = useState(false);
-  const [filtre, setFiltre] = useState("Tous");
+  const [tagFiltre, setTagFiltre] = useState<string | null>(null);
 
   const { data: directory } = useDirectory();
 
@@ -81,13 +116,16 @@ export function BlogSection() {
   });
 
   const createPost = useMutation({
-    mutationFn: async (input: { titre: string; chapeau: string; contenu: string; categorie: string }) => {
+    mutationFn: async (input: { contenu: string; categorie: string }) => {
       if (!user) throw new Error("Connexion requise");
-      const { error } = await supabase.from("blog_posts").insert({ ...input, author_id: user.id });
+      const titre = input.contenu.replace(/\s+/g, " ").trim().slice(0, 110);
+      const { error } = await supabase
+        .from("blog_posts")
+        .insert({ ...input, titre, chapeau: "", author_id: user.id });
       if (error) throw error;
     },
     onSuccess: () => {
-      toast.success("Article publié");
+      toast.success("Publication ajoutée au fil");
       setComposerOpen(false);
       qc.invalidateQueries({ queryKey: ["blog-posts"] });
     },
@@ -100,14 +138,14 @@ export function BlogSection() {
       if (error) throw error;
     },
     onSuccess: () => {
-      toast.success("Article supprimé");
+      toast.success("Publication supprimée");
       qc.invalidateQueries({ queryKey: ["blog-posts"] });
     },
   });
 
   const toggleLike = useMutation({
     mutationFn: async ({ postId, liked }: { postId: string; liked: boolean }) => {
-      if (!user) throw new Error("Connectez-vous pour aimer un article");
+      if (!user) throw new Error("Connectez-vous pour aimer une publication");
       if (liked) {
         const { error } = await supabase.from("blog_likes").delete().eq("post_id", postId).eq("user_id", user.id);
         if (error) throw error;
@@ -120,8 +158,22 @@ export function BlogSection() {
     onError: (e: Error) => toast.error(e.message),
   });
 
-  const categories = ["Tous", ...CATEGORIES];
-  const liste = (posts ?? []).filter((p) => filtre === "Tous" || p.categorie === filtre);
+  const withTags = useMemo(
+    () =>
+      (posts ?? []).map((p) => ({
+        post: p,
+        tags: tagsFor(p, directory?.get(p.author_id)?.niveau),
+      })),
+    [posts, directory],
+  );
+
+  const allTags = useMemo(() => {
+    const counts = new Map<string, number>();
+    for (const { tags } of withTags) for (const t of tags) counts.set(t, (counts.get(t) ?? 0) + 1);
+    return [...counts.entries()].sort((a, b) => b[1] - a[1]).slice(0, 8).map(([t]) => t);
+  }, [withTags]);
+
+  const liste = tagFiltre ? withTags.filter((p) => p.tags.includes(tagFiltre)) : withTags;
 
   return (
     <section id="blog" className="relative overflow-hidden border-t border-border/60 bg-ink py-14 sm:py-24">
@@ -132,13 +184,13 @@ export function BlogSection() {
         <Reveal>
           <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
             <div>
-              <p className="eyebrow">Blog des membres</p>
+              <p className="eyebrow">Le fil du club</p>
               <h2 className="mt-4 max-w-2xl font-display text-3xl sm:text-4xl leading-[1.05] md:text-6xl">
-                Les <span className="text-gradient-blue">voix</span> de la filière
+                Le <span className="text-gradient-blue">micro-feed</span> GTEL
               </h2>
               <p className="mt-5 max-w-xl text-mist">
-                Comptes rendus, tutoriels et carnets de terrain publiés par les membres du club. Tout le monde peut
-                lire — les membres connectés écrivent et commentent.
+                Photos de TP, moments du club et notes de terrain, publiés en quelques lignes par les membres.
+                Tout le monde peut lire et réagir en commentaire.
               </p>
             </div>
 
@@ -149,7 +201,7 @@ export function BlogSection() {
                 className="btn-glow inline-flex items-center gap-2 px-6 py-3.5"
               >
                 <PenLine className="h-4 w-4" />
-                {composerOpen ? "Fermer" : "Écrire un article"}
+                {composerOpen ? "Fermer" : "Publier dans le fil"}
               </button>
             ) : (
               <Link to="/auth" className="btn-ghost inline-flex items-center gap-2 px-6 py-3.5">
@@ -177,46 +229,60 @@ export function BlogSection() {
           )}
         </AnimatePresence>
 
-        <Reveal delay={0.1}>
-          <div className="mt-12 flex flex-wrap gap-2">
-            {categories.map((c) => (
-              <button
-                key={c}
-                type="button"
-                onClick={() => setFiltre(c)}
-                className={`px-4 py-2 font-mono text-[0.62rem] uppercase tracking-[0.18em] transition-all duration-500 ${
-                  filtre === c
-                    ? "border border-azure bg-azure/15 text-cyan"
-                    : "border border-border text-steel hover:border-azure/60 hover:text-chalk"
-                }`}
-              >
-                {c}
-              </button>
-            ))}
-          </div>
-        </Reveal>
+        {allTags.length > 0 && (
+          <Reveal delay={0.1}>
+            <div className="mt-12 flex flex-wrap items-center gap-2">
+              {tagFiltre && (
+                <button
+                  type="button"
+                  onClick={() => setTagFiltre(null)}
+                  className="inline-flex items-center gap-1.5 rounded-full border border-border px-3 py-1.5 font-mono text-[0.62rem] uppercase tracking-[0.16em] text-steel hover:text-chalk"
+                >
+                  <X className="h-3 w-3" />
+                  Tout
+                </button>
+              )}
+              {allTags.map((t) => (
+                <button
+                  key={t}
+                  type="button"
+                  onClick={() => setTagFiltre(tagFiltre === t ? null : t)}
+                  className={`rounded-full px-3.5 py-1.5 font-mono text-[0.62rem] tracking-[0.1em] transition-all duration-500 ${
+                    tagFiltre === t
+                      ? "border border-azure bg-azure/15 text-cyan"
+                      : "border border-border text-steel hover:border-azure/60 hover:text-chalk"
+                  }`}
+                >
+                  {t}
+                </button>
+              ))}
+            </div>
+          </Reveal>
+        )}
 
         <div className="mt-10 grid gap-6 lg:grid-cols-2">
           {isLoading && (
-            <p className="font-mono text-xs uppercase tracking-[0.2em] text-steel">Chargement des articles…</p>
+            <p className="font-mono text-xs uppercase tracking-[0.2em] text-steel">Chargement du fil…</p>
           )}
           {!isLoading && liste.length === 0 && (
             <div className="panel p-10 text-center lg:col-span-2">
-              <p className="font-display text-2xl text-chalk">Aucun article pour l'instant</p>
+              <p className="font-display text-2xl text-chalk">Le fil est encore vide</p>
               <p className="mt-2 text-sm text-mist">
-                Soyez le premier membre à raconter un TP, un projet ou un événement du club.
+                Soyez le premier membre à partager une photo de TP, un projet ou un moment du club.
               </p>
             </div>
           )}
-          {liste.map((post, i) => (
+          {liste.map(({ post, tags }, i) => (
             <Reveal key={post.id} delay={0.05 * i}>
-              <PostCard
+              <FeedCard
                 post={post}
+                tags={tags}
                 author={directory?.get(post.author_id)}
                 likes={(likes ?? []).filter((l) => l.post_id === post.id)}
                 currentUserId={user?.id ?? null}
                 onToggleLike={(liked) => toggleLike.mutate({ postId: post.id, liked })}
                 onDelete={() => deletePost.mutate(post.id)}
+                onTag={(t) => setTagFiltre(t)}
                 directory={directory}
               />
             </Reveal>
@@ -232,12 +298,10 @@ function Composer({
   pending,
   authorName,
 }: {
-  onSubmit: (v: { titre: string; chapeau: string; contenu: string; categorie: string }) => void;
+  onSubmit: (v: { contenu: string; categorie: string }) => void;
   pending: boolean;
   authorName: string;
 }) {
-  const [titre, setTitre] = useState("");
-  const [chapeau, setChapeau] = useState("");
   const [contenu, setContenu] = useState("");
   const [categorie, setCategorie] = useState(CATEGORIES[0]!);
 
@@ -245,22 +309,30 @@ function Composer({
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        const parsed = postSchema.safeParse({ titre, chapeau, contenu });
+        const parsed = postSchema.safeParse({ contenu });
         if (!parsed.success) {
           toast.error(parsed.error.issues[0]?.message ?? "Formulaire invalide");
           return;
         }
-        onSubmit({ ...parsed.data, categorie });
-        setTitre("");
-        setChapeau("");
+        onSubmit({ contenu: parsed.data.contenu, categorie });
         setContenu("");
       }}
       className="panel mt-8 space-y-4 p-6 md:p-8"
     >
-      <p className="eyebrow">Nouvel article · {authorName}</p>
-      <input value={titre} onChange={(e) => setTitre(e.target.value)} placeholder="Titre de l'article" className="field font-display text-xl" maxLength={120} />
-      <input value={chapeau} onChange={(e) => setChapeau(e.target.value)} placeholder="Chapeau (une phrase d'accroche)" className="field" maxLength={240} />
-      <textarea value={contenu} onChange={(e) => setContenu(e.target.value)} placeholder="Votre article…" rows={7} className="field resize-y" maxLength={6000} />
+      <div className="flex items-center gap-3">
+        <span className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-cobalt to-cyan font-mono text-[0.7rem] text-primary-foreground">
+          {initials(authorName)}
+        </span>
+        <p className="eyebrow">{authorName} · nouvelle publication</p>
+      </div>
+      <textarea
+        value={contenu}
+        onChange={(e) => setContenu(e.target.value)}
+        placeholder="Quoi de neuf ? Deux phrases suffisent — ajoutez vos #hashtags."
+        rows={4}
+        className="field resize-y"
+        maxLength={2000}
+      />
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div className="flex flex-wrap gap-2">
           {CATEGORIES.map((c) => (
@@ -268,7 +340,7 @@ function Composer({
               key={c}
               type="button"
               onClick={() => setCategorie(c)}
-              className={`px-3 py-1.5 font-mono text-[0.6rem] uppercase tracking-[0.16em] transition-colors duration-500 ${
+              className={`rounded-full px-3 py-1.5 font-mono text-[0.6rem] uppercase tracking-[0.16em] transition-colors duration-500 ${
                 categorie === c ? "border border-azure bg-azure/15 text-cyan" : "border border-border text-steel"
               }`}
             >
@@ -285,58 +357,140 @@ function Composer({
   );
 }
 
-function PostCard({
+function PhotoGrid({ photos, alt }: { photos: string[]; alt: string }) {
+  const [zoom, setZoom] = useState<string | null>(null);
+  const layout =
+    photos.length === 1
+      ? "grid-cols-1"
+      : photos.length === 3
+        ? "grid-cols-2 [&>*:first-child]:row-span-2"
+        : "grid-cols-2";
+
+  return (
+    <>
+      <div className={`mt-4 grid gap-1.5 overflow-hidden rounded-xl ${layout}`}>
+        {photos.map((src, i) => (
+          <button
+            key={`${src}-${i}`}
+            type="button"
+            onClick={() => setZoom(src)}
+            className="group/photo relative overflow-hidden"
+          >
+            <img
+              src={src}
+              alt={`${alt} — photo ${i + 1}`}
+              loading="lazy"
+              decoding="async"
+              className={`w-full object-cover transition-transform duration-700 group-hover/photo:scale-105 ${
+                photos.length === 1 ? "aspect-[16/10]" : "aspect-square"
+              }`}
+            />
+          </button>
+        ))}
+      </div>
+
+      <AnimatePresence>
+        {zoom && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-100 flex items-center justify-center bg-foreground/90 p-6 backdrop-blur-xl"
+            onClick={() => setZoom(null)}
+          >
+            <img src={zoom} alt={alt} className="max-h-[80vh] w-auto max-w-5xl object-contain" />
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  );
+}
+
+function FeedCard({
   post,
+  tags,
   author,
   likes,
   currentUserId,
   onToggleLike,
   onDelete,
+  onTag,
   directory,
 }: {
   post: Post;
+  tags: string[];
   author: { display_name: string; niveau: string | null } | undefined;
   likes: { post_id: string; user_id: string }[];
   currentUserId: string | null;
   onToggleLike: (liked: boolean) => void;
   onDelete: () => void;
+  onTag: (tag: string) => void;
   directory: Map<string, { display_name: string; niveau: string | null }> | undefined;
 }) {
   const [open, setOpen] = useState(false);
+  const [expanded, setExpanded] = useState(false);
   const liked = !!currentUserId && likes.some((l) => l.user_id === currentUserId);
   const name = author?.display_name ?? "Membre GTEL";
+  const { short, hasMore, full } = caption(post.contenu);
+  const photos = feedPhotos(post.id, 1 + (hashString(post.id) % 4));
 
   return (
-    <article className="panel group relative flex h-full flex-col p-7 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1.5">
+    <article className="panel group relative flex h-full flex-col p-5 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1.5 sm:p-7">
       <span className="absolute inset-x-0 top-0 h-px origin-left scale-x-0 bg-gradient-to-r from-cobalt via-azure to-cyan transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100" />
 
-      <div className="flex items-center gap-3">
-        <span className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-cobalt to-cyan font-mono text-[0.7rem] text-primary-foreground">
+      {/* Author header */}
+      <header className="flex items-center gap-3">
+        <span className="flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-br from-cobalt to-cyan font-mono text-[0.7rem] text-primary-foreground">
           {initials(name)}
         </span>
         <span className="text-sm">
-          <span className="block text-chalk">{name}</span>
+          <span className="block font-semibold text-chalk">{name}</span>
           <span className="block font-mono text-[0.62rem] uppercase tracking-[0.16em] text-steel">
             {author?.niveau ? `${author.niveau} · ` : ""}
             {new Date(post.created_at).toLocaleDateString("fr-FR", { day: "2-digit", month: "long", year: "numeric" })}
           </span>
         </span>
         <span className="chip ml-auto">{post.categorie}</span>
-      </div>
+      </header>
 
-      <h3 className="mt-5 font-display text-2xl leading-snug text-foreground transition-colors duration-500 group-hover:text-cyan">
-        {post.titre}
-      </h3>
-      {post.chapeau && <p className="mt-2 text-sm text-mist">{post.chapeau}</p>}
-      <p className="mt-4 line-clamp-6 text-sm leading-relaxed whitespace-pre-line text-muted-foreground">
-        {post.contenu}
+      {/* Caption */}
+      <p className="mt-4 text-sm leading-relaxed whitespace-pre-line text-foreground/90">
+        {expanded ? full : short}
+        {hasMore && !expanded && (
+          <button
+            type="button"
+            onClick={() => setExpanded(true)}
+            className="ml-1.5 font-mono text-[0.62rem] uppercase tracking-[0.16em] text-primary"
+          >
+            …voir plus
+          </button>
+        )}
       </p>
 
-      <div className="mt-6 flex items-center gap-3 border-t border-border/60 pt-5">
+      {/* Photos */}
+      <PhotoGrid photos={photos} alt={post.titre} />
+
+      {/* Hashtags */}
+      <div className="mt-4 flex flex-wrap gap-1.5">
+        {tags.map((t) => (
+          <button
+            key={t}
+            type="button"
+            onClick={() => onTag(t)}
+            className="inline-flex items-center gap-1 rounded-full border border-border px-2.5 py-1 font-mono text-[0.6rem] tracking-[0.08em] text-steel transition-colors duration-500 hover:border-azure/60 hover:text-cyan"
+          >
+            <Hash className="h-2.5 w-2.5" />
+            {t.replace(/^#/, "")}
+          </button>
+        ))}
+      </div>
+
+      {/* Actions */}
+      <div className="mt-5 flex flex-wrap items-center gap-2 border-t border-border/60 pt-4">
         <button
           type="button"
           onClick={() => onToggleLike(liked)}
-          className={`inline-flex items-center gap-2 border px-3 py-1.5 font-mono text-[0.62rem] uppercase tracking-[0.16em] transition-all duration-500 ${
+          className={`inline-flex items-center gap-2 rounded-full border px-3 py-1.5 font-mono text-[0.62rem] uppercase tracking-[0.16em] transition-all duration-500 ${
             liked ? "border-cyan/60 bg-cyan/10 text-cyan" : "border-border text-steel hover:text-chalk"
           }`}
         >
@@ -347,24 +501,40 @@ function PostCard({
         <button
           type="button"
           onClick={() => setOpen((v) => !v)}
-          className="inline-flex items-center gap-2 border border-border px-3 py-1.5 font-mono text-[0.62rem] uppercase tracking-[0.16em] text-steel transition-colors duration-500 hover:text-chalk"
+          className="inline-flex items-center gap-2 rounded-full border border-border px-3 py-1.5 font-mono text-[0.62rem] uppercase tracking-[0.16em] text-steel transition-colors duration-500 hover:text-chalk"
         >
           <MessageCircle className="h-3.5 w-3.5" />
-          Commentaires
+          Commenter
         </button>
+
+        <a
+          href={LINKEDIN_CLUB}
+          target="_blank"
+          rel="noreferrer noopener"
+          className="inline-flex items-center gap-2 rounded-full border border-azure/50 px-3 py-1.5 font-mono text-[0.62rem] uppercase tracking-[0.16em] text-primary transition-colors duration-500 hover:bg-azure/10"
+        >
+          <Linkedin className="h-3.5 w-3.5" />
+          Consulter sur LinkedIn
+        </a>
+
+        <span className="ml-auto inline-flex items-center gap-1.5 font-mono text-[0.6rem] uppercase tracking-[0.16em] text-steel">
+          <Images className="h-3.5 w-3.5" />
+          {photos.length}
+        </span>
 
         {currentUserId === post.author_id && (
           <button
             type="button"
             onClick={onDelete}
-            aria-label="Supprimer l'article"
-            className="ml-auto inline-flex items-center border border-border px-3 py-1.5 text-steel transition-colors duration-500 hover:border-destructive hover:text-destructive"
+            aria-label="Supprimer la publication"
+            className="inline-flex items-center rounded-full border border-border px-3 py-1.5 text-steel transition-colors duration-500 hover:border-destructive hover:text-destructive"
           >
             <Trash2 className="h-3.5 w-3.5" />
           </button>
         )}
       </div>
 
+      {/* Comments drawer */}
       <AnimatePresence>
         {open && (
           <motion.div
@@ -433,7 +603,7 @@ function CommentThread({
   });
 
   return (
-    <div className="mt-6 space-y-4 border-t border-border/60 pt-5">
+    <div className="mt-5 space-y-4 border-t border-border/60 pt-5">
       {(comments ?? []).length === 0 && (
         <p className="font-mono text-[0.62rem] uppercase tracking-[0.18em] text-steel">
           Aucun commentaire — lancez la discussion.
@@ -447,7 +617,7 @@ function CommentThread({
             <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-azure/40 font-mono text-[0.6rem] text-cyan">
               {initials(name)}
             </span>
-            <div className="flex-1 bg-surface/60 px-4 py-3">
+            <div className="flex-1 rounded-xl bg-surface/60 px-4 py-3">
               <p className="font-mono text-[0.6rem] uppercase tracking-[0.16em] text-steel">
                 {name} · {new Date(c.created_at).toLocaleDateString("fr-FR")}
               </p>
@@ -483,7 +653,7 @@ function CommentThread({
           <input
             value={texte}
             onChange={(e) => setTexte(e.target.value)}
-            placeholder="Votre commentaire…"
+            placeholder="Répondre rapidement…"
             maxLength={800}
             className="field"
           />
