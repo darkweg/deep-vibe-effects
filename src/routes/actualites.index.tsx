@@ -15,7 +15,7 @@ import studentsImg from "@/assets/students.jpg";
 import students2Img from "@/assets/students2.jpg";
 import journeeImg from "@/assets/journee.jpg";
 
-export const Route = createFileRoute("/actualites")({
+export const Route = createFileRoute("/actualites/")({
   head: () => ({
     meta: [
       { title: "Actualités & annonces — Club GTEL" },
