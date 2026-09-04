@@ -19,6 +19,7 @@ import { Route as GalerieRouteImport } from './routes/galerie'
 import { Route as AuthenticatedBibliothequeRouteImport } from './routes/_authenticated/bibliotheque'
 import { Route as AuthenticatedFiliereRouteImport } from './routes/_authenticated/filiere'
 import { Route as ActualitesIndexRouteImport } from './routes/actualites.index'
+import { Route as ActualitesIdRouteImport } from './routes/actualites.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -70,6 +71,11 @@ const ActualitesIndexRoute = ActualitesIndexRouteImport.update({
   path: '/',
   getParentRoute: () => ActualitesRoute,
 } as any)
+const ActualitesIdRoute = ActualitesIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => ActualitesRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -80,6 +86,7 @@ export interface FileRoutesByFullPath {
   '/galerie': typeof GalerieRoute
   '/bibliotheque': typeof AuthenticatedBibliothequeRoute
   '/filiere': typeof AuthenticatedFiliereRoute
+  '/actualites/$id': typeof ActualitesIdRoute
   '/actualites/': typeof ActualitesIndexRoute
 }
 export interface FileRoutesByTo {
@@ -90,6 +97,7 @@ export interface FileRoutesByTo {
   '/galerie': typeof GalerieRoute
   '/bibliotheque': typeof AuthenticatedBibliothequeRoute
   '/filiere': typeof AuthenticatedFiliereRoute
+  '/actualites/$id': typeof ActualitesIdRoute
   '/actualites': typeof ActualitesIndexRoute
 }
 export interface FileRoutesById {
@@ -103,6 +111,7 @@ export interface FileRoutesById {
   '/galerie': typeof GalerieRoute
   '/_authenticated/bibliotheque': typeof AuthenticatedBibliothequeRoute
   '/_authenticated/filiere': typeof AuthenticatedFiliereRoute
+  '/actualites/$id': typeof ActualitesIdRoute
   '/actualites/': typeof ActualitesIndexRoute
 }
 export interface FileRouteTypes {
@@ -116,6 +125,7 @@ export interface FileRouteTypes {
     | '/galerie'
     | '/bibliotheque'
     | '/filiere'
+    | '/actualites/$id'
     | '/actualites/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -126,6 +136,7 @@ export interface FileRouteTypes {
     | '/galerie'
     | '/bibliotheque'
     | '/filiere'
+    | '/actualites/$id'
     | '/actualites'
   id:
     | '__root__'
@@ -138,6 +149,7 @@ export interface FileRouteTypes {
     | '/galerie'
     | '/_authenticated/bibliotheque'
     | '/_authenticated/filiere'
+    | '/actualites/$id'
     | '/actualites/'
   fileRoutesById: FileRoutesById
 }
@@ -223,6 +235,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ActualitesIndexRouteImport
       parentRoute: typeof ActualitesRoute
     }
+    '/actualites/$id': {
+      id: '/actualites/$id'
+      path: '/$id'
+      fullPath: '/actualites/$id'
+      preLoaderRoute: typeof ActualitesIdRouteImport
+      parentRoute: typeof ActualitesRoute
+    }
   }
 }
 
@@ -240,10 +259,12 @@ const AuthenticatedRouteRouteWithChildren =
   AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
 
 interface ActualitesRouteChildren {
+  ActualitesIdRoute: typeof ActualitesIdRoute
   ActualitesIndexRoute: typeof ActualitesIndexRoute
 }
 
 const ActualitesRouteChildren: ActualitesRouteChildren = {
+  ActualitesIdRoute: ActualitesIdRoute,
   ActualitesIndexRoute: ActualitesIndexRoute,
 }
 
