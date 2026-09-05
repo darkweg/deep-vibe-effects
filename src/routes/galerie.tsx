@@ -74,7 +74,7 @@ function Galerie() {
           <AnimatePresence mode="popLayout">
             {visibles.map((p, idx) => (
               <motion.button
-                key={p.album}
+                key={p.i}
                 layout
                 initial={{ opacity: 0, scale: 0.94 }}
                 animate={{ opacity: 1, scale: 1 }}
