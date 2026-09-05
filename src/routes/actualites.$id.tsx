@@ -93,7 +93,7 @@ function ArticleDetail() {
         </div>
       </div>
 
-      <article className="container-x py-10 sm:py-16">
+      <article className="container-x pt-16 pb-10 sm:pt-20 sm:pb-16">
         <Reveal>
           <div className="flex flex-wrap items-center gap-3">
             <span className="badge-cyan">
