@@ -13,8 +13,6 @@ import studentsImg from "@/assets/students.jpg";
 import libraryImg from "@/assets/library.jpg";
 import towerImg from "@/assets/tower.jpg";
 import heroImg from "@/assets/hero.jpg";
-import event2Img from "@/assets/event2.jpg";
-import fiber2Img from "@/assets/fiber2.jpg";
 import students2Img from "@/assets/students2.jpg";
 import journeeImg from "@/assets/journee.jpg";
 import arduinoImg from "@/assets/arduino.jpg";
@@ -76,7 +74,7 @@ function Galerie() {
           <AnimatePresence mode="popLayout">
             {visibles.map((p, idx) => (
               <motion.button
-                key={p.album}
+                key={p.i}
                 layout
                 initial={{ opacity: 0, scale: 0.94 }}
                 animate={{ opacity: 1, scale: 1 }}
