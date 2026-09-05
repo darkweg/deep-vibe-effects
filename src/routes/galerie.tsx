@@ -13,8 +13,6 @@ import studentsImg from "@/assets/students.jpg";
 import libraryImg from "@/assets/library.jpg";
 import towerImg from "@/assets/tower.jpg";
 import heroImg from "@/assets/hero.jpg";
-import event2Img from "@/assets/event2.jpg";
-import fiber2Img from "@/assets/fiber2.jpg";
 import students2Img from "@/assets/students2.jpg";
 import journeeImg from "@/assets/journee.jpg";
 import arduinoImg from "@/assets/arduino.jpg";
