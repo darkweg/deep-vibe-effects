@@ -14,6 +14,48 @@ export type Database = {
   }
   public: {
     Tables: {
+      articles: {
+        Row: {
+          author_id: string
+          categorie: string
+          contenu: string
+          cover_url: string | null
+          created_at: string
+          date_publication: string
+          id: string
+          linkedin: string | null
+          resume: string
+          titre: string
+          updated_at: string
+        }
+        Insert: {
+          author_id: string
+          categorie?: string
+          contenu?: string
+          cover_url?: string | null
+          created_at?: string
+          date_publication?: string
+          id?: string
+          linkedin?: string | null
+          resume?: string
+          titre: string
+          updated_at?: string
+        }
+        Update: {
+          author_id?: string
+          categorie?: string
+          contenu?: string
+          cover_url?: string | null
+          created_at?: string
+          date_publication?: string
+          id?: string
+          linkedin?: string | null
+          resume?: string
+          titre?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       blog_comments: {
         Row: {
           author_id: string
