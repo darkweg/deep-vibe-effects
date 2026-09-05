@@ -26,8 +26,6 @@ export const FEED_IMAGES: string[] = [
   towerImg as string,
   eventImg as string,
   libraryImg as string,
-  event2Img as string,
-  fiber2Img as string,
   journeeImg as string,
   students2Img as string,
 ];
