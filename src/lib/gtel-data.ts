@@ -30,7 +30,7 @@ export const ACTUALITES: Actualite[] = [
     categorie: "Annonce",
     date: "Aout 2026",
     resume:
-      " Nous avons créer un forums pour vous. Venez afin qu'on parle de vos préoccupations",
+      " Nous avons créer un forum pour vous. Venez afin qu'on parle de vos préoccupations",
     corps: [
       "Le club GTEL ouvre les candidatures pour le Forum Télécoms ENSPY 2029, un rendez-vous pensé comme un espace d'échange direct entre les étudiants de la filière, les anciens et les professionnels du secteur.",
       "Pendant deux jours, les participants pourront présenter leurs projets, poser leurs questions sur les parcours d'insertion et rencontrer les entreprises partenaires du département de Télécommunications.",
@@ -41,13 +41,13 @@ export const ACTUALITES: Actualite[] = [
   {
     id: "atelier-fibre-optique",
     slug: "atelier-fibre-optique",
-    titre: "Atelier soudure fibre optique avec le laboratoire réseaux",
+    titre: "Atelier de soudure de la fibre optique au laboratoire",
     categorie: "Formation",
     date: "Novembre 2026",
     resume:
       "Encadrées par les L4 pour manipuler soudeuse, OTDR et jarretières monomodes dans les conditions du terrain.",
     corps: [
-      "L'atelier fibre optique réunit chaque promotion autour du matériel du laboratoire réseaux : soudeuse à fusion, cliveuse, réflectomètre OTDR et jeux de jarretières monomodes.",
+      "L'atelier fibre optique réunit chaque promotion autour du matériel dedié à la manipulation des fibres optiques : soudeuse à fusion, cliveuse, réflectomètre OTDR et jeux de jarretières monomodes.",
       "Les L4 encadrent les groupes par binômes. L'objectif est simple : réussir une soudure propre, mesurer l'atténuation obtenue et interpréter correctement la trace OTDR.",
       "La session se termine par un débriefing collectif sur les bonnes pratiques de terrain, du nettoyage des connecteurs à la gestion des rayons de courbure.",
     ],
@@ -63,7 +63,7 @@ export const ACTUALITES: Actualite[] = [
       "Passation officielle entre les promotions : Présidence, Cellule Communication et pôle Parrainage sont désormais au complet.",
     corps: [
       "La passation entre les promotions s'est tenue en présence des membres du club et des délégués de la filière.",
-      "Le nouveau Bureau est désormais au complet : Présidence, Vice-présidence, Cellule Communication, pôle Parrainage et trésorerie.",
+      "Le nouveau Bureau est désormais au complet : Présidence, Vice-présidence, Cellule Communication, Cellule relations extérieures, pôle Parrainage et trésorerie.",
       "La feuille de route annoncée met l'accent sur la documentation partagée, les ateliers pratiques et une présence renforcée du club sur les réseaux.",
     ],
     linkedin: LINKEDIN_CLUB,
@@ -90,7 +90,7 @@ export const ACTUALITES: Actualite[] = [
     categorie: "Evenements",
     date: "Mai 2026",
     resume:
-      " Nous avons visiter les locaux de l'ART ou nous avons été a chaque fois instruits par different encadreurs exceptionels sur les réalités du secteur des télécomunications au Cameroun",
+      " Nous avons visiter les locaux de l'ART où nous avons été à chaque fois instruits par différents encadreurs exceptionels, sur les réalités du secteur des télécomunications au Cameroun",
     corps: [
       "La délégation du club GTEL a été reçue dans les locaux de l'Agence de Régulation des Télécommunications pour une visite guidée des différents services.",
       "Les encadreurs ont détaillé les missions de contrôle du spectre, la certification des équipements et le suivi de la qualité de service des opérateurs.",
