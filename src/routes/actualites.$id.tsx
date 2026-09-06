@@ -1,4 +1,7 @@
-import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { useQuery } from "@tanstack/react-query";
+import { Loader2 } from "lucide-react";
+import { articleQueryOptions, formatDate } from "@/lib/articles";
 import { motion } from "motion/react";
 import { ArrowLeft, ArrowUpRight, CalendarDays, Linkedin, Share2, Tag } from "lucide-react";
 import { toast } from "sonner";
@@ -8,16 +11,15 @@ import { ACTUALITES } from "@/lib/gtel-data";
 import { actuImage } from "@/lib/actu-media";
 
 export const Route = createFileRoute("/actualites/$id")({
-  loader: ({ params }) => {
-    const index = ACTUALITES.findIndex((a) => a.id === params.id);
-    if (index === -1) throw notFound();
-    return { index };
-  },
+  loader: ({ params }) => ({ index: ACTUALITES.findIndex((a) => a.id === params.id) }),
   head: ({ loaderData }) => {
     if (!loaderData) {
       return {
         meta: [{ title: "Article introuvable — Club GTEL" }, { name: "robots", content: "noindex" }],
       };
+    }
+    if (loaderData.index < 0) {
+      return { meta: [{ title: "Actualité — Club GTEL" }, { name: "robots", content: "noindex" }] };
     }
     const a = ACTUALITES[loaderData.index]!;
     return {
@@ -50,6 +52,108 @@ function ArticleIntrouvable() {
 
 function ArticleDetail() {
   const { index } = Route.useLoaderData();
+  if (index < 0) return <DbArticleDetail />;
+  return <StaticArticleDetail index={index} />;
+}
+
+function DbArticleDetail() {
+  const { id } = Route.useParams();
+  const { data, isLoading } = useQuery(articleQueryOptions(id));
+
+  if (isLoading) {
+    return (
+      <div className="theme-soft-black flex min-h-[70svh] items-center justify-center">
+        <Loader2 className="h-5 w-5 animate-spin text-muted-foreground" />
+      </div>
+    );
+  }
+  if (!data) return <ArticleIntrouvable />;
+
+  const blocks = data.contenu.split(/\n{2,}/).filter(Boolean);
+
+  return (
+    <div className="theme-soft-black min-h-screen">
+      <div className="sticky top-16 z-40 border-b border-border/60 bg-background/80 backdrop-blur-md sm:top-20">
+        <div className="container-x flex items-center justify-between gap-4 py-3">
+          <Link
+            to="/actualites"
+            className="inline-flex items-center gap-2 font-mono text-[0.65rem] uppercase tracking-[0.2em] text-foreground transition-transform duration-500 hover:-translate-x-1"
+          >
+            <ArrowLeft className="h-4 w-4" />
+            Retour aux actualités
+          </Link>
+        </div>
+      </div>
+
+      <article className="container-x pt-16 pb-16 sm:pt-20">
+        <div className="flex flex-wrap items-center gap-3">
+          <span className="badge-cyan">
+            <Tag className="h-3 w-3" />
+            {data.categorie}
+          </span>
+          <span className="badge-steel">
+            <CalendarDays className="h-3 w-3" />
+            {formatDate(data.date_publication)}
+          </span>
+        </div>
+        <h1 className="mt-5 max-w-4xl font-display text-[clamp(1.9rem,7vw,3.75rem)] leading-[1.05] font-extrabold tracking-tight">
+          {data.titre}
+        </h1>
+        <p className="mt-5 max-w-2xl text-base text-mist sm:text-lg">{data.resume}</p>
+
+        {data.cover_url && (
+          <img
+            src={data.cover_url}
+            alt={data.titre}
+            loading="eager"
+            decoding="async"
+            className="mt-8 aspect-video w-full rounded-2xl object-cover sm:mt-12"
+          />
+        )}
+
+        <div className="mt-10 max-w-2xl space-y-5">
+          {blocks.map((b, i) => {
+            if (b.startsWith("## ")) {
+              return (
+                <h2 key={i} className="font-display text-2xl font-bold sm:text-3xl">
+                  {b.replace(/^##\s+/, "")}
+                </h2>
+              );
+            }
+            if (/^\s*[-*]\s+/m.test(b) && b.trim().startsWith("-")) {
+              return (
+                <ul key={i} className="list-disc space-y-2 pl-5 text-foreground/85">
+                  {b.split("\n").map((li, j) => (
+                    <li key={j}>{li.replace(/^\s*[-*]\s+/, "")}</li>
+                  ))}
+                </ul>
+              );
+            }
+            return (
+              <p key={i} className="text-base leading-[1.85] text-foreground/85 sm:text-lg">
+                {b}
+              </p>
+            );
+          })}
+        </div>
+
+        {data.linkedin && (
+          <a
+            href={data.linkedin}
+            target="_blank"
+            rel="noreferrer noopener"
+            className="btn-glow mt-10 inline-flex items-center gap-2 px-5 py-3"
+          >
+            <Linkedin className="h-4 w-4" />
+            Consulter sur LinkedIn
+          </a>
+        )}
+      </article>
+    </div>
+  );
+}
+
+function StaticArticleDetail({ index }: { index: number }) {
   const article = ACTUALITES[index]!;
   const related = ACTUALITES.filter((a) => a.id !== article.id)
     .sort((a, b) => Number(b.categorie === article.categorie) - Number(a.categorie === article.categorie))
@@ -93,7 +197,7 @@ function ArticleDetail() {
         </div>
       </div>
 
-      <article className="container-x py-10 sm:py-16">
+      <article className="container-x pt-16 pb-10 sm:pt-20 sm:pb-16">
         <Reveal>
           <div className="flex flex-wrap items-center gap-3">
             <span className="badge-cyan">

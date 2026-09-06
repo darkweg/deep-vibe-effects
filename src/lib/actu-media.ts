@@ -6,8 +6,8 @@ import journeeImg from "@/assets/journee.jpg";
 import arduinoImg from "@/assets/arduino.jpg";
 import towerImg from "@/assets/tower.jpg";
 import libraryImg from "@/assets/library.jpg";
-import event2Img from "@/assets/event2.jpg";
-import fiber2Img from "@/assets/fiber2.jpg";
+import students3Img from "@/assets/students3.jpg";
+import heroImg from "@/assets/hero.jpg";
 
 /** Ordered pool used by the Actualités feed and detail pages. */
 export const ACTU_IMAGES: string[] = [
@@ -26,6 +26,8 @@ export const FEED_IMAGES: string[] = [
   towerImg as string,
   eventImg as string,
   libraryImg as string,
+  students3Img as string,
+  heroImg as string,
   journeeImg as string,
   students2Img as string,
 ];
