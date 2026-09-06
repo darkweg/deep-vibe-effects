@@ -20,6 +20,7 @@ import { Route as AuthenticatedBibliothequeRouteImport } from './routes/_authent
 import { Route as AuthenticatedFiliereRouteImport } from './routes/_authenticated/filiere'
 import { Route as ActualitesIndexRouteImport } from './routes/actualites.index'
 import { Route as ActualitesIdRouteImport } from './routes/actualites.$id'
+import { Route as ActualitesCreerRouteImport } from './routes/actualites.creer'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -76,6 +77,11 @@ const ActualitesIdRoute = ActualitesIdRouteImport.update({
   path: '/$id',
   getParentRoute: () => ActualitesRoute,
 } as any)
+const ActualitesCreerRoute = ActualitesCreerRouteImport.update({
+  id: '/creer',
+  path: '/creer',
+  getParentRoute: () => ActualitesRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -87,6 +93,7 @@ export interface FileRoutesByFullPath {
   '/bibliotheque': typeof AuthenticatedBibliothequeRoute
   '/filiere': typeof AuthenticatedFiliereRoute
   '/actualites/$id': typeof ActualitesIdRoute
+  '/actualites/creer': typeof ActualitesCreerRoute
   '/actualites/': typeof ActualitesIndexRoute
 }
 export interface FileRoutesByTo {
@@ -98,6 +105,7 @@ export interface FileRoutesByTo {
   '/bibliotheque': typeof AuthenticatedBibliothequeRoute
   '/filiere': typeof AuthenticatedFiliereRoute
   '/actualites/$id': typeof ActualitesIdRoute
+  '/actualites/creer': typeof ActualitesCreerRoute
   '/actualites': typeof ActualitesIndexRoute
 }
 export interface FileRoutesById {
@@ -112,6 +120,7 @@ export interface FileRoutesById {
   '/_authenticated/bibliotheque': typeof AuthenticatedBibliothequeRoute
   '/_authenticated/filiere': typeof AuthenticatedFiliereRoute
   '/actualites/$id': typeof ActualitesIdRoute
+  '/actualites/creer': typeof ActualitesCreerRoute
   '/actualites/': typeof ActualitesIndexRoute
 }
 export interface FileRouteTypes {
@@ -126,6 +135,7 @@ export interface FileRouteTypes {
     | '/bibliotheque'
     | '/filiere'
     | '/actualites/$id'
+    | '/actualites/creer'
     | '/actualites/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -137,6 +147,7 @@ export interface FileRouteTypes {
     | '/bibliotheque'
     | '/filiere'
     | '/actualites/$id'
+    | '/actualites/creer'
     | '/actualites'
   id:
     | '__root__'
@@ -150,6 +161,7 @@ export interface FileRouteTypes {
     | '/_authenticated/bibliotheque'
     | '/_authenticated/filiere'
     | '/actualites/$id'
+    | '/actualites/creer'
     | '/actualites/'
   fileRoutesById: FileRoutesById
 }
@@ -242,6 +254,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ActualitesIdRouteImport
       parentRoute: typeof ActualitesRoute
     }
+    '/actualites/creer': {
+      id: '/actualites/creer'
+      path: '/creer'
+      fullPath: '/actualites/creer'
+      preLoaderRoute: typeof ActualitesCreerRouteImport
+      parentRoute: typeof ActualitesRoute
+    }
   }
 }
 
@@ -260,11 +279,13 @@ const AuthenticatedRouteRouteWithChildren =
 
 interface ActualitesRouteChildren {
   ActualitesIdRoute: typeof ActualitesIdRoute
+  ActualitesCreerRoute: typeof ActualitesCreerRoute
   ActualitesIndexRoute: typeof ActualitesIndexRoute
 }
 
 const ActualitesRouteChildren: ActualitesRouteChildren = {
   ActualitesIdRoute: ActualitesIdRoute,
+  ActualitesCreerRoute: ActualitesCreerRoute,
   ActualitesIndexRoute: ActualitesIndexRoute,
 }
 
