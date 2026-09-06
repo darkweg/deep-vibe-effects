@@ -42,6 +42,8 @@ const CAT_ICONS: Record<string, LucideIcon> = {
 };
 
 function Actualites() {
+  const { user } = useAuth();
+  const { data: dbArticles = [] } = useQuery(articlesQueryOptions);
   const categories = useMemo(
     () => ["Toutes", ...Array.from(new Set(ACTUALITES.map((a) => a.categorie)))],
     [],
