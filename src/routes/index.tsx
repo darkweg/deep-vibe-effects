@@ -63,9 +63,9 @@ function Hero() {
           height={1088}
           className="h-full w-full object-cover"
         />
+        <div className="absolute inset-0 backdrop-blur-[2px]" aria-hidden />
         <div
-          className="absolute inset-0"
-          style={{ background: "var(--gradient-hero)" }}
+          className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60"
           aria-hidden
         />
       </motion.div>
@@ -80,16 +80,16 @@ function Hero() {
               École Nationale Supérieure Polytechnique de Yaoundé
             </span>
           </Reveal>
-          <h1 className="mt-6 max-w-6xl font-display text-[clamp(2.2rem,8.5vw,6.5rem)] leading-[0.92] font-extrabold tracking-tight break-words text-white">
+          <h1 className="mt-6 max-w-6xl font-display text-[clamp(2.2rem,8.5vw,6.5rem)] leading-[0.92] font-extrabold tracking-tight break-words text-white drop-shadow-md">
             <RevealText text="CLUB GTEL" />
-            <span className="block text-[clamp(1.15rem,4.6vw,4.6rem)] text-blue-600 ">
+            <span className="block text-[clamp(1.15rem,4.6vw,4.6rem)] text-blue-400 drop-shadow-md">
               <RevealText text="Télécommunications" delay={0.15} />
             </span>
           </h1>
 
           <div className="mt-10 flex flex-col gap-8 border-t border-border/60 pt-8 md:flex-row md:items-end md:justify-between">
             <Reveal delay={0.35}>
-              <p className="max-w-md text-base text-white" >
+              <p className="max-w-md text-base text-white drop-shadow-md" >
                 Un point d'information unique sur la vie du département, la filière et la mémoire
                 académique transmise de promotion en promotion.
               </p>
