@@ -11,7 +11,10 @@ import { ParallaxMedia } from "@/components/site/ParallaxMedia";
 import { ACTUALITES } from "@/lib/gtel-data";
 import { ACTU_IMAGES } from "@/lib/actu-media";
 import { Link } from "@tanstack/react-router";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, PenLine } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import { useAuth } from "@/hooks/useAuth";
+import { articlesQueryOptions, formatDate } from "@/lib/articles";
 
 export const Route = createFileRoute("/actualites/")({
   head: () => ({
@@ -95,6 +98,54 @@ function Actualites() {
             icons={CAT_ICONS}
           />
         </Reveal>
+
+        {user && (
+          <Reveal>
+            <Link
+              to="/actualites/creer"
+              className="btn-glow mt-6 inline-flex items-center gap-2 px-5 py-3 text-sm"
+            >
+              <PenLine className="h-4 w-4" />
+              ➕ Rédiger une actualité
+            </Link>
+          </Reveal>
+        )}
+
+        {dbArticles.length > 0 && (
+          <div className="mt-10 grid gap-6 sm:mt-14 sm:grid-cols-2 lg:grid-cols-3">
+            {dbArticles
+              .filter((a) => filtre === "Toutes" || a.categorie === filtre)
+              .map((a) => (
+                <Reveal key={a.id}>
+                  <Link
+                    to="/actualites/$id"
+                    params={{ id: a.id }}
+                    className="glass-card group flex h-full flex-col overflow-hidden rounded-2xl"
+                  >
+                    {a.cover_url && (
+                      <img
+                        src={a.cover_url}
+                        alt={a.titre}
+                        loading="lazy"
+                        decoding="async"
+                        className="aspect-video w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
+                    )}
+                    <div className="flex flex-1 flex-col p-5">
+                      <span className="badge-cyan w-fit">{a.categorie}</span>
+                      <h2 className="mt-3 font-display text-xl font-bold leading-snug group-hover:text-primary">
+                        {a.titre}
+                      </h2>
+                      <p className="mt-2 line-clamp-3 text-sm text-mist">{a.resume}</p>
+                      <span className="mt-auto pt-4 font-mono text-[0.62rem] uppercase tracking-[0.2em] text-primary">
+                        {formatDate(a.date_publication)}
+                      </span>
+                    </div>
+                  </Link>
+                </Reveal>
+              ))}
+          </div>
+        )}
 
         {!ready && (
           <div className="mt-10 sm:mt-14">
