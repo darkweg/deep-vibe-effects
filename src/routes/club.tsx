@@ -27,9 +27,9 @@ export const Route = createFileRoute("/club")({
 });
 
 const JALONS = [
-  { annee: "2016", texte: "Premiers rassemblements informels des étudiants GTEL autour des projets de laboratoire." },
-  { annee: "2019", texte: "Structuration du club : statuts, Bureau élu et première Cellule Communication." },
-  { annee: "2022", texte: "Lancement du parrainage documentaire entre promotions L3, L4 et L5." },
+  { annee: "2000", texte: "Premiers rassemblements informels des étudiants GTEL autour des projets de laboratoire." },
+  { annee: "2001", texte: "Structuration du club : statuts, Bureau élu et première Cellule Communication." },
+  { annee: "2023", texte: "Lancement du parrainage documentaire entre promotions L3, L4 et L5." },
   { annee: "2026", texte: "Mise en ligne de la vitrine numérique du club et centralisation des ressources." },
 ];
 
