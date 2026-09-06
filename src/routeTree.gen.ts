@@ -17,9 +17,11 @@ import { Route as ClubRouteImport } from './routes/club'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as GalerieRouteImport } from './routes/galerie'
 import { Route as AuthenticatedBibliothequeRouteImport } from './routes/_authenticated/bibliotheque'
+import { Route as AuthenticatedEspaceMembreRouteImport } from './routes/_authenticated/espace-membre'
 import { Route as AuthenticatedFiliereRouteImport } from './routes/_authenticated/filiere'
 import { Route as ActualitesIndexRouteImport } from './routes/actualites.index'
 import { Route as ActualitesIdRouteImport } from './routes/actualites.$id'
+import { Route as ActualitesCreerRouteImport } from './routes/actualites.creer'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -61,6 +63,12 @@ const AuthenticatedBibliothequeRoute =
     path: '/bibliotheque',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedEspaceMembreRoute =
+  AuthenticatedEspaceMembreRouteImport.update({
+    id: '/espace-membre',
+    path: '/espace-membre',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedFiliereRoute = AuthenticatedFiliereRouteImport.update({
   id: '/filiere',
   path: '/filiere',
@@ -76,6 +84,11 @@ const ActualitesIdRoute = ActualitesIdRouteImport.update({
   path: '/$id',
   getParentRoute: () => ActualitesRoute,
 } as any)
+const ActualitesCreerRoute = ActualitesCreerRouteImport.update({
+  id: '/creer',
+  path: '/creer',
+  getParentRoute: () => ActualitesRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -85,8 +98,10 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/galerie': typeof GalerieRoute
   '/bibliotheque': typeof AuthenticatedBibliothequeRoute
+  '/espace-membre': typeof AuthenticatedEspaceMembreRoute
   '/filiere': typeof AuthenticatedFiliereRoute
   '/actualites/$id': typeof ActualitesIdRoute
+  '/actualites/creer': typeof ActualitesCreerRoute
   '/actualites/': typeof ActualitesIndexRoute
 }
 export interface FileRoutesByTo {
@@ -96,8 +111,10 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/galerie': typeof GalerieRoute
   '/bibliotheque': typeof AuthenticatedBibliothequeRoute
+  '/espace-membre': typeof AuthenticatedEspaceMembreRoute
   '/filiere': typeof AuthenticatedFiliereRoute
   '/actualites/$id': typeof ActualitesIdRoute
+  '/actualites/creer': typeof ActualitesCreerRoute
   '/actualites': typeof ActualitesIndexRoute
 }
 export interface FileRoutesById {
@@ -110,8 +127,10 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/galerie': typeof GalerieRoute
   '/_authenticated/bibliotheque': typeof AuthenticatedBibliothequeRoute
+  '/_authenticated/espace-membre': typeof AuthenticatedEspaceMembreRoute
   '/_authenticated/filiere': typeof AuthenticatedFiliereRoute
   '/actualites/$id': typeof ActualitesIdRoute
+  '/actualites/creer': typeof ActualitesCreerRoute
   '/actualites/': typeof ActualitesIndexRoute
 }
 export interface FileRouteTypes {
@@ -124,8 +143,10 @@ export interface FileRouteTypes {
     | '/contact'
     | '/galerie'
     | '/bibliotheque'
+    | '/espace-membre'
     | '/filiere'
     | '/actualites/$id'
+    | '/actualites/creer'
     | '/actualites/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -135,8 +156,10 @@ export interface FileRouteTypes {
     | '/contact'
     | '/galerie'
     | '/bibliotheque'
+    | '/espace-membre'
     | '/filiere'
     | '/actualites/$id'
+    | '/actualites/creer'
     | '/actualites'
   id:
     | '__root__'
@@ -148,8 +171,10 @@ export interface FileRouteTypes {
     | '/contact'
     | '/galerie'
     | '/_authenticated/bibliotheque'
+    | '/_authenticated/espace-membre'
     | '/_authenticated/filiere'
     | '/actualites/$id'
+    | '/actualites/creer'
     | '/actualites/'
   fileRoutesById: FileRoutesById
 }
@@ -221,6 +246,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedBibliothequeRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/espace-membre': {
+      id: '/_authenticated/espace-membre'
+      path: '/espace-membre'
+      fullPath: '/espace-membre'
+      preLoaderRoute: typeof AuthenticatedEspaceMembreRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/filiere': {
       id: '/_authenticated/filiere'
       path: '/filiere'
@@ -242,16 +274,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ActualitesIdRouteImport
       parentRoute: typeof ActualitesRoute
     }
+    '/actualites/creer': {
+      id: '/actualites/creer'
+      path: '/creer'
+      fullPath: '/actualites/creer'
+      preLoaderRoute: typeof ActualitesCreerRouteImport
+      parentRoute: typeof ActualitesRoute
+    }
   }
 }
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedBibliothequeRoute: typeof AuthenticatedBibliothequeRoute
+  AuthenticatedEspaceMembreRoute: typeof AuthenticatedEspaceMembreRoute
   AuthenticatedFiliereRoute: typeof AuthenticatedFiliereRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedBibliothequeRoute: AuthenticatedBibliothequeRoute,
+  AuthenticatedEspaceMembreRoute: AuthenticatedEspaceMembreRoute,
   AuthenticatedFiliereRoute: AuthenticatedFiliereRoute,
 }
 
@@ -260,11 +301,13 @@ const AuthenticatedRouteRouteWithChildren =
 
 interface ActualitesRouteChildren {
   ActualitesIdRoute: typeof ActualitesIdRoute
+  ActualitesCreerRoute: typeof ActualitesCreerRoute
   ActualitesIndexRoute: typeof ActualitesIndexRoute
 }
 
 const ActualitesRouteChildren: ActualitesRouteChildren = {
   ActualitesIdRoute: ActualitesIdRoute,
+  ActualitesCreerRoute: ActualitesCreerRoute,
   ActualitesIndexRoute: ActualitesIndexRoute,
 }
 
