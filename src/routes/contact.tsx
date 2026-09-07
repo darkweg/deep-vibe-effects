@@ -42,7 +42,7 @@ function Contact() {
       <PageHeader
         eyebrow="Contact"
         title="Écrire au Bureau du club"
-        intro="Proposer une actualité, signaler un document manquant dans la bibliothèque ou rejoindre la Cellule Communication : ce formulaire arrive directement au Bureau."
+        intro="Proposer une actualité, partager une photo ou rejoindre la Cellule Communication : ce formulaire arrive directement au Bureau."
       />
 
       <section className="container-x py-12 sm:py-20">
