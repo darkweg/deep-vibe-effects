@@ -86,12 +86,62 @@ function Actualites() {
 
   return (
     <div className="theme-soft-black min-h-screen">
-      <PageHeader
-        eyebrow="Actualités & annonces"
-        title="Ce qui se passe dans la filière"
-        intro="Événements, appels à candidature, formations et vie du Bureau. Le fil est alimenté par la Cellule Communication."
-     titleClassName="text-blue-950"
-   />
+      {/* Bannière éditoriale */}
+      <section className="relative overflow-hidden border-b pt-28 pb-10 sm:pt-40 sm:pb-16">
+        <div
+          className="absolute inset-0 bg-gradient-to-b from-primary/10 via-transparent to-background"
+          aria-hidden
+        />
+        <div className="container-x relative text-center">
+          <Reveal>
+            <span className="badge-cyan mx-auto">
+              <Newspaper className="h-3 w-3" /> Journal du département
+            </span>
+          </Reveal>
+          <h1 className="mx-auto mt-6 max-w-4xl font-display text-[clamp(2rem,7vw,4.5rem)] leading-[0.95] font-extrabold tracking-tight text-blue-950">
+            <RevealText text="Journal & Annonces du Département" />
+          </h1>
+          <Reveal delay={0.2}>
+            <p className="mx-auto mt-5 max-w-xl text-sm text-mist sm:text-base">
+              Événements, appels à candidature, formations et vie du Bureau — le fil est alimenté
+              par la Cellule Communication.
+            </p>
+          </Reveal>
+
+          <Reveal delay={0.3}>
+            <label className="glass-card mx-auto mt-8 flex w-full max-w-xl items-center gap-3 rounded-full px-5 py-3 focus-within:border-primary">
+              <Search className="h-4 w-4 shrink-0 text-steel" />
+              <input
+                value={q}
+                onChange={(e) => setQ(e.target.value)}
+                placeholder="Rechercher un article, une annonce, une formation…"
+                className="w-full bg-transparent text-sm outline-none placeholder:text-steel"
+              />
+            </label>
+          </Reveal>
+
+          {featured && (
+            <Reveal delay={0.4}>
+              <Link
+                to="/actualites/$id"
+                params={{ id: featured.id }}
+                className="glass-card group mx-auto mt-8 flex max-w-2xl flex-col items-start gap-3 rounded-2xl p-5 text-left ring-1 ring-primary/25 transition-all duration-500 hover:ring-glow/60 sm:flex-row sm:items-center sm:gap-5 sm:p-6"
+              >
+                <span className="badge-cobalt shrink-0">À la une</span>
+                <span className="min-w-0 flex-1">
+                  <span className="block truncate font-display text-base font-bold group-hover:text-primary sm:text-lg">
+                    {featured.titre}
+                  </span>
+                  <span className="mt-1 block line-clamp-1 text-xs text-mist sm:text-sm">
+                    {featured.resume}
+                  </span>
+                </span>
+                <ArrowUpRight className="h-5 w-5 shrink-0 text-primary transition-transform duration-500 group-hover:translate-x-1 group-hover:-translate-y-1" />
+              </Link>
+            </Reveal>
+          )}
+        </div>
+      </section>
 
       <section className="container-x py-12 sm:py-20">
         <Reveal>
