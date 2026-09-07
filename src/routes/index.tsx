@@ -4,7 +4,6 @@ import { useRef } from "react";
 import {
   ArrowUpRight,
   ArrowDown,
-  BookOpen,
   CalendarDays,
   GraduationCap,
   Images,
@@ -22,7 +21,6 @@ import { useAuth } from "@/hooks/useAuth";
 import heroImg from "@/assets/hero.jpg";
 import studentsImg from "@/assets/students.jpg";
 import fiberImg from "@/assets/fiber.jpg";
-import towerImg from "@/assets/tower.jpg";
 import eventImg from "@/assets/event.jpg";
 import libraryImg from "@/assets/library.jpg";
 
@@ -33,7 +31,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Actualités du département, galerie, fiches des unités d'enseignement et bibliothèque de parrainage L3–L5 du club GTEL de l'ENSPY.",
+          "Actualités du département, galerie et fiches des unités d'enseignement du club GTEL de l'ENSPY.",
       },
       { property: "og:title", content: "Club GTEL — Génie des Télécommunications, ENSPY" },
       {
@@ -97,12 +95,12 @@ function Hero() {
             <Reveal delay={0.45}>
               <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                 <Link
-                  to={isMember ? "/bibliotheque" : "/auth"}
+                  to={isMember ? "/espace-membre" : "/auth"}
                   className="btn-glow hover-sheen group inline-flex items-center gap-2 rounded-full px-6 py-3.5"
                 >
-                  {isMember ? <BookOpen className="h-4 w-4  text-white " /> : <Users className="h-4 w-4  text-white" />}
+                  <Users className="h-4 w-4  text-white" />
                   <span className="relative text-white">
-                    {isMember ? "Bibliothèque de parrainage" : "Espace membre"}
+                    Espace membre
                   </span>
                   <ArrowUpRight className="relative h-4 w-4 transition-transform duration-500 group-hover:translate-x-1 group-hover:-translate-y-1 text-white"/>
                 </Link>
@@ -227,40 +225,6 @@ function Index() {
           </div>
         </div>
       </section>
-
-      {/* Bandeau bibliothèque — réservé aux membres */}
-      {isMember && (
-      <section className="theme-ash relative h-[70svh] min-h-[26rem] overflow-hidden">
-        <ParallaxMedia
-          src={towerImg}
-          alt="Antenne de télécommunications sous un ciel gris"
-          className="absolute inset-0 h-full w-full"
-          strength={90}
-          scrim
-        />
-        <div className="relative z-3 flex h-full items-center">
-          <div className="container-x">
-            <h2 className="max-w-3xl font-display text-3xl sm:text-4xl leading-[1.02] font-extrabold md:text-6xl">
-              <RevealText text="Ce qui se transmet ne doit pas se perdre." />
-            </h2>
-            <Reveal delay={0.2}>
-              <p className="mt-6 max-w-xl text-muted-foreground">
-                Anciens sujets, TD corrigés, supports de cours : la bibliothèque de parrainage
-                centralise ce que chaque promotion lègue à la suivante.
-              </p>
-            </Reveal>
-            <Reveal delay={0.3}>
-              <Link
-                to="/bibliotheque"
-                className="btn-glow hover-sheen mt-8 inline-flex items-center gap-2 rounded-full px-6 py-3.5"
-              >
-                <BookOpen className="h-4 w-4" /> Ouvrir la bibliothèque <ArrowUpRight className="h-4 w-4" />
-              </Link>
-            </Reveal>
-          </div>
-        </div>
-      </section>
-      )}
 
       {/* Actualités — thème noir doux (page /actualites) */}
       <section className="theme-soft-black py-16 sm:py-24 md:py-36">
@@ -413,7 +377,7 @@ function Index() {
           </h2>
           <Reveal delay={0.2}>
             <p className="mx-auto mt-6 max-w-xl text-mist">
-              Publier une annonce, alimenter la galerie ou déposer un document dans la bibliothèque :
+              Publier une annonce, alimenter la galerie ou animer la vie du département :
               tout passe par un espace membre simple à prendre en main.
             </p>
           </Reveal>

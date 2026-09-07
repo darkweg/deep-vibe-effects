@@ -88,13 +88,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "description",
         content:
-          "Le site du club GTEL de l'École Nationale Supérieure Polytechnique de Yaoundé : actualités, galerie, unités d'enseignement et bibliothèque de parrainage.",
+          "Le site du club GTEL de l'École Nationale Supérieure Polytechnique de Yaoundé : actualités, galerie et unités d'enseignement.",
       },
       { name: "author", content: "Club GTEL — ENSPY" },
       { property: "og:title", content: "Club GTEL — ENSPY" },
       {
         property: "og:description",
-        content: "Actualités, filière, galerie et bibliothèque de parrainage du club GTEL.",
+        content: "Actualités, filière et galerie du club GTEL.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

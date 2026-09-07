@@ -16,7 +16,6 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ClubRouteImport } from './routes/club'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as GalerieRouteImport } from './routes/galerie'
-import { Route as AuthenticatedBibliothequeRouteImport } from './routes/_authenticated/bibliotheque'
 import { Route as AuthenticatedEspaceMembreRouteImport } from './routes/_authenticated/espace-membre'
 import { Route as AuthenticatedFiliereRouteImport } from './routes/_authenticated/filiere'
 import { Route as ActualitesIndexRouteImport } from './routes/actualites.index'
@@ -57,12 +56,6 @@ const GalerieRoute = GalerieRouteImport.update({
   path: '/galerie',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthenticatedBibliothequeRoute =
-  AuthenticatedBibliothequeRouteImport.update({
-    id: '/bibliotheque',
-    path: '/bibliotheque',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
 const AuthenticatedEspaceMembreRoute =
   AuthenticatedEspaceMembreRouteImport.update({
     id: '/espace-membre',
@@ -97,7 +90,6 @@ export interface FileRoutesByFullPath {
   '/club': typeof ClubRoute
   '/contact': typeof ContactRoute
   '/galerie': typeof GalerieRoute
-  '/bibliotheque': typeof AuthenticatedBibliothequeRoute
   '/espace-membre': typeof AuthenticatedEspaceMembreRoute
   '/filiere': typeof AuthenticatedFiliereRoute
   '/actualites/$id': typeof ActualitesIdRoute
@@ -110,7 +102,6 @@ export interface FileRoutesByTo {
   '/club': typeof ClubRoute
   '/contact': typeof ContactRoute
   '/galerie': typeof GalerieRoute
-  '/bibliotheque': typeof AuthenticatedBibliothequeRoute
   '/espace-membre': typeof AuthenticatedEspaceMembreRoute
   '/filiere': typeof AuthenticatedFiliereRoute
   '/actualites/$id': typeof ActualitesIdRoute
@@ -126,7 +117,6 @@ export interface FileRoutesById {
   '/club': typeof ClubRoute
   '/contact': typeof ContactRoute
   '/galerie': typeof GalerieRoute
-  '/_authenticated/bibliotheque': typeof AuthenticatedBibliothequeRoute
   '/_authenticated/espace-membre': typeof AuthenticatedEspaceMembreRoute
   '/_authenticated/filiere': typeof AuthenticatedFiliereRoute
   '/actualites/$id': typeof ActualitesIdRoute
@@ -142,7 +132,6 @@ export interface FileRouteTypes {
     | '/club'
     | '/contact'
     | '/galerie'
-    | '/bibliotheque'
     | '/espace-membre'
     | '/filiere'
     | '/actualites/$id'
@@ -155,7 +144,6 @@ export interface FileRouteTypes {
     | '/club'
     | '/contact'
     | '/galerie'
-    | '/bibliotheque'
     | '/espace-membre'
     | '/filiere'
     | '/actualites/$id'
@@ -170,7 +158,6 @@ export interface FileRouteTypes {
     | '/club'
     | '/contact'
     | '/galerie'
-    | '/_authenticated/bibliotheque'
     | '/_authenticated/espace-membre'
     | '/_authenticated/filiere'
     | '/actualites/$id'
@@ -239,13 +226,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GalerieRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/bibliotheque': {
-      id: '/_authenticated/bibliotheque'
-      path: '/bibliotheque'
-      fullPath: '/bibliotheque'
-      preLoaderRoute: typeof AuthenticatedBibliothequeRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
     '/_authenticated/espace-membre': {
       id: '/_authenticated/espace-membre'
       path: '/espace-membre'
@@ -285,13 +265,11 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthenticatedRouteRouteChildren {
-  AuthenticatedBibliothequeRoute: typeof AuthenticatedBibliothequeRoute
   AuthenticatedEspaceMembreRoute: typeof AuthenticatedEspaceMembreRoute
   AuthenticatedFiliereRoute: typeof AuthenticatedFiliereRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
-  AuthenticatedBibliothequeRoute: AuthenticatedBibliothequeRoute,
   AuthenticatedEspaceMembreRoute: AuthenticatedEspaceMembreRoute,
   AuthenticatedFiliereRoute: AuthenticatedFiliereRoute,
 }

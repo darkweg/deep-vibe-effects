@@ -14,7 +14,7 @@ export const Route = createFileRoute("/auth")({
       {
         name: "description",
         content:
-          "Connectez-vous à l'espace membre du club GTEL pour accéder aux fiches de la filière, à la bibliothèque de parrainage et publier sur le blog.",
+          "Connectez-vous à l'espace membre du club GTEL pour accéder aux fiches de la filière et publier sur le blog.",
       },
       { property: "og:title", content: "Espace membre — Club GTEL" },
       {
@@ -103,7 +103,7 @@ function AuthPage() {
       <PageHeader
         eyebrow="Espace membre"
         title="Connexion au réseau GTEL"
-        intro="La filière et la bibliothèque de parrainage sont réservées aux membres. Créez votre compte étudiant pour y accéder et publier sur le blog du club."
+        intro="La filière est réservée aux membres. Créez votre compte étudiant pour y accéder et publier sur le blog du club."
       />
 
       <section className="container-x grid gap-10 py-12 sm:py-20 lg:grid-cols-[1.1fr_0.9fr]">
@@ -230,7 +230,7 @@ function AuthPage() {
                 icon: ShieldCheck,
                 titre: "Accès protégé",
                 texte:
-                  "Les fiches d'unités d'enseignement et la bibliothèque de parrainage ne sont visibles que par les membres connectés.",
+                  "Les fiches d'unités d'enseignement ne sont visibles que par les membres connectés.",
               },
               {
                 icon: Sparkles,

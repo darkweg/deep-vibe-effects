@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
-import { BookOpen, GraduationCap, Images, Newspaper, PenLine, ArrowUpRight } from "lucide-react";
+import { GraduationCap, Images, Newspaper, PenLine, ArrowUpRight } from "lucide-react";
 import { PageHeader } from "@/components/site/PageHeader";
 import { Reveal } from "@/components/site/Reveal";
 import { useAuth } from "@/hooks/useAuth";
@@ -12,7 +12,7 @@ export const Route = createFileRoute("/_authenticated/espace-membre")({
       { title: "Espace membre — Club GTEL" },
       {
         name: "description",
-        content: "Tableau de bord des membres du club GTEL : rédiger une actualité, accéder à la filière et à la bibliothèque.",
+        content: "Tableau de bord des membres du club GTEL : rédiger une actualité et accéder à la filière.",
       },
       { property: "og:title", content: "Espace membre — Club GTEL" },
       { property: "og:description", content: "Tableau de bord réservé aux membres du club GTEL." },
@@ -32,7 +32,7 @@ function EspaceMembre() {
       <PageHeader
         eyebrow="Espace membre"
         title={`Bonjour ${profile?.display_name ?? "Membre GTEL"}`}
-        intro="Votre tableau de bord : publiez une actualité, retrouvez la filière et la bibliothèque de parrainage."
+        intro="Votre tableau de bord : publiez une actualité et retrouvez la filière."
       />
 
       <section className="container-x pb-16 sm:pb-24">
@@ -50,7 +50,6 @@ function EspaceMembre() {
           {[
             { to: "/actualites", label: "Actualités", icon: Newspaper, desc: "Le fil du département." },
             { to: "/filiere", label: "La filière", icon: GraduationCap, desc: "Unités d'enseignement L3–L5." },
-            { to: "/bibliotheque", label: "Bibliothèque", icon: BookOpen, desc: "Ressources de parrainage." },
             { to: "/galerie", label: "Galerie", icon: Images, desc: "Le fil photos du club." },
           ].map((c, i) => (
             <Reveal key={c.to} delay={0.06 * i}>

@@ -1,6 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { CalendarDays, Users } from "lucide-react";
-import { PageHeader } from "@/components/site/PageHeader";
+import { BookOpen, CalendarDays, GraduationCap, Landmark, Users } from "lucide-react";
 import { Reveal, RevealText } from "@/components/site/Reveal";
 import { ParallaxMedia } from "@/components/site/ParallaxMedia";
 import { BUREAU } from "@/lib/gtel-data";
@@ -27,20 +26,65 @@ export const Route = createFileRoute("/club")({
 });
 
 const JALONS = [
-  { annee: "2000", texte: "Premiers rassemblements informels des étudiants GTEL autour des projets de laboratoire." },
-  { annee: "2001", texte: "Structuration du club : statuts, Bureau élu et première Cellule Communication." },
-  { annee: "2023", texte: "Lancement du parrainage documentaire entre promotions L3, L4 et L5." },
+  { annee: "2016", texte: "Premiers rassemblements informels des étudiants GTEL autour des projets de laboratoire." },
+  { annee: "2019", texte: "Structuration du club : statuts, Bureau élu et première Cellule Communication." },
+  { annee: "2022", texte: "Lancement du parrainage documentaire entre promotions L3, L4 et L5." },
   { annee: "2026", texte: "Mise en ligne de la vitrine numérique du club et centralisation des ressources." },
 ];
 
 function Club() {
   return (
     <div className="theme-soft-black min-h-screen">
-      <PageHeader
-        eyebrow="Le club"
-        title="Origine, identité et Bureau"
-        intro="Né de l'entraide entre les promotions, le club GTEL s'est structuré pour porter la voix de la filière Génie des Télécommunications au sein de l'ENSPY."
-      />
+      {/* Hero institutionnel */}
+      <section className="relative flex min-h-[34rem] items-end overflow-hidden pt-28 sm:pt-40">
+        <img
+          src={studentsImg}
+          alt="Les membres du club GTEL réunis au département"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+        <div
+          className="absolute inset-0 bg-gradient-to-b from-slate-950/70 via-slate-950/45 to-slate-950/90"
+          aria-hidden
+        />
+        <div className="container-x relative z-2 pb-8">
+          <Reveal>
+            <span className="badge-cyan">
+              <Landmark className="h-3 w-3" /> Institution
+            </span>
+          </Reveal>
+          <h1 className="mt-6 max-w-4xl font-display text-[clamp(2.2rem,7vw,4.8rem)] leading-[0.95] font-extrabold tracking-tight text-white drop-shadow-md">
+            <RevealText text="À propos du Club GTEL" />
+          </h1>
+          <Reveal delay={0.2}>
+            <p className="mt-5 max-w-2xl text-base text-white/85 drop-shadow-sm sm:text-lg">
+              Né de l'entraide entre les promotions, le club porte la voix de la filière Génie des
+              Télécommunications et transmet sa mémoire académique au sein de l'ENSPY.
+            </p>
+          </Reveal>
+        </div>
+      </section>
+      {/* Barre de badges statistiques */}
+      <div className="border-b border-white/10 bg-slate-950/80 backdrop-blur-md">
+        <div className="container-x flex flex-wrap gap-x-10 gap-y-4 py-5">
+          {[
+            { icon: GraduationCap, valeur: "3 Niveaux", label: "L3 · L4 · L5" },
+            { icon: BookOpen, valeur: "200+ Documents", label: "Ressources partagées" },
+            { icon: Users, valeur: "Filière GTEL", label: "ENSPY · Yaoundé I" },
+          ].map((s, i) => (
+            <Reveal key={s.valeur} delay={0.08 * i}>
+              <div className="flex items-center gap-3">
+                <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/15 ring-1 ring-primary/40">
+                  <s.icon className="h-4 w-4 text-cyan-glow" />
+                </span>
+                <span>
+                  <span className="block font-display text-sm font-bold text-white sm:text-base">{s.valeur}</span>
+                  <span className="block font-mono text-[0.6rem] uppercase tracking-[0.18em] text-white/60">{s.label}</span>
+                </span>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
 
       <section className="container-x py-14 sm:py-24">
         <div className="grid gap-10 sm:gap-14 lg:grid-cols-2 lg:gap-20">

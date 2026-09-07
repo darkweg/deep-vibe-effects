@@ -3,7 +3,6 @@ export const NAV_LINKS = [
   { to: "/actualites", label: "Actualités", memberOnly: false },
   { to: "/galerie", label: "Galerie", memberOnly: false },
   { to: "/filiere", label: "La filière", memberOnly: true },
-  { to: "/bibliotheque", label: "Bibliothèque", memberOnly: true },
   { to: "/club", label: "Le club", memberOnly: false },
   { to: "/contact", label: "Contact", memberOnly: false },
 ] as const;
@@ -632,27 +631,6 @@ export const UES: UE[] = [
   }
 ];
 
-export type Doc = {
-  titre: string;
-  niveau: "L3" | "L4" | "L5";
-  matiere: string;
-  type: string;
-  annee: string;
-  taille: string;
-};
-
-export const DOCUMENTS: Doc[] = [
-  { titre: "Théorie du signal — Examen final", niveau: "L3", matiere: "TEL 311", type: "Ancien sujet", annee: "2025", taille: "1,2 Mo" },
-  { titre: "Électronique des communications — TD corrigés", niveau: "L3", matiere: "TEL 322", type: "TD corrigé", annee: "2024", taille: "3,4 Mo" },
-  { titre: "Mathématiques du signal — Fiche de révision", niveau: "L3", matiere: "MAT 310", type: "Fiche", annee: "2026", taille: "740 Ko" },
-  { titre: "Réseaux mobiles — Contrôle continu", niveau: "L4", matiere: "TEL 411", type: "Ancien sujet", annee: "2025", taille: "980 Ko" },
-  { titre: "Transmission numérique — Support de cours", niveau: "L4", matiere: "TEL 424", type: "Support de cours", annee: "2025", taille: "6,1 Mo" },
-  { titre: "Antennes & propagation — TP guidé", niveau: "L4", matiere: "TEL 418", type: "TP", annee: "2024", taille: "2,3 Mo" },
-  { titre: "Réseaux à fibre optique — Examen + corrigé", niveau: "L5", matiere: "TEL 512", type: "Ancien sujet", annee: "2026", taille: "4,8 Mo" },
-  { titre: "Sécurité des réseaux — Étude de cas opérateur", niveau: "L5", matiere: "TEL 526", type: "Étude de cas", annee: "2025", taille: "1,9 Mo" },
-  { titre: "Projet de fin de cycle — Guide de rédaction", niveau: "L5", matiere: "PFE", type: "Guide", annee: "2026", taille: "820 Ko" },
-];
-
 export const BUREAU = [
   { nom: "Tia Tchoffo Brandon", role: "Président", promo: "GTEL 4" },
   { nom: "Kenfack Richecard Alias Richesse", role: "Cellule Communication", promo: "GTEL 4" },
@@ -669,7 +647,7 @@ export const BUREAU = [
 
 export const CHIFFRES = [
   { valeur: "3", label: "Niveaux couverts, L3 à L5" },
-  { valeur: "200+", label: "Documents de parrainage" },
+  { valeur: "200+", label: "Ressources partagées" },
   { valeur: "24", label: "Unités d'enseignement" },
   { valeur: "1", label: "Vitrine unique du département" },
 ];
