@@ -169,7 +169,15 @@ function Actualites() {
         {dbArticles.length > 0 && (
           <div className="mt-10 grid gap-6 sm:mt-14 sm:grid-cols-2 lg:grid-cols-3">
             {dbArticles
-              .filter((a) => filtre === "Toutes" || a.categorie === filtre)
+              .filter(
+                (a) =>
+                  (filtre === "Toutes" || a.categorie === filtre) &&
+                  (q.trim() === "" ||
+                    [a.titre, a.resume, a.categorie]
+                      .join(" ")
+                      .toLowerCase()
+                      .includes(q.trim().toLowerCase())),
+              )
               .map((a) => (
                 <Reveal key={a.id}>
                   <Link
