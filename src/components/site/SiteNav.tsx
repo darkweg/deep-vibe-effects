@@ -24,7 +24,6 @@ const NAV_ICONS: Record<string, LucideIcon> = {
   "/actualites": Newspaper,
   "/galerie": Images,
   "/filiere": GraduationCap,
-  "/bibliotheque": BookOpen,
   "/club": Users,
   "/contact": Mail,
 };
