@@ -1,10 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { CalendarDays, GraduationCap, LayoutGrid, PartyPopper, Users } from "lucide-react";
+import { CalendarDays, GraduationCap, LayoutGrid, Newspaper, PartyPopper, Search, Users } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
-import { PageHeader } from "@/components/site/PageHeader";
-import { Reveal } from "@/components/site/Reveal";
+import { Reveal, RevealText } from "@/components/site/Reveal";
 import { FilterTabs } from "@/components/site/FilterTabs";
 import { NewsSkeleton } from "@/components/site/NewsSkeleton";
 import { ParallaxMedia } from "@/components/site/ParallaxMedia";
@@ -53,10 +52,16 @@ function Actualites() {
   );
   const [filtre, setFiltre] = useState("Toutes");
   const [ready, setReady] = useState(false);
-  const liste = useMemo(
-    () => ACTUALITES.filter((a) => filtre === "Toutes" || a.categorie === filtre),
-    [filtre],
-  );
+  const [q, setQ] = useState("");
+  const liste = useMemo(() => {
+    const term = q.trim().toLowerCase();
+    return ACTUALITES.filter(
+      (a) =>
+        (filtre === "Toutes" || a.categorie === filtre) &&
+        (term === "" || [a.titre, a.resume, a.categorie].join(" ").toLowerCase().includes(term)),
+    );
+  }, [filtre, q]);
+  const featured = ACTUALITES[0];
 
   // Warm the browser image cache once so tab switching never re-downloads media.
   useEffect(() => {
