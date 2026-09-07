@@ -4,7 +4,6 @@ import { useRef } from "react";
 import {
   ArrowUpRight,
   ArrowDown,
-  BookOpen,
   CalendarDays,
   GraduationCap,
   Images,
@@ -22,7 +21,6 @@ import { useAuth } from "@/hooks/useAuth";
 import heroImg from "@/assets/hero.jpg";
 import studentsImg from "@/assets/students.jpg";
 import fiberImg from "@/assets/fiber.jpg";
-import towerImg from "@/assets/tower.jpg";
 import eventImg from "@/assets/event.jpg";
 import libraryImg from "@/assets/library.jpg";
 
@@ -33,7 +31,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Actualités du département, galerie, fiches des unités d'enseignement et bibliothèque de parrainage L3–L5 du club GTEL de l'ENSPY.",
+          "Actualités du département, galerie et fiches des unités d'enseignement du club GTEL de l'ENSPY.",
       },
       { property: "og:title", content: "Club GTEL — Génie des Télécommunications, ENSPY" },
       {
@@ -379,7 +377,7 @@ function Index() {
           </h2>
           <Reveal delay={0.2}>
             <p className="mx-auto mt-6 max-w-xl text-mist">
-              Publier une annonce, alimenter la galerie ou déposer un document dans la bibliothèque :
+              Publier une annonce, alimenter la galerie ou animer la vie du département :
               tout passe par un espace membre simple à prendre en main.
             </p>
           </Reveal>
