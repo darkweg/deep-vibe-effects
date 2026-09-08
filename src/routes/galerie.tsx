@@ -1,10 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { Image as ImageIcon, X } from "lucide-react";
-import { PageHeader } from "@/components/site/PageHeader";
-import { Reveal } from "@/components/site/Reveal";
-import { FilterTabs } from "@/components/site/FilterTabs";
+import { Image as ImageIcon, Search, X } from "lucide-react";
+import { Reveal, RevealText } from "@/components/site/Reveal";
 import { BlogSection } from "@/components/blog/BlogSection";
 
 import eventImg from "@/assets/event.jpg";
