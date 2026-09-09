@@ -1,0 +1,17 @@
+{
+  "hosting": {
+    "site":"club-gtel-enspy",
+    "public": ".output/public",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}

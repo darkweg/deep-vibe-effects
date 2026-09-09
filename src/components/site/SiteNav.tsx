@@ -17,6 +17,7 @@ import {
 import { useQueryClient } from "@tanstack/react-query";
 import { NAV_LINKS } from "@/lib/gtel-data";
 import { useAuth } from "@/hooks/useAuth";
+import polytechLogo from "@/assets/polytech-logo.png";
 import logo from "@/assets/gtel-logo.jpg";
 
 const NAV_ICONS: Record<string, LucideIcon> = {
@@ -56,6 +57,11 @@ export function SiteNav() {
     >
       <nav className="container-x flex items-center justify-between gap-6">
         <Link to="/" className="group flex items-center gap-3">
+          <img
+            src={polytechLogo}
+            alt="Logo Polytech ENSPY"
+            className="h-10 w-10 rounded-lg object-contain transition-all duration-500"
+          />
           <img
             src={logo}
             alt="Logo Club GTEL"
