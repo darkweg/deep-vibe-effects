@@ -149,6 +149,7 @@ function Club() {
                 <span className="badge-cyan">{m.role}</span>
                 <p className="mt-4 font-display text-xl font-bold">{m.nom}</p>
                 <p className="mt-1 text-sm text-steel">{m.promo}</p>
+                <p className="mt-4 text-sm text-muted-foreground">{m.description}</p>
               </div>
             </Reveal>
           ))}

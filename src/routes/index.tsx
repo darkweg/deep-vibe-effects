@@ -18,7 +18,7 @@ import { ParallaxMedia } from "@/components/site/ParallaxMedia";
 import { ACTUALITES, CHIFFRES, UES } from "@/lib/gtel-data";
 import { useAuth } from "@/hooks/useAuth";
 
-import heroImg from "@/assets/hero.jpg";
+import heroImg from "@/assets/hero1.jpg";
 import studentsImg from "@/assets/students.jpg";
 import fiberImg from "@/assets/fiber.jpg";
 import eventImg from "@/assets/event.jpg";

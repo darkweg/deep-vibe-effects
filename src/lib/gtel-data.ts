@@ -632,17 +632,55 @@ export const UES: UE[] = [
 ];
 
 export const BUREAU = [
-  { nom: "Tia Tchoffo Brandon", role: "Président", promo: "GTEL 4" },
-  { nom: "Kenfack Richecard Alias Richesse", role: "Cellule Communication", promo: "GTEL 4" },
-  { nom: "Mbassi Effa Nicolas", role: "Pôle Parrainage", promo: "GTEL 4" },
-  { nom: "Kouamen Suzel", role: "Trésorerie", promo: "GTEL 4" },
-  { nom: "Vmessah Ida", role: "Adjointe a la Cellule Communication", promo: "GTEL 4" },
-  { nom: "Wokam Melvine", role: "Adjoint a la Trésorerie", promo: "GTEL 4" },
-  { nom: "Pokam Franc", role: "Cellule Innovation", promo: "GTEL 4" },
-  { nom: "Ehon Nayang Eric", role: "Adjoint a la Cellule Innovation", promo: "GTEL 4" },
-  { nom: "Mbozo'o Carmen", role: "Censeur", promo: "GTEL 4" },
-  { nom: "Bomo Roland", role: "Cellule Relations extérieures", promo: "GTEL 4" },
-  { nom: "Djouma Noé", role: "Ajoint a la Cellule Relations extérieures", promo: "GTEL 4" },
+  { nom: "Tia Tchoffo Brandon", role: "Président", promo: "GTEL 4", description: `Rôle du président
+Le Président, c'est le chef d'orchestre. Il ne fait pas tout tout seul, mais il est responsable que tout avance.
+Représenter le club : C'est le visage du club devant l'administration, les autres clubs et les entreprises comme MTN, Orange, Camtel.
+Donner la vision et le programme : Il fixe les objectifs de l'année - ateliers Arduino, visite technique, formation CCNA, compétitions de projets.
+Coordonner et animer le bureau : Il répartit les tâches entre trésorier, secrétaire, responsable technique et il préside les réunions.
+Superviser les activités : Il s'assure que chaque événement est bien préparé et valide les dépenses et communications importantes.
+Assurer la continuité : Il veille au respect des statuts, fait le bilan de fin de mandat et organise les élections.` },
+  { nom: "Kenfack Richecard Alias Richesse", role: "Cellule Communication", promo: "GTEL 4", description: "La personne en charge de la Communication au sein du club Gtel assure la visibilité et le rayonnement du Club. Elle conçoit les supports de communication : affiches, publications sur les réseaux sociaux, newsletters, flyers. Elle couvre les événements du club en images et en récits. Elle maintient une image cohérente et attractive sur tous les canaux utilisés (chaîne WhatsApp, Compte LinkedIn, Site Web). Elle assure le relais d'information entre le bureau et les membres. Elle renforce l'engagement et la participation de la communauté." },
+  { nom: "Mbassi Effa Nicolas", role: "Pôle Parrainage", promo: "GTEL 4", description: "Coordonnateur du pôle parrainage, responsable de la collecte et de la classification des documents." },
+  { nom: "Kouamen Suzel", role: "Trésorerie", promo: "GTEL 4", description: `Trésorière:
+•    Gérer les finances du club : recettes, dépenses et solde.
+•    Collecter les cotisations et contributions des membres.
+•    Tenir les comptes et conserver les justificatifs des dépenses.
+•    Présenter régulièrement un bilan financier au bureau et aux membres.
+•    Veiller à une utilisation transparente et responsable des fonds du club.` },
+  { nom: "Vmessah Ida", role: "Adjointe a la Cellule Communication", promo: "GTEL 4", description: "Assistante dans la gestion des communications du club." },
+  { nom: "Wokam Melvine", role: "Adjoint a la Trésorerie", promo: "GTEL 4", description: `Le Commissaire aux comptes;
+- Contrôle et vérifie la gestion financière du Club.
+- Il s’assure que les recettes et dépenses sont régulières et correctement justifiées.
+- Il signale les éventuelles erreurs ou irrégularités constatées.
+- Il contribue à garantir la transparence et la bonne utilisation des ressources du Club.` },
+  { nom: "Pokam Franc", role: "Cellule Innovation", promo: "GTEL 4", description: `Cellule innovation 
+- la cellule innovation étant une nouvelle cellule sont :trouver des idée innovante pour la bonne gestion du club sur plan interne comme externe.
+- Son but principale et que chaque cellule fonctionne de manière optimale et que la structuration du club soit de qualité .
+- Elle est épicentre de la créativité du club afin que le club rayonne dans toutes sa splendeur` },
+  { nom: "WAMBOU GLORIA", role: "Adjoint a la Cellule Innovation", promo: "GTEL 4", description: "Assistante dans la gestion des projets d'innovation du club." },
+  { nom: "Ehon Nayang Eric", role: "Cellule Projet", promo: "GTEL 4", description: `Chef de la cellule project ;
+- Identification et sélection des projets 
+- Coordination d'équipe : répartir les tâches entre les membres de la cellule
+- Suivi technique 
+- Reporting : rendre compte de l'avancement au bureau exécutif du club (président, etc.)
+- Recherche de ressources : identifier les besoins matériels/techniques et solliciter les partenaires ou encadrants si nécessaire
+- Capitalisation : documenter les projets réalisés pour en garder une trace (utile pour les promotions suivantes.` },
+  { nom: "Mbozo'o Carmen", role: "Censeur", promo: "GTEL 4", description: `Rôle du Censeur:
+• Veiller au respect du règlement intérieur du club
+• Assurer la discipline lors des événements et réunions
+• Sanctionner ou signaler les manquements aux règles établies
+• Rendre compte au bureau
+Responsable de la supervision et de l'évaluation des activités du club.` },
+  { nom: "Bomo Roland", role: "Cellule Relations extérieures", promo: "GTEL 4", description: `Responsable des relations extérieures :
+* Chercher et entretenir des liens avec des entreprises, opérateurs télécoms, associations professionnelles, anciens élèves, etc.
+* Démarcher des sponsors pour financer les événements du club (conférences, hackathons, formations)
+* Être le point de contact du club vis-à-vis des partenaires, intervenants extérieurs, autres clubs/écoles
+* Faciliter la venue d'intervenants professionnels, visites d'entreprises, forums carrière
+* Veiller à la visibilité et à la réputation du club en dehors de l'école (réseaux sociaux, relations presse si besoin).` },
+  { nom: "Djouma Noé", role: "Ajoint a la Cellule Relations extérieures", promo: "GTEL 4", description: "Assistante dans la gestion des relations avec les partenaires externes." },
+  { nom: "Valerie", role: "Secretaire Generale", promo: "GTEL 4", description: `Secrétariat général 
+• Contrôle et veille que toutes les cellules du club font leur travail comme il se doit
+• S'occupe de la paperasse administrative (requête, demande) auprès du département et de l'administration de l'école.` },
 ];
 
 export const CHIFFRES = [
