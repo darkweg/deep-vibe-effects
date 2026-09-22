@@ -19,7 +19,18 @@ GRANT ALL ON public.articles TO service_role;
 ALTER TABLE public.articles ENABLE ROW LEVEL SECURITY;
 
 CREATE POLICY "articles_read_all" ON public.articles FOR SELECT USING (true);
-CREATE POLICY "articles_insert_own" ON public.articles FOR INSERT TO authenticated WITH CHECK (auth.uid() = author_id);
+DROP POLICY IF EXISTS "articles_insert_own" ON public.articles;
+
+CREATE POLICY "articles_insert_comm_only" ON public.articles
+FOR INSERT TO authenticated
+WITH CHECK (
+  auth.uid() = author_id 
+  AND EXISTS (
+    SELECT 1 FROM public.user_roles 
+    WHERE user_id = auth.uid() 
+    AND role = 'communication'::app_role
+  )
+);
 CREATE POLICY "articles_update_own" ON public.articles FOR UPDATE TO authenticated USING (auth.uid() = author_id) WITH CHECK (auth.uid() = author_id);
 CREATE POLICY "articles_delete_own" ON public.articles FOR DELETE TO authenticated USING (auth.uid() = author_id);
 
